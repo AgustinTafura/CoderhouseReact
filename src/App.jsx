@@ -3,13 +3,14 @@ import './App.css';
 import NavBarComponent from './components/navbar';
 
 
+
 const App = () => {
 
   return (
-
+    <>
     <NavBarComponent />
 
-
+    </>
 
   );
 }
