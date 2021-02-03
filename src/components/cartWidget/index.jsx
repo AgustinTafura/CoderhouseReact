@@ -1,18 +1,16 @@
-import M from 'materialize-css/dist/js/materialize.min.js';
-import 'materialize-css/dist/css/materialize.min.css';
-import ItemListContainer from '../../containers/itemListContainer';
-
+import './style.css';
 
 const CartWidgetComponent = () => {
   
   return (
 
     <>
-        < ItemListContainer href="cart.html">
-            <i class="material-icons">shopping_cart</i>
-        </ItemListContainer>
+      <li className="nav-item">
+        <a id="cartLogo" className="nav-link page-scroll" href="cart.html">
+          <i className="material-icons">shopping_cart</i>
+        </a>
+      </li>
     </>
-
 
   );
 }

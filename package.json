@@ -6,13 +6,20 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.6.0",
+    "isotope-layout": "^3.0.6",
     "jquery": "^3.5.1",
-    "materialize-css": "^1.0.0",
+    "jquery.easing": "^1.4.1",
+    "magnific-popup": "^1.1.0",
+    "morphext": "^2.4.7",
+    "popper.js": "^1.16.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "swiper": "^6.4.8",
+    "validator": "^13.5.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -39,5 +46,9 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/bootstrap": "^5.0.5",
+    "@types/isotope-layout": "^3.0.8",
+    "@types/jquery": "^3.5.5"
+  }
 }

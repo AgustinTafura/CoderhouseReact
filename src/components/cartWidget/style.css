@@ -1,0 +1,14 @@
+a[href="cart.html"] {
+    
+
+}
+
+i.material-icons{
+    height: 0px;
+    line-height: unset;
+}
+
+#cartLogo:hover {
+    color: #14bf98;
+    background-size: 0%;
+}

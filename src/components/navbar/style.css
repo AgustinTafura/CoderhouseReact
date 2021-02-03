@@ -1,0 +1,33 @@
+:root {
+    --primary: #14bf98;
+    --secondary: 
+    
+}
+
+
+@media (min-width: 768px) {
+
+    nav.navbar {
+        padding: 2.125rem 1.5rem 2.125rem 2rem;
+        box-shadow: none;
+        /* background: transparent; */
+    }
+
+    .navbar .nav-item .nav-link {
+        padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+        background-image: linear-gradient(var(--primary),var(--primary));
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 30%;
+        transition: background-size .3s;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        margin-left: 0.4rem;
+        margin-right: 0.4rem;
+        
+    }
+    .navbar-custom.top-nav-collapse .nav-item .nav-link:hover  {
+        color: #fff;
+        background-size: 100% 50%;
+    }
+}
