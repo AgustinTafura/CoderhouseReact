@@ -4,7 +4,6 @@
     
 }
 
-
 @media (min-width: 768px) {
 
     nav.navbar {
@@ -31,3 +30,23 @@
         background-size: 100% 50%;
     }
 }
+
+.navbar-custom .fa-stack .hexagon {
+    background: url(background/hexagon-green.svg);
+    background-size: 1.625rem 1.625rem;
+}
+
+.navbar-custom .fa-stack:hover .hexagon {
+    background: url(background/hexagon-white.svg);
+    background-size: 1.625rem 1.625rem;
+}
+
+/* #logo {
+    content: url(JPL-0112.svg)
+}
+
+@media (min-width: 768px) {
+    #logo {
+        content: url(JPL-0111.svg)
+    }
+} */

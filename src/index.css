@@ -5,7 +5,7 @@
 
 
 main {
-	margin-top: 20rem;
+	margin-top: 12rem;
 }
 
 
@@ -900,7 +900,7 @@ input[type='checkbox'] {
 	position: absolute;
 	width: 6rem;
 	height: 6rem;
-	/* background: url('../images/hexagon-green.svg') center center no-repeat; */
+	/* background: url(images/hexagon-green.svg) center center no-repeat; */
 	background-size: 6rem 6rem;
 }
 
@@ -1944,6 +1944,7 @@ a:hover.back-to-top {
 	.navbar-custom .dropdown-items-divide-hr {
 		width: 84%;
 	}
+	
 	/* end of navigation */
 
 
@@ -2064,6 +2065,7 @@ a:hover.back-to-top {
 	.navbar-custom .social-icons {
 		display: block;
 		margin-left: 0.5rem;
+		margin-bottom: 0.5rem;
 	}
 
 	.navbar-custom .fa-stack {
@@ -2075,14 +2077,14 @@ a:hover.back-to-top {
 		width: 1.625rem;
 		height: 1.625rem;
 		position: absolute;
-		/* background: url("images/hexagon-green.svg") center center no-repeat; */
+		/* background: url(images/hexagon-green.svg) center center no-repeat; */
 		margin-left: 3px;
 		background-size: 1.625rem 1.625rem;
 		transition: all 0.2s ease;
 	}
 
 	.navbar-custom .fa-stack:hover .hexagon {
-		/* background-image: url("images/hexagon-white.svg") center center no-repeat; */
+		/* background: url(images/hexagon-white.svg) center center no-repeat; */
 		background-size: 1.625rem 1.625rem;
 	}
 	

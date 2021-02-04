@@ -19,6 +19,7 @@ b {
     padding-right: 1rem;    
 }
 
+
 div button {
     display: inline-block;
     padding: 1.1875rem 2.4rem;
@@ -39,3 +40,8 @@ div button:hover {
 	color: var(--primary);
 	text-decoration: none;
 }
+
+.cards-2 .btn-solid-reg:hover {
+	background-color: transparent;
+}
+
