@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
-// import ItemCountComponent from "../components/itemCount"
-import ItemList from "../components/itemList"
-import productList from '../mock/productList'
+import ItemDetail from "../components/itemDetail";
+import product from '../mock/product';
 
-    
-const ItemListContainer = (props) => {
-    
 
+const ItemDetailContainer = (props) => {
+    
+    
     const [isLoading, setIsLoading] = useState(false)
-    const [products, setProducts] = useState([])
+    const [productSelected, setProductSelected] = useState([])
 
     useEffect(() => {
 
         setIsLoading(true)
 
         const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(productList), 3000)
+            setTimeout(()=>resolve(product), 1000)
         })
         
         myPromise.then(
             (result)=>{ 
-                setProducts(result);
+                setProductSelected(result);
                 setIsLoading(false);
             }
             // (result)=>{console.log(result)}
@@ -52,12 +51,11 @@ const ItemListContainer = (props) => {
         <>
             <div id="services" className="cards-2">
                 <div className="container" style={{textAlign:"center"}}>   
-                            <ItemList products={products}/>
+                            <ItemDetail product={productSelected}/>
                 </div> 
             </div> 
-
         </>
     )
     
 }
-export default ItemListContainer;
+export default ItemDetailContainer;

@@ -1,6 +1,6 @@
 import Item from '../item';
 
-const ItemList = ({products}) => {
+const ItemDetail = ({products}) => {
     return (
         <>
         <div className="row">
@@ -26,4 +26,4 @@ const ItemList = ({products}) => {
     )
 }
 
-export default ItemList
+export default ItemDetail
