@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ItemCountComponent from "../../components/itemCount"
 
 
 
-const Item = ({name, features, price, description, image}) => {
+const Item = ({id, name, features, price, description, image}) => {
     const [contador, setContador] = useState(1)
 
     const onAdd = (stock) => {
@@ -23,7 +24,10 @@ const Item = ({name, features, price, description, image}) => {
             {/* <!-- Card --> */}
                 <div  className="card">
                     <div className="card-image">
-                        <img className="img-fluid" src={`images/${image}`} alt="alternative"></img>
+                        <Link to={`/product/${id}`}>
+                            <img className="img-fluid" src={`../images/${image}`} alt="alternative"></img>
+                        </Link>
+                            
                     </div>
                     <div className="card-body">
                         <h3 className="card-title">{name}</h3>

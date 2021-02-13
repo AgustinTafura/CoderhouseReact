@@ -1,11 +1,9 @@
-:root {
-    --primary: #14bf98;
-}
-
-
-
 main {
 	margin-top: 12rem;
+}
+
+header {
+	background-position: center;
 }
 
 
@@ -53,13 +51,13 @@ Table Of Contents:
 /*****************************************
 Colors:
 
-- Backgrounds - light gray #fbfbfb
+- Backgrounds - light gray var(--background-light)
 - Background - dark blue #153e52
-- Backgrounds navbar, footer - dark gray #1d1e1b
+- Backgrounds navbar, footer - dark gray var(--secondary)
 - Buttons, bullets, icons - green # 14bf98
-- Headings text - black #484a46
-- Body text - gray #787976
-- Body text - light gray #dfe5ec
+- Headings text - black var(--headings-text)
+- Body text - gray var(--body-text)
+- Body text - light gray var(--body-text-light)
 ******************************************/
 
 
@@ -73,7 +71,7 @@ html {
 }
 
 body, p {
-	color: #787976; 
+	color: var(--body-text); 
 	font: 400 1rem/1.5625rem "Open Sans", sans-serif;
 }
 
@@ -99,42 +97,42 @@ body, p {
 }
 
 h1 {
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 2.5rem/3rem "Montserrat", sans-serif;
 }
 
 h2 {
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1.75rem/2.125rem "Montserrat", sans-serif;
 }
 
 h3 {
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1.375rem/1.75rem "Montserrat", sans-serif;
 }
 
 h4 {
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1.25rem/1.625rem "Montserrat", sans-serif;
 }
 
 h5 {
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1.125rem/1.5rem "Montserrat", sans-serif;
 }
 
 h6 {
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1rem/1.375rem "Montserrat", sans-serif;
 }
 
 a {
-	color: #787976;
+	color: var(--body-text);
 	text-decoration: underline;
 }
 
 a:hover {
-	color: #787976;
+	color: var(--body-text);
 	text-decoration: underline;
 }
 
@@ -144,7 +142,7 @@ a.green {
 
 a.white,
 .white {
-	color: #dfe5ec;
+	color: var(--body-text-light);
 }
 
 .testimonial-text {
@@ -156,7 +154,7 @@ a.white,
 }
 
 strong {
-	color: #484a46;
+	color: var(--headings-text);
 }
 
 .section-title {
@@ -170,7 +168,7 @@ strong {
 	border: 0.125rem solid var(--primary);
 	border-radius: 0.25rem;
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--tertiarity);
 	font: 700 0.75rem/0 "Montserrat", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
@@ -188,7 +186,7 @@ strong {
 	border: 0.125rem solid var(--primary);
 	border-radius: 0.25rem;
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--tertiarity);
 	font: 700 0.75rem/0 "Montserrat", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
@@ -203,54 +201,54 @@ strong {
 .btn-outline-reg {
 	display: inline-block;
 	padding: 1.1875rem 1.875rem 1.1875rem 1.875rem;
-	border: 0.125rem solid #787976;
+	border: 0.125rem solid var(--body-text);
 	border-radius: 0.25rem;
 	background-color: transparent;
-	color: #787976;
+	color: var(--body-text);
 	font: 700 0.75rem/0 "Montserrat", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
 }
 
 .btn-outline-reg:hover {
-	background-color: #787976;
-	color: #fff;
+	background-color: var(--body-text);
+	color: var(--tertiarity);
 	text-decoration: none;
 }
 
 .btn-outline-lg {
 	display: inline-block;
 	padding: 1.375rem 2.125rem 1.375rem 2.125rem;
-	border: 0.125rem solid #787976;
+	border: 0.125rem solid var(--body-text);
 	border-radius: 0.25rem;
 	background-color: transparent;
-	color: #787976;
+	color: var(--body-text);
 	font: 700 0.75rem/0 "Montserrat", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
 }
 
 .btn-outline-lg:hover {
-	background-color: #787976;
-	color: #fff;
+	background-color: var(--body-text);
+	color: var(--tertiarity);
 	text-decoration: none;
 }
 
 .btn-outline-sm {
 	display: inline-block;
 	padding: 1rem 1.625rem 0.9375rem 1.625rem;
-	border: 0.125rem solid #787976;
+	border: 0.125rem solid var(--body-text);
 	border-radius: 0.25rem;
 	background-color: transparent;
-	color: #787976;
+	color: var(--body-text);
 	font: 700 0.75rem/0 "Montserrat", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
 }
 
 .btn-outline-sm:hover {
-	background-color: #787976;
-	color: #fff;
+	background-color: var(--body-text);
+	color: var(--tertiarity);
 	text-decoration: none;
 }
 
@@ -271,7 +269,7 @@ strong {
 	position: absolute;
 	top: 0.8125rem;
 	left: 1.375rem;
-	color: #787976;
+	color: var(--body-text);
 	opacity: 1;
 	font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
 	cursor: text;
@@ -304,8 +302,8 @@ strong {
 	padding-left: 1.3125rem;
 	border: 1px solid #dadada;
 	border-radius: 0.25rem;
-	background-color: #fff;
-	color: #787976;
+	background-color: var(--tertiarity);
+	color: var(--body-text);
 	font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
 	transition: all 0.2s;
 	-webkit-appearance: none; /* removes inner shadow on form inputs on ios safari */
@@ -358,8 +356,8 @@ select::-ms-expand {
 	padding-left: 1.3125rem;
 	border: 1px solid #dadada;
 	border-radius: 0.25rem;
-	background-color: #fff;
-	color: #787976;
+	background-color: var(--tertiarity);
+	color: var(--body-text);
 	font: 400 1rem/1.5625rem "Open Sans", sans-serif;
 	transition: all 0.2s;
 }
@@ -400,7 +398,7 @@ input[type='checkbox'] {
 	border: 0.125rem solid var(--primary);
 	border-radius: 0.25rem;
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--tertiarity);
 	font: 700 0.75rem/1.75rem "Montserrat", sans-serif;
 	cursor: pointer;
 	transition: all 0.2s;
@@ -425,7 +423,7 @@ input[type='checkbox'] {
 }
 
 .help-block.with-errors .list-unstyled {
-	color: #787976;
+	color: var(--body-text);
 	font-size: 0.75rem;
 	line-height: 1.125rem;
 	text-align: left;
@@ -606,7 +604,7 @@ input[type='checkbox'] {
 .navbar-custom {
 	padding-top: 0.375rem;
 	padding-bottom: 0.375rem;
-	background-color: #1d1e1b;
+	background-color: var(--secondary);
 	box-shadow: 0 0.0625rem 0.375rem 0 rgba(0, 0, 0, 0.1);
 	font: 600 0.875rem/0.875rem "Open Sans", sans-serif;
 	transition: all 0.2s;
@@ -626,7 +624,7 @@ input[type='checkbox'] {
 	margin-top: 0.25rem;
 	margin-bottom: 0.25rem;
 	font: 700 2.25rem/1.5rem "Montserrat", sans-serif;
-	color: #fff;
+	color: var(--tertiarity);
 	text-decoration: none;
 }
 
@@ -637,7 +635,7 @@ input[type='checkbox'] {
 
 .navbar-custom .nav-item .nav-link {
 	padding: 0.625rem 0.75rem 0.625rem 0.75rem;
-	color: #fff;
+	color: var(--tertiarity);
 	text-decoration: none;
 	transition: all 0.2s ease;
 	
@@ -677,16 +675,28 @@ input[type='checkbox'] {
 	margin-top: 0;
 	border: none;
 	border-radius: 0.25rem;
-	background-color: #1d1e1b;
+	background-color: var(--background-dark-light)
+	
+}
+
+.navbar-custom.top-nav-collapse .dropdown-menu {
+	margin-top: 0;
+	border: none;
+	border-radius: 0.25rem;
+	background-color: var(--secondary);
+}
+
+.dropdown-toggle .dropdown-menu:hover::after {
+	background-color: red;
 }
 
 .navbar-custom .dropdown-item {
-	color: #fff;
+	color: var(--tertiarity);
 	text-decoration: none;
 }
 
 .navbar-custom .dropdown-item:hover {
-	background-color: #1d1e1b;
+	background-color: transparent;
 }
 
 .navbar-custom .dropdown-item .item-text {
@@ -713,7 +723,7 @@ input[type='checkbox'] {
 
 .navbar-custom .navbar-toggler {
 	border: none;
-	color: #fff;
+	color: var(--tertiarity);
 	font-size: 2rem;
 }
 
@@ -739,7 +749,7 @@ input[type='checkbox'] {
 /*    04. Header     */
 /*********************/
 .header {
-	/* background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/logo-055.jpg') center center no-repeat; */
+	// background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/images/logo-055.jpg') center center no-repeat;
 	background-size: cover;
 }
 
@@ -755,12 +765,12 @@ input[type='checkbox'] {
 
 .header h1 {
 	margin-bottom: 0.5rem;
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .header .p-large {
 	margin-bottom: 2rem;
-	color: #dfe5ec;
+	color: var(--body-text-light);
 }
 
 .header .btn-solid-lg {
@@ -790,7 +800,7 @@ input[type='checkbox'] {
 }
 
 .basic-1 .testimonial-author {
-	color: #484a46;
+	color: var(--headings-text);
 }
 
 /* Hover Animation */
@@ -846,7 +856,7 @@ input[type='checkbox'] {
 }
 
 .cards-1 .fa-stack-1x {
-	color: #fff;
+	color: var(--tertiarity);
 	font-size: 2rem;
 }
 
@@ -865,7 +875,7 @@ input[type='checkbox'] {
 .cards-2 {
 	padding-top: 6.625rem;	
 	padding-bottom: 1.25rem;	
-	background-color: #fbfbfb;
+	background-color: var(--background-light);
 }
 
 .cards-2 .section-title {
@@ -894,7 +904,7 @@ input[type='checkbox'] {
 	border: 1px solid #ebe8e8;
 	border-bottom-left-radius: 0.375rem;
 	border-bottom-right-radius: 0.375rem;
-	background-color: #fff;
+	background-color: var(--tertiarity);
 }
 
 .cards-2 h3 {
@@ -918,7 +928,7 @@ input[type='checkbox'] {
 
 .cards-2 .price {
 	margin-bottom: 0.25rem;
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1rem/1.5rem "Montserrat", sans-serif;
 	text-align: center;
 }
@@ -933,7 +943,7 @@ input[type='checkbox'] {
 }
 
 .cards-2 .btn-solid-reg:hover {
-	background-color: #fff;
+	background-color: var(--tertiarity);
 }
 
 
@@ -975,7 +985,7 @@ input[type='checkbox'] {
 	border: 0.125rem solid var(--primary);
 	border-radius: 50%;
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--tertiarity);
 	font: 700 1rem/2.125rem "Montserrat", sans-serif;
 	text-align: center;
 	vertical-align: middle;
@@ -984,9 +994,9 @@ input[type='checkbox'] {
 }
 
 .accordion span[aria-expanded="false"] .circle-numbering {
-	border: 0.125rem solid #484a46;
+	border: 0.125rem solid var(--headings-text);
 	background-color: transparent;
-	color: #484a46;
+	color: var(--headings-text);
 }
 
 .accordion .item:hover span[aria-expanded="false"] .circle-numbering {
@@ -999,7 +1009,7 @@ input[type='checkbox'] {
 	width: 70%;
 	margin-top: 0.125rem;
 	margin-bottom: 0.25rem;
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1.25rem/1.75rem "Montserrat", sans-serif;
 	vertical-align: middle;
 	cursor: pointer;
@@ -1065,7 +1075,7 @@ input[type='checkbox'] {
 
 .tabs #tab-1 .progress-container .title {
 	margin-bottom: 0.25rem;
-	color: #484a46;
+	color: var(--headings-text);
 	font: 600 0.875rem/1.25rem "Open Sans", sans-serif;
 }
 
@@ -1143,7 +1153,7 @@ input[type='checkbox'] {
 .slider {
 	padding-top: 6.375rem;
 	padding-bottom: 6.5rem;
-	background-color: #fbfbfb;
+	background-color: var(--background-light);
 }
 
 .slider h2 {
@@ -1203,7 +1213,7 @@ input[type='checkbox'] {
 }
 
 .slider .testimonial-author {
-	color: #484a46;
+	color: var(--headings-text);
 }
 
 
@@ -1226,7 +1236,7 @@ input[type='checkbox'] {
 
 .form-1 h2 {
 	margin-bottom: 1.375rem;
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .form-1 .list-unstyled .fas {
@@ -1240,20 +1250,20 @@ input[type='checkbox'] {
 }
 
 .form-1 .label-control {
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .form-1 .form-control-input,
 .form-1 .form-control-select {
 	border: 1px solid #39728f;
 	background-color: #2a5d77;
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .form-1 .form-control-textarea {
 	border: 1px solid #39728f;
 	background-color: #2a5d77;
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .form-1 .form-control-input:focus,
@@ -1262,16 +1272,16 @@ input[type='checkbox'] {
 .form-1 .form-control-select:hover,
 .form-1 .form-control-textarea:focus,
 .form-1 .form-control-textarea:hover {
-	border: 1px solid #fff;
+	border: 1px solid var(--tertiarity);
 }
 
 #lmsgSubmit.h3.text-center.tada.animated,
 #lmsgSubmit.h3.text-center {
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .form-1 .help-block.with-errors .list-unstyled {
-	color: #dfe5ec;
+	color: var(--body-text-light);
 }
 
 
@@ -1316,12 +1326,12 @@ input[type='checkbox'] {
 
 .filter .button-group a:hover {
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .filter .button-group a.button.is-checked {
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .filter .grid {
@@ -1370,7 +1380,7 @@ input[type='checkbox'] {
 	top: 42%;
 	right: 0;
 	left: 0;
-	color: #fff;
+	color: var(--tertiarity);
 	font: 700 1.125rem/1.625rem "Montserrat", sans-serif;
 }
 
@@ -1384,7 +1394,7 @@ input[type='checkbox'] {
 	margin: 2.5rem auto;
 	padding: 1.5625rem;
 	border-radius: 0.25rem;
-	background: #fff;
+	background: var(--tertiarity);
 	text-align: left;
 }
 
@@ -1414,7 +1424,7 @@ input[type='checkbox'] {
 	margin-bottom: 2.125rem;
 	padding: 1.125rem 1.5rem 1.125rem 1.5rem;
 	border-radius: 0.25rem;
-	background-color: #fbfbfb;
+	background-color: var(--background-light);
 }
 
 .lightbox-basic .testimonial-text {
@@ -1436,7 +1446,7 @@ input[type='checkbox'] {
 	width: auto;
 	height: auto;
 	margin-right: 0.5rem;
-	color: #484a46;
+	color: var(--headings-text);
 	opacity: 1;
 }
 
@@ -1459,7 +1469,7 @@ input[type='checkbox'] {
 .basic-2 {
 	padding-top: 6.375rem;
 	padding-bottom: 3.375rem;
-	background-color: #fbfbfb;
+	background-color: var(--background-light);
 	text-align: center;
 }
 
@@ -1499,7 +1509,7 @@ input[type='checkbox'] {
 
 .basic-2 .team-member .job-title {
 	margin-bottom: 0.75rem;
-	color: #484a46;
+	color: var(--headings-text);
 	font: 700 1rem/1.375rem "Montserrat", sans-serif;
 }
 
@@ -1528,7 +1538,7 @@ input[type='checkbox'] {
 .basic-2 .fa-stack-1x {
 	font-size: 0.6875rem;
 	line-height: 1.75rem;
-	color: #fff;
+	color: var(--tertiarity);
 	transition: all 0.2s ease;
 }
 
@@ -1608,7 +1618,7 @@ input[type='checkbox'] {
 .form-2 {
 	padding-top: 6.625rem;
 	padding-bottom: 5.625rem;
-	background-color: #fbfbfb;
+	background-color: var(--background-light);
 }
 
 .form-2 .text-container {
@@ -1669,7 +1679,7 @@ input[type='checkbox'] {
 .form-2 .fa-stack-1x {
 	font-size: 1.5rem;
 	line-height: 3.25rem;
-	color: #fff;
+	color: var(--tertiarity);
 	transition: all 0.2s ease;
 }
 
@@ -1683,7 +1693,7 @@ input[type='checkbox'] {
 /**********************/
 .footer {
 	padding-top: 5rem;
-	background-color: #1d1e1b;
+	background-color: var(--secondary);
 }
 
 .footer .text-container {
@@ -1692,7 +1702,7 @@ input[type='checkbox'] {
 
 .footer h4 {
 	margin-bottom: 0.75rem;
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .footer p,
@@ -1708,13 +1718,13 @@ input[type='checkbox'] {
 .copyright {
 	padding-top: 1rem;
 	padding-bottom: 0.5rem;
-	background-color: #1d1e1b;
+	background-color: var(--secondary);
 	text-align: center;
 }
 
 .copyright p,
 .copyright a {
-	color: #dfe5ec;
+	color: var(--body-text-light);
 	text-decoration: none;
 }
 
@@ -1752,13 +1762,13 @@ a:hover.back-to-top {
 }
 
 .ex-header h1 {
-	color: #fff;
+	color: var(--tertiarity);
 }
 
 .ex-basic-1 {
 	padding-top: 2rem;
 	padding-bottom: 0.875rem;
-	background-color: #fbfbfb;
+	background-color: var(--background-light);
 }
 
 .ex-basic-1 .breadcrumbs {
@@ -1829,7 +1839,7 @@ a:hover.back-to-top {
 	}
 	
 	.navbar-custom .navbar-brand.logo-text {
-		color: #fff;
+		color: var(--tertiarity);
 	}
 
 	.navbar-custom .navbar-nav {
@@ -1849,15 +1859,15 @@ a:hover.back-to-top {
 	.navbar-custom.top-nav-collapse {
         padding: 0.375rem 1.5rem 0.375rem 2rem;
 		box-shadow: 0 0.0625rem 0.375rem 0 rgba(0, 0, 0, 0.1);
-		background-color: #1d1e1b;
+		background-color: var(--secondary);
 	}
 
 	.navbar-custom.top-nav-collapse .navbar-brand.logo-text {
-		color: #fff;
+		color: var(--tertiarity);
 	}
 
 	.navbar-custom.top-nav-collapse .nav-item .nav-link {
-		color: #fff;
+		color: var(--tertiarity);
 	}
 	
 	.navbar-custom.top-nav-collapse .nav-item .nav-link:hover,
@@ -1868,7 +1878,7 @@ a:hover.back-to-top {
 	.navbar-custom .dropdown-menu {
 		padding-top: 1rem;
 		padding-bottom: 1rem;
-		border-top: 0.75rem solid rgba(0, 0, 0, 0);
+		border-top: 1.2rem solid rgba(0, 0, 0, 0);
 		border-radius: 0.25rem;
 		box-shadow: 0 0.25rem 0.375rem 0 rgba(0, 0, 0, 0.03);
 	}
@@ -2032,7 +2042,7 @@ a:hover.back-to-top {
 	.navbar-custom .fa-stack-1x {
 		font-size: 0.6875rem;
 		line-height: 1.625rem;
-		color: #fff;
+		color: var(--tertiarity);
 		transition: all 0.2s ease;
 	}
 

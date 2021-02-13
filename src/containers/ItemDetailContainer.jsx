@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from "../components/itemDetail";
-import product from '../mock/product';
+import productList from '../mock/productList';
+import { useParams } from "react-router-dom";
 
 
 const ItemDetailContainer = (props) => {
     
+    const {id} = useParams()
     
     const [isLoading, setIsLoading] = useState(false)
     const [productSelected, setProductSelected] = useState([])
@@ -14,32 +16,34 @@ const ItemDetailContainer = (props) => {
         setIsLoading(true)
 
         const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(product), 1000)
+            setTimeout(()=>resolve(productList), 1000)
         })
         
         myPromise.then(
-            (result)=>{ 
-                setProductSelected(result);
+            (result)=>{
+                console.log(result)
+                result.filter( product => {
+                   return product.id === 1? setProductSelected(product) : null;                 
+                })
                 setIsLoading(false);
             }
-            // (result)=>{console.log(result)}
         )
             
-    }, [])
+    }, [id])
 
     if(isLoading){
         return (
             <>
             
-                <p> Cargando productos </p>    
-                <div class="spinner-grow bounce1" role="status">
-                    <span class="sr-only">Cargando Productos</span>
+                <p className='loadingContainer'> Cargando productos </p>    
+                <div className="spinner-grow bounce1" role="status">
+                    <span className="sr-only">Cargando Productos</span>
                 </div>
-                <div class="spinner-grow bounce2" role="status">
-                    <span class="sr-only">Cargando Productos</span>
+                <div className="spinner-grow bounce2" role="status">
+                    <span className="sr-only">Cargando Productos</span>
                 </div>
-                <div class="spinner-grow bounce3" role="status">
-                    <span class="sr-only">Cargando Productos</span>
+                <div className="spinner-grow bounce3" role="status">
+                    <span className="sr-only">Cargando Productos</span>
                 </div>
 
             </>

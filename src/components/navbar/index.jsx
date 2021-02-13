@@ -1,30 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css';
-
+import './style.scss';
+import {Route, useParams } from "react-router-dom";
 import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import ItemNavContainer from '../../containers/ItemNavContainer';
 import ItemDropdown from '../../containers/ItemDropdown';
 import ListDropdownContainer from '../../containers/ListDropdownContainer';
 import CartWidgetComponent from '../cartWidget';
+import { Link } from "react-router-dom";
 
 
 const NavBarComponent = () => {
-    
+
     document.addEventListener('DOMContentLoaded', function() {
         // "use strict"; 
 	
-        /* Preloader */
-        $(window).on('load', function() {
-            var preloaderFadeOutTime = 500;
-            function hidePreloader() {
-                var preloader = $('.spinner-wrapper');
-                setTimeout(function() {
-                    preloader.fadeOut(preloaderFadeOutTime);
-                }, 500);
-            }
-            hidePreloader();
-        });
+
     
         
     //     /* Navbar Scripts */
@@ -43,23 +34,16 @@ const NavBarComponent = () => {
     return (
         <>
 
-        {/* <!-- Preloader --> */}
-        <div className="spinner-wrapper">
-            <div className="spinner">
-                <div className="bounce1"></div>
-                <div className="bounce2"></div>
-                <div className="bounce3"></div>
-            </div>
-        </div>
+
         {/* <!-- end of preloader --> */}
         <nav className="navbar navbar-expand-md navbar-dark navbar-custom fixed-top popup-with-move-anim">
             {/* <!-- Text Logo - Use this if you don't have a graphic logo --> */}
             {/* <!-- <a className="navbar-brand logo-text page-scroll" href="index.html">Aria</a> --> */}
 
             {/* <!-- Image Logo --> */}
-            <a className="navbar-brand logo-image" href="index.html">
-                <img id="logo" src="images/JPL-0111.svg" alt="alternative"></img>
-            </a>
+            <Link className="navbar-brand logo-image" to='/'>
+                <img id="logo" src="../images/JPL-0111.svg" alt="alternative"></img>
+            </Link>
             
             {/* <!-- Mobile Menu Toggle Button --> */}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,18 +55,18 @@ const NavBarComponent = () => {
             <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul className="navbar-nav ml-auto">
                     
-                    <ItemNavContainer  href={'login.html'} name={'LOGIN'}>
+                    {/* <ItemNavContainer  href={'login.html'} name={'LOGIN'}>
                         <span className="sr-only">(current)</span>
-                    </ItemNavContainer>
+                    </ItemNavContainer> */}
                     <ItemNavContainer  href={'booking.html'} name={'RESERVAR TURNO'}/>
 
                         {/* <!-- Dropdown Menu -->           */}
-                        <ListDropdownContainer name={"TIENDA"}>
-                            <ItemDropdown href={'plans.html'} name={'PLANES'}/>
+                        <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
+                            <ItemDropdown href={'/tienda/plan'} name={'PLANES'}/>
                             <div className="dropdown-items-divide-hr"></div>
-                            <ItemDropdown href={'recipes.html'} name={'RECETAS'}/>
+                            <ItemDropdown href={'/tienda/receta'} name={'RECETAS'}/>
                             <div className="dropdown-items-divide-hr"></div>
-                            <ItemDropdown href={'recipes.html'} name={'TURNOS ONLINE'}/>
+                            <ItemDropdown href={'/tienda/turnos'} name={'TURNOS ONLINE'}/>
                         </ListDropdownContainer>
                         {/* <!-- end of dropdown menu --> */}
 

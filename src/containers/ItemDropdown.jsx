@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
 
 
 const ItemDropdown = ({href, name}) => {
 
     return (
         <>
-
-            <a className="dropdown-item" href={href}>
+            <Link className="dropdown-item" to={href}>
                 <span className="item-text">{name}</span>
-            </a>
+            </Link>
+
 
  
         </>

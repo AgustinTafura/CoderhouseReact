@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ItemCountComponent from "../../components/itemCount"
 
-const ItemList = ({product}) => {
+const ItemDetail = ({product}) => {
 
     const [contador, setContador] = useState(1)
 
@@ -25,7 +25,7 @@ const ItemList = ({product}) => {
             {/* <!-- Card --> */}
             <div  className="row no-gutters">
                     <div className="col-6">
-                        <img className="img-fluid rounded-left" src={`images/${product.image}`} alt="alternative"></img>
+                        <img className="img-fluid rounded-left" src={`../images/${product.image}`} alt="alternative"></img>
                     </div>
                     <div className="col-6 rounded-right">
                         <h1 className="card-title">{product.name}</h1>
@@ -64,4 +64,4 @@ const ItemList = ({product}) => {
     )
 }
 
-export default ItemList
+export default ItemDetail

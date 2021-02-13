@@ -1,9 +1,3 @@
-:root {
-    --primary: #14bf98;
-    --secondary: 
-    
-}
-
 @media (min-width: 768px) {
 
     nav.navbar {
@@ -28,6 +22,15 @@
     .navbar-custom.top-nav-collapse .nav-item .nav-link:hover  {
         color: #fff;
         background-size: 100% 50%;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+        color: #fff;
+        &:hover {
+        //   color: var(--primary); 
+            color: #fff;
+            background-size: 100% 50%; 
+        }
     }
 }
 

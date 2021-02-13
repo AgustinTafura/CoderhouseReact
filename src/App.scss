@@ -1,3 +1,33 @@
+/*****************************************
+Colors:
+- Primary - #14bf98
+- Secondary - #1d1e1b
+- Backgrounds - light gray #fbfbfb
+- Background - dark blue #153e52
+- Backgrounds navbar, footer - dark gray #1d1e1b
+- Buttons, bullets, icons - green $primary
+- Headings text - black #484a46
+- Body text - gray #787976
+- Body text - light gray #dfe5ec
+******************************************/
+
+:root {
+    --primary: #14bf98;
+	--secondary: #1d1e1b;
+	--tertiarity: #fff;
+	--background-dark: #1d1e1b;
+	--background-dark-light: #0000008a;
+	--background-light: #fbfbfb;
+	--headings-text: #484a46;
+	--body-text: #787976;
+	--body-text-light: #dfe5ec;
+}
+
+
+
+
+
+
 .App {
   text-align: center;
 }
@@ -47,7 +77,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: #1d1e1b;
+	background: var(--secondary);
 }
 
 .spinner {
@@ -90,7 +120,7 @@
 .bounce2 {
   -webkit-animation-delay: -0.16s;
 	animation-delay: -0.16s;
-  background-color: #1d1e1b;
+  background-color: var(--secondary);
 }
 
 
@@ -109,4 +139,10 @@
 		-ms-transform: scale(1.0);
 		transform: scale(1.0);
 	}
+}
+
+.loadingComponent {
+	position: absolute;
+    top: 50%;
+    left: 50%;
 }

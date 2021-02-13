@@ -1,48 +1,52 @@
+
 import logo from './logo.svg';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 import NavBarComponent from './components/navBar';
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer';
+import  React from 'react';
+import  {BrowserRouter, Switch, Route, Router} from 'react-router-dom';
+import HomeContainer from './containers/home';
 
 const App = () => {
 
   return (
-    <>
+      
+    <BrowserRouter>
+                <NavBarComponent />
+        <Switch>
+
+            <Route exact path="/">
+                {/* <!-- Preloader --> */}
+                <div className="spinner-wrapper">
+                    <div className="spinner">
+                        <div className="bounce1"></div>
+                        <div className="bounce2"></div>
+                        <div className="bounce3"></div>
+                    </div>
+                </div>
+                <HomeContainer/>    
+            </Route>
+
+            <Route exact path="/product/:id">
+                    <ItemDetailContainer/>
+            </Route>
+
+            <Route exact path='/tienda/:categoryId?'>
+
+                    <ItemListContainer/>
+
+            </Route>
+
+            <Route path="*" children={<div>Not found</div>} />
+
+        </Switch>
     
-    <NavBarComponent />
-    <main>
-        <ItemDetailContainer/>
-        <ItemListContainer/>
-    </main>
-    {/* <!-- Header --> */}
-    <header id="header" className="header" >
-        <div className="header-content">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="text-container">
-                            <h1>BUSINESS <span id="js-rotating">TEMPLATE, SERVICES, SOLUTIONS</span></h1>
-                            <p className="p-heading p-large">Aria is a top consultancy company specializing in business growth using online marketing and conversion optimization tactics</p>
-                            <a className="btn-solid-lg page-scroll" href="#intro">DISCOVER</a>
-                        </div>
-                    </div> 
-                    {/* <!-- end of col --> */}
-                </div> 
-                {/* <!-- end of row --> */}
-            </div> 
-            {/* <!-- end of container --> */}
-        </div> 
-        {/* <!-- end of header-content --> */}
-    </header> 
-    {/* <!-- end of header --> */}
-    
-    {/* <!-- end of header --> */}
 
 
-
-    </>
+    </BrowserRouter>
 
   );
 }

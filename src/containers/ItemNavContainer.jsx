@@ -1,9 +1,10 @@
-const ItemNavContainer = ({id, href, name, children}) => {
+import { Link } from "react-router-dom";
 
+const ItemNavContainer = ({id, href, name, children}) => {
     return (
         <>
             <li className="nav-item">
-                <a id={id} className="nav-link page-scroll" href={href}>{name} {children}</a>
+                <Link id={id} className="nav-link page-scroll" to={href}> {name} {children} </Link>
             </li>
         </>
     )
