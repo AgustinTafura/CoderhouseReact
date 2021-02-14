@@ -35,15 +35,17 @@ const ItemDetailContainer = (props) => {
         return (
             <>
             
-                <p className='loadingContainer'> Cargando productos </p>    
-                <div className="spinner-grow bounce1" role="status">
-                    <span className="sr-only">Cargando Productos</span>
-                </div>
-                <div className="spinner-grow bounce2" role="status">
-                    <span className="sr-only">Cargando Productos</span>
-                </div>
-                <div className="spinner-grow bounce3" role="status">
-                    <span className="sr-only">Cargando Productos</span>
+                <div className='loadingComponent'>
+                    <p > Cargando productos </p>    
+                    <div className="spinner-grow bounce1" role="status">
+                        <span className="sr-only">Cargando Productos</span>
+                    </div>
+                    <div className="spinner-grow bounce2" role="status">
+                        <span className="sr-only">Cargando Productos</span>
+                    </div>
+                    <div className="spinner-grow bounce3" role="status">
+                        <span className="sr-only">Cargando Productos</span>
+                    </div>
                 </div>
 
             </>

@@ -1,8 +1,8 @@
-import './style.css';
+import './style.scss';
+import { Link } from "react-router-dom";
 
+const ItemCountComponent = ({stock, contador, onAdd, onRemove, className, addToCart, isAddToCart, quantityAdded}) => {
 
-const ItemCountComponent = ({stock, contador, onAdd, onRemove, className}) => {
-  
     return (
       <>
 
@@ -12,13 +12,13 @@ const ItemCountComponent = ({stock, contador, onAdd, onRemove, className}) => {
         
         {(contador < stock) ?
           <button onClick={() =>{onAdd(stock)}} className={`btn-solid-reg ${className}`}>+</button>
-          : null
+          : <button className={`btn-solid-reg disabled ${className}`} >+</button>
         }
-  
         <div>
-          <button >comprar</button>
+          {(isAddToCart == false) ?
+          ( <button onClick={()=>{addToCart(contador)}}>Agregar a Carrito</button>)
+            : (quantityAdded != contador) ? <button onClick={()=>{addToCart(contador)}}>Actualizar Carrito</button> : <Link to={`/cart`}><button ><i className="material-icons">shopping_cart</i></button></Link>}
         </div>
-
       </>
   
   

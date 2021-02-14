@@ -58,7 +58,7 @@ const NavBarComponent = () => {
                     {/* <ItemNavContainer  href={'login.html'} name={'LOGIN'}>
                         <span className="sr-only">(current)</span>
                     </ItemNavContainer> */}
-                    <ItemNavContainer  href={'booking.html'} name={'RESERVAR TURNO'}/>
+                    <ItemNavContainer  href={'/booking'} name={'RESERVAR TURNO'}/>
 
                         {/* <!-- Dropdown Menu -->           */}
                         <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
@@ -71,7 +71,7 @@ const NavBarComponent = () => {
                         {/* <!-- end of dropdown menu --> */}
 
                         {/* <!-- Cart Widget -->           */}
-                    <CartWidgetComponent />
+                    <CartWidgetComponent href={'/cart'}/>
                     
                 </ul>
                 

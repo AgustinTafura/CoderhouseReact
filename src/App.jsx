@@ -12,6 +12,7 @@ import HomeContainer from './containers/home';
 
 const App = () => {
 
+    
   return (
       
     <BrowserRouter>
@@ -19,14 +20,6 @@ const App = () => {
         <Switch>
 
             <Route exact path="/">
-                {/* <!-- Preloader --> */}
-                <div className="spinner-wrapper">
-                    <div className="spinner">
-                        <div className="bounce1"></div>
-                        <div className="bounce2"></div>
-                        <div className="bounce3"></div>
-                    </div>
-                </div>
                 <HomeContainer/>    
             </Route>
 
@@ -35,9 +28,11 @@ const App = () => {
             </Route>
 
             <Route exact path='/tienda/:categoryId?'>
-
                     <ItemListContainer/>
+            </Route>
 
+            <Route exact path="/cart">
+                    <h1>HOLA CARRITO</h1>
             </Route>
 
             <Route path="*" children={<div>Not found</div>} />

@@ -4,20 +4,41 @@ import ItemCountComponent from "../../components/itemCount"
 
 
 
-const Item = ({id, name, features, price, description, image}) => {
+const Item = ({id, name, features, price, description, image, stock }) => {
+
     const [contador, setContador] = useState(1)
+    const [isAddToCart, setIsAddToCart] = useState(false)
+    const [quantityAdded, setQuantityAdded] = useState([])
 
     const onAdd = (stock) => {
+
         if (contador < stock) {
-            setContador(contador + 1)
+            console.log('isAddToCart', isAddToCart)
+            setContador(contador + 1)           
         }
+        
+
     }
     
     const onRemove = (stock) => {
         if (contador > 1) {
             setContador(contador - 1)
         }
+
     }
+
+    const addToCart = (x) => {
+
+        setQuantityAdded(x)
+        setIsAddToCart(true)
+
+
+    }
+
+    useEffect(() => {
+        
+
+    }, [isAddToCart, contador])
 
     return (
         <>
@@ -46,7 +67,7 @@ const Item = ({id, name, features, price, description, image}) => {
 
                         </ul>
                         <p className="price"><span>$ {price}</span></p>
-                        <ItemCountComponent stock={12} onRemove={onRemove} onAdd={onAdd} contador={contador} />
+                        <ItemCountComponent stock={stock} onRemove={onRemove} onAdd={onAdd} contador={contador} isAddToCart={isAddToCart}  addToCart={addToCart} quantityAdded={quantityAdded}  />
 
                     </div>
 

@@ -9,6 +9,7 @@ const ItemListContainer = (props) => {
     const { categoryId } = useParams()
     const [isLoading, setIsLoading] = useState(false)
     const [products, setProducts] = useState([])
+
     
     useEffect(() => {
 
@@ -70,7 +71,7 @@ const ItemListContainer = (props) => {
                         <div className="row">
                             <div className="col-lg-12">
 
-                                {products.length != 0?
+                                {products.length !== 0?
 
                                     products.map((product, index)=>{
                                         return (
@@ -80,7 +81,8 @@ const ItemListContainer = (props) => {
                                                 features={product.feature} 
                                                 price={product.price} 
                                                 description={product.description} 
-                                                image={product.image} 
+                                                image={product.image}
+                                                stock={product.stock}
                                             />
                                         )
                                     })

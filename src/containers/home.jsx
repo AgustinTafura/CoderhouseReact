@@ -1,23 +1,57 @@
 import $ from "jquery";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 const HomeContainer = () => {
 
-    /* Preloader */
-    var preloaderFadeOutTime = 500;
-    function hidePreloader() {
-        var preloader = $('.spinner-wrapper');
-        setTimeout(function() {
-            preloader.fadeOut(preloaderFadeOutTime);
-        }, 200);
-    }
-    $(window).on('load', function() {
-        hidePreloader();
-        
-    });
+    const [isLoading, setIsLoading] = useState(false)
 
+    useEffect(() => {
+
+        setIsLoading(true)
+
+        const myPromise = new Promise((resolve, reject) => {
+            setTimeout(()=>resolve(true), 5000)
+        })
+        
+        myPromise.then(
+            (result)=>{
+                console.log(result)
+                setIsLoading(false);
+            }
+        )
+            
+    }, [])
+
+    // document.addEventListener("DOMContentLoaded", function(event) {
+    //     /* Preloader */
+    //     var preloaderFadeOutTime = 500;
+    //     var preloader = $('.spinner-wrapper');    
+    //     setTimeout(function() {
+    //         preloader.fadeOut(preloaderFadeOutTime);
+    //     }, 1000);
+    // });
+
+
+    if(isLoading) {
+        return (
+            <>
+                {/* <!-- Preloader --> */}
+                <div className="spinner-wrapper">
+                    <div className="spinner">
+                        <div className="bounce1"></div>
+                        <div className="bounce2"></div>
+                        <div className="bounce3"></div>
+                    </div>
+                </div>
+            </>
+        )
+    }
     return (
-            /* <!-- Header --> */
+        <>
+
+
+             {/* <!-- Header --> */}
             <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/images/logo-055.jpg') no-repeat`, backgroundSize:`cover` }}>
             <div className="header-content">
                 <div className="container">
@@ -37,7 +71,8 @@ const HomeContainer = () => {
             </div> 
             {/* <!-- end of header-content --> */}
         </header> 
-        /* <!-- end of header --> */
+        {/* <!-- end of header --> */}
+        </>
     )
 }
 
