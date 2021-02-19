@@ -1,61 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import ItemCountComponent from "../../components/itemCount"
+import ItemCountComponent from "../../components/itemCount";
+import {CartContext} from "../../context/CartContext";
 
 
+const Item = ({product}) => {
 
-const Item = ({id, name, features, price, description, image, stock }) => {
+    const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
 
     const [contador, setContador] = useState(1)
-    const [isAddToCart, setIsAddToCart] = useState(false)
+    // const [isAddToCart, setIsAddToCart] = useState(false)
     const [quantityAdded, setQuantityAdded] = useState([])
 
     const onAdd = (stock) => {
 
         if (contador < stock) {
-            console.log('isAddToCart', isAddToCart)
             setContador(contador + 1)           
         }
         
-
     }
     
     const onRemove = (stock) => {
         if (contador > 1) {
             setContador(contador - 1)
         }
-
     }
 
-    const addToCart = (x) => {
-
-        setQuantityAdded(x)
-        setIsAddToCart(true)
-
-
+    const addToCArt = () => {
+        addItemToCart(product.id, contador)
+        setQuantityAdded(contador)
     }
 
+   
     useEffect(() => {
-        
+        if(isInCart(product.id)) {
+            setContador(quantityItemAdded(product.id))
+            setQuantityAdded(quantityItemAdded(product.id))
+        }
 
-    }, [isAddToCart, contador])
+    }, [])
 
     return (
         <>
             {/* <!-- Card --> */}
                 <div  className="card">
                     <div className="card-image">
-                        <Link to={`/product/${id}`}>
-                            <img className="img-fluid" src={`../images/${image}`} alt="alternative"></img>
+                        <Link to={`/product/${product.id}`}>
+                            <img className="img-fluid" src={`../images/${product.image}`} alt="alternative"></img>
                         </Link>
                             
                     </div>
                     <div className="card-body">
-                        <h3 className="card-title">{name}</h3>
-                        <p> {description} </p>
+                        <h3 className="card-title">{product.name}</h3>
+                        <p> {product.description} </p>
                         <ul className="list-unstyled li-space-lg">
-                            {(features)?                         
-                            features.map((feature)=>{
+                            {(product.features)?                         
+                            (product.features).map((feature)=>{
                                 return (
                                 <li className="media">
                                     <i className="fas fa-square"></i>
@@ -66,8 +66,8 @@ const Item = ({id, name, features, price, description, image, stock }) => {
                             :null}
 
                         </ul>
-                        <p className="price"><span>$ {price}</span></p>
-                        <ItemCountComponent stock={stock} onRemove={onRemove} onAdd={onAdd} contador={contador} isAddToCart={isAddToCart}  addToCart={addToCart} quantityAdded={quantityAdded}  />
+                        <p className="price"><span>$ {product.price}</span></p>
+                        <ItemCountComponent isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}  />
 
                     </div>
 

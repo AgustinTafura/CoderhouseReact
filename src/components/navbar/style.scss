@@ -11,7 +11,7 @@
         background-image: linear-gradient(var(--primary),var(--primary));
         background-position: 0 100%;
         background-repeat: no-repeat;
-        background-size: 0% 30%;
+        background-size: 0% 20%;
         transition: background-size .3s;
         padding-left: 0.4rem;
         padding-right: 0.4rem;
@@ -21,7 +21,7 @@
     }
     .navbar-custom.top-nav-collapse .nav-item .nav-link:hover  {
         color: #fff;
-        background-size: 100% 50%;
+        background-size: 100% 37%;
     }
 
     .navbar-dark .navbar-nav .nav-link {
@@ -53,3 +53,15 @@
         content: url(JPL-0111.svg)
     }
 } */
+
+.dropdown-menu:hover ~ .dropdown {
+    color: red;
+    background-size: 100% 50%;
+}
+
+
+
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: #fff;
+}
+

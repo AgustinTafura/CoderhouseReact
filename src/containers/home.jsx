@@ -1,10 +1,30 @@
-import $ from "jquery";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import ReactTextRotator from "react-text-rotator";
+import {CartContext} from "../context/CartContext";
 
 const HomeContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false)
+    const {cart} = useContext(CartContext)
+
+   
+    const content = [
+        {
+            text: "  PLANIFICACIÓN",
+            animation: "fade",
+        },
+        {
+            text: "  ENTRENAMIENTO",
+            animation: "fade",
+        },
+        {
+            text: "  HÁBITOS",
+            animation: "fade",
+        },
+    ];
+    
+
 
     useEffect(() => {
 
@@ -16,21 +36,14 @@ const HomeContainer = () => {
         
         myPromise.then(
             (result)=>{
-                console.log(result)
+
                 setIsLoading(false);
             }
         )
             
     }, [])
 
-    // document.addEventListener("DOMContentLoaded", function(event) {
-    //     /* Preloader */
-    //     var preloaderFadeOutTime = 500;
-    //     var preloader = $('.spinner-wrapper');    
-    //     setTimeout(function() {
-    //         preloader.fadeOut(preloaderFadeOutTime);
-    //     }, 1000);
-    // });
+
 
 
     if(isLoading) {
@@ -58,7 +71,15 @@ const HomeContainer = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="text-container">
-                                <h1>NUTRICIÓN + <span id="js-rotating">PLANIFICACIÓN, ENTRENAMIENTO, HÁBITOS</span></h1>
+                                <h1>NUTRICIÓN     
+                                    <span style={{fontFamily: "Mansalva"}}> + </span> 
+                                <ReactTextRotator 
+                                    content={content}
+                                    time={2000}
+                                    startDelay={100}
+                                />
+
+                                </h1>
                                 <p className="p-heading p-large">Consultas Online, Planes personalizados y Monitoreo de los objetivos alcanzados</p>
                                 <Link to="/tienda" className="btn-solid-lg page-scroll"> DESCÚBRE CÓMO</Link>
                             </div>

@@ -1,42 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ItemCountComponent from "../../components/itemCount"
+import {CartContext} from "../../context/CartContext";
 
 const ItemDetail = ({product}) => {
 
+    const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
+    
     const [contador, setContador] = useState(1)
-    const [isAddToCart, setIsAddToCart] = useState(false)
     const [quantityAdded, setQuantityAdded] = useState([])
+    
 
- 
+
     const onAdd = (stock) => {
 
         if (contador < stock) {
-            console.log('isAddToCart', isAddToCart)
             setContador(contador + 1)           
         }
         
-
     }
     
     const onRemove = (stock) => {
         if (contador > 1) {
             setContador(contador - 1)
         }
-
     }
 
-    const addToCart = (x) => {
-
-        setQuantityAdded(x)
-        setIsAddToCart(true)
-
-
+    const addToCArt = () => {
+        addItemToCart(product.id, contador)
+        setQuantityAdded(contador)
     }
 
+   
     useEffect(() => {
-        
+        if(isInCart(product.id)) {
+            setContador(quantityItemAdded(product.id))
+            setQuantityAdded(quantityItemAdded(product.id))
+        }
 
-    }, [isAddToCart, contador])
+    }, [])
 
     return (
         <>
@@ -65,7 +66,7 @@ const ItemDetail = ({product}) => {
 
                         </ul>
                         <p className="price"><span>${product.price}</span></p>
-                        <ItemCountComponent stock={product.stock} onRemove={onRemove} onAdd={onAdd} contador={contador} isAddToCart={isAddToCart}  addToCart={addToCart} quantityAdded={quantityAdded}  />
+                        <ItemCountComponent isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}   />
 
                     </div>
 

@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 const ItemDetailContainer = (props) => {
     
     const {id} = useParams()
-    
+
     const [isLoading, setIsLoading] = useState(false)
     const [productSelected, setProductSelected] = useState([])
 
@@ -21,9 +21,8 @@ const ItemDetailContainer = (props) => {
         
         myPromise.then(
             (result)=>{
-                console.log(result)
                 result.filter( product => {
-                   return product.id === 1? setProductSelected(product) : null;                 
+                   return product.id.toString() === id? setProductSelected(product) : null;                 
                 })
                 setIsLoading(false);
             }

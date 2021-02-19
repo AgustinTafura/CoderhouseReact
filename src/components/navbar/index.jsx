@@ -1,42 +1,54 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
-import {Route, useParams } from "react-router-dom";
 import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import ItemNavContainer from '../../containers/ItemNavContainer';
 import ItemDropdown from '../../containers/ItemDropdown';
 import ListDropdownContainer from '../../containers/ListDropdownContainer';
 import CartWidgetComponent from '../cartWidget';
-import { Link } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
 
 const NavBarComponent = () => {
-
+    const actualLocation = useLocation()
     document.addEventListener('DOMContentLoaded', function() {
         // "use strict"; 
-	
 
-    
-        
-    //     /* Navbar Scripts */
-        // jQuery to collapse the navbar on scroll
-        $(window).on('scroll load', function() {
-            if ($(".navbar").offset().top > 20) {
-                $(".fixed-top").addClass("top-nav-collapse");
-            } else {
-                $(".fixed-top").removeClass("top-nav-collapse");
+        })
+            
+            useEffect(() => {
+
+            const efectNav = () => {
+                if ($(".navbar").offset().top > 20) {
+                    $(".fixed-top").addClass("top-nav-collapse");
+
+                } else {
+                    $(".fixed-top").removeClass("top-nav-collapse");
+
+                }
             }
-        });
+
+            if(actualLocation.pathname === '/'){
+                
+                /* Navbar Scripts */
+                // jQuery to collapse the navbar on scroll
+                $(window).on('scroll load',efectNav);
+            }
+
+            return () => {
+                $(window).off('scroll load',efectNav);
+            }
+        }, [actualLocation])
+
     
  
 
-    })
     return (
         <>
 
 
         {/* <!-- end of preloader --> */}
-        <nav className="navbar navbar-expand-md navbar-dark navbar-custom fixed-top popup-with-move-anim">
+        <nav className={`navbar navbar-expand-md navbar-dark navbar-custom fixed-top popup-with-move-anim ${(actualLocation.pathname !== '/')?'top-nav-collapse':'' }`}>
             {/* <!-- Text Logo - Use this if you don't have a graphic logo --> */}
             {/* <!-- <a className="navbar-brand logo-text page-scroll" href="index.html">Aria</a> --> */}
 
