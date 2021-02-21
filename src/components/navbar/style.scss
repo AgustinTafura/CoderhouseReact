@@ -29,18 +29,18 @@
         &:hover {
         //   color: var(--primary); 
             color: #fff;
-            background-size: 100% 50%; 
+            background-size: 100% 37%; 
         }
     }
 }
 
 .navbar-custom .fa-stack .hexagon {
-    background: url(background/hexagon-green.svg);
+    background: url('background/hexagon-green.svg');
     background-size: 1.625rem 1.625rem;
 }
 
 .navbar-custom .fa-stack:hover .hexagon {
-    background: url(background/hexagon-white.svg);
+    background: url('background/hexagon-white.svg');
     background-size: 1.625rem 1.625rem;
 }
 
@@ -54,10 +54,10 @@
     }
 } */
 
-.dropdown-menu:hover ~ .dropdown {
-    color: red;
-    background-size: 100% 50%;
-}
+// .dropdown-menu:hover ~ .dropdown {
+//     color: red;
+//     background-size: 100% 50%;
+// }
 
 
 

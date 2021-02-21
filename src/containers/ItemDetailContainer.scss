@@ -1,0 +1,19 @@
+.ex-basic-1 {
+	padding-top: 2rem;
+	padding-bottom: 0.875rem;
+	// background-color: var(--background-light);
+	text-align: left;
+}
+
+.ex-basic-1 .breadcrumbs {
+	margin-bottom: 1rem;
+	color: var(--body-text);
+    a {
+        color: var(--body-text)
+    }
+}
+
+.ex-basic-1 .breadcrumbs .fa {
+	margin-right: 0.5rem;
+	margin-left: 0.625rem;
+}

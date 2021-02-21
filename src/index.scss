@@ -686,9 +686,9 @@ input[type='checkbox'] {
 	background-color: var(--secondary);
 }
 
-.dropdown-toggle .dropdown-menu:hover::after {
-	background-color: red;
-}
+// .dropdown-toggle .dropdown-menu:hover::after {
+// 	background-color: red;
+// }
 
 .navbar-custom .dropdown-item {
 	color: var(--tertiarity);
@@ -881,6 +881,7 @@ input[type='checkbox'] {
 .cards-2 .section-title {
 	margin-bottom: 0.5rem;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 .cards-2 h2 {
@@ -944,6 +945,10 @@ input[type='checkbox'] {
 
 .cards-2 .btn-solid-reg:hover {
 	background-color: var(--tertiarity);
+}
+
+.card-text {
+	padding: 1rem;
 }
 
 
@@ -1768,11 +1773,17 @@ a:hover.back-to-top {
 .ex-basic-1 {
 	padding-top: 2rem;
 	padding-bottom: 0.875rem;
-	background-color: var(--background-light);
+	// background-color: var(--background-light);
+	text-align: left;
 }
 
 .ex-basic-1 .breadcrumbs {
 	margin-bottom: 1rem;
+	color: var(--body-text);
+	a {
+        color: var(--body-text);
+		text-transform: capitalize;
+    }
 }
 
 .ex-basic-1 .breadcrumbs .fa {

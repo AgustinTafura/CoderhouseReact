@@ -2,7 +2,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
 
 
-const FooterComponent = () => {
+const Footer = () => {
 
   document.addEventListener('DOMContentLoaded', function() {
 
@@ -22,4 +22,4 @@ const FooterComponent = () => {
   );
 }
 
-export default FooterComponent;
+export default Footer;

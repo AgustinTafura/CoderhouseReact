@@ -64,31 +64,53 @@ const ItemListContainer = (props) => {
                 <div className="container" style={{textAlign:"center"}}>
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="section-title">TIENDA</div>
-                            <h2>Elige el plan ideal que mejor<br></br> se adapte a tus objetivos</h2>
-                        </div> 
+                        <div className="section-title">{categoryId?categoryId:'TIENDA'}</div>
+                        <h2>Elige el plan ideal que mejor<br></br> se adapte a tus objetivos</h2>
                     </div> 
-                        <div className="row">
-                            <div className="col-lg-12">
-
-                                {products.length !== 0?
-
-                                    products.map((product, index)=>{
-                                        return (
-                                            <Item key={index}  
-                                                product={product}
-                                            />
-                                        )
-                                    })
-                                    :<>
-                                        <h4>No hemos encontrado productos para ésta categoría</h4>
-                                        <Link to="/tienda" className="btn-solid-lg page-scroll">VER OTROS PRODUCTOS</Link>
-                                    </>
-
-                                }
-
+                </div> 
+                {categoryId?
+                ( <>
+                
+                <div class="ex-basic-1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="breadcrumbs">
+                                    <Link to="/tienda"> Tienda </Link>
+                                    {/* <a href="index.html">Tienda</a> */}
+                                    <i class="fa fa-angle-double-right"></i>
+                                    {categoryId?<Link to={`/tienda/${categoryId}`}>{categoryId}</Link>:null}
+                                    {/* <a href="index.html">{productSelected.categoryId}</a> */}
+                                </div> 
                             </div> 
                         </div> 
+                    </div> 
+                </div>
+                </>
+                ):null 
+                }
+                
+                <div className="row">
+                    <div className="col-lg-12">
+
+                        {products.length !== 0?
+
+                            products.map((product, index)=>{
+                                return (
+                                    <Item key={index}  
+                                        product={product}
+                                    />
+                                )
+                            })
+                            :<>
+                                <h4>No hemos encontrado productos para ésta categoría</h4>
+                                <Link to="/tienda" className="btn-solid-lg page-scroll">VER OTROS PRODUCTOS</Link>
+                            </>
+
+                        }
+
+                    </div> 
+                </div> 
                 </div> 
             </div>
        </>

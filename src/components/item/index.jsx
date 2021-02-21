@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import ItemCountComponent from "../../components/itemCount";
+import ItemCountComponent from "../ItemCount";
 import {CartContext} from "../../context/CartContext";
 
 
 const Item = ({product}) => {
 
     const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
-
     const [contador, setContador] = useState(1)
-    // const [isAddToCart, setIsAddToCart] = useState(false)
     const [quantityAdded, setQuantityAdded] = useState([])
 
     const onAdd = (stock) => {
@@ -71,13 +69,9 @@ const Item = ({product}) => {
 
                     </div>
 
-  
-                    {/* <div className="button-container">
-                        <a className="btn-solid-reg page-scroll" href="#callMe">DETAILS</a>
-                    </div>  */}
                 </div>
                 
-            {/* <!-- end of card --> */}
+
         </>
     )
 }

@@ -72,7 +72,7 @@ const HomeContainer = () => {
                         <div className="col-lg-12">
                             <div className="text-container">
                                 <h1>NUTRICIÓN     
-                                    <span style={{fontFamily: "Mansalva"}}> + </span> 
+                                    <span style={{fontFamily: "Mansalva"}}> +  </span> 
                                 <ReactTextRotator 
                                     content={content}
                                     time={2000}

@@ -1,3 +1,18 @@
+# Proyect
+
+Este proyecto se enfocará comunicar los servicios brindados por un profesional de la salud, particularmente en nutrición y entrenamiento, incluyendo principalemente las siguientes secciones:
+
+ - Profesional: dedicado presentacion del profesional en Nutrición y Entrenamiento.
+ - Blog: dedicado a la publicación de contenido relevante para sus pacientes.
+ - Tienda: dedicada a venta de los servicios/productos.
+ - Turnos: dedicada a la comunicación directa para obtener turnos online y/o presencial.
+
+
+## NPM additional dependencies
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

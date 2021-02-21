@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { } from "react";
 import './style.scss';
 import { Link } from "react-router-dom";
 
-const ItemCountComponent = ({contador, product,  onAdd, onRemove, className, quantityAdded, addToCArt, isInCart}) => {
+const ItemCount = ({contador, product,  onAdd, onRemove, className, quantityAdded, addToCArt, isInCart}) => {
 
 
     return (
@@ -25,4 +25,4 @@ const ItemCountComponent = ({contador, product,  onAdd, onRemove, className, qua
     );
   }
 
-  export default ItemCountComponent;
+  export default ItemCount;

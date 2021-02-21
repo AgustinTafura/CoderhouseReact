@@ -4,7 +4,7 @@ import {CartContext} from "../../context/CartContext";
 
 const ItemDetail = ({product}) => {
 
-    const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
+    const {addItemToCart, isInCart, quantityItemAdded} = useContext(CartContext)
     
     const [contador, setContador] = useState(1)
     const [quantityAdded, setQuantityAdded] = useState([])
@@ -46,10 +46,12 @@ const ItemDetail = ({product}) => {
 
             {/* <!-- Card --> */}
             <div  className="row no-gutters">
-                    <div className="col-6">
-                        <img className="img-fluid rounded-left" src={`../images/${product.image}`} alt="alternative"></img>
+                    <div className="col-12 col-lg-6">
+                    <div className="image-container">
+                        <img className="img-fluid" src={`../images/${product.image}`} alt="alternative"></img>
+                    </div> 
                     </div>
-                    <div className="col-6 rounded-right">
+                    <div className="col-12 col-lg-6 rounded-right card-text">
                         <h1 className="card-title">{product.name}</h1>
                         <h3> {product.description} </h3>
                         <ul className="list-unstyled li-space-lg">
@@ -70,19 +72,13 @@ const ItemDetail = ({product}) => {
 
                     </div>
 
-  
-                    {/* <div className="button-container">
-                        <a className="btn-solid-reg page-scroll" href="#callMe">DETAILS</a>
-                    </div>  */}
                 </div>
-
-                
-             {/* <!-- end of card --> */}
 
             </div> 
         </div> 
 
-        </>
+        
+         </>
     )
 }
 

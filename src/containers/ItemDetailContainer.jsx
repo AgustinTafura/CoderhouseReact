@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ItemDetail from "../components/itemDetail";
 import productList from '../mock/productList';
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const ItemDetailContainer = (props) => {
     
@@ -54,11 +54,36 @@ const ItemDetailContainer = (props) => {
 
     return (
         <>
-            <div id="services" className="cards-2">
-                <div className="container" style={{textAlign:"center"}}>   
-                            <ItemDetail product={productSelected}/>
+            <div id="services" className="counter">
+                <div className="container" style={{textAlign:"center"}}>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="section-title">Plan de Alimentación</div>
+                            <h2>Elige la opción ideal que mejor<br></br> se adapte a tus objetivos</h2>
+                        </div> 
+                    </div> 
+
+                    <div class="ex-basic-1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="breadcrumbs">
+                                    <Link to="/tienda"> Tienda </Link>
+                                    {/* <a href="index.html">Tienda</a> */}
+                                    <i class="fa fa-angle-double-right"></i>
+                                    <Link to={`/tienda/${productSelected.categoryId}`}>{productSelected.categoryId}</Link>
+                                    {/* <a href="index.html">{productSelected.categoryId}</a> */}
+                                </div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div>
+                    <ItemDetail product={productSelected}/>
                 </div> 
-            </div> 
+            </div>
+
+            
+             
         </>
     )
     
