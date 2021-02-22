@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import ItemCountComponent from "../../components/itemCount"
+import ItemCountComponent from "../../components/ItemCount"
 import {CartContext} from "../../context/CartContext";
 
 const ItemDetail = ({product}) => {

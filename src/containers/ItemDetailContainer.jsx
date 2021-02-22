@@ -63,14 +63,14 @@ const ItemDetailContainer = (props) => {
                         </div> 
                     </div> 
 
-                    <div class="ex-basic-1">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="breadcrumbs">
+                    <div className="ex-basic-1">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="breadcrumbs">
                                     <Link to="/tienda"> Tienda </Link>
                                     {/* <a href="index.html">Tienda</a> */}
-                                    <i class="fa fa-angle-double-right"></i>
+                                    <i className="fa fa-angle-double-right"></i>
                                     <Link to={`/tienda/${productSelected.categoryId}`}>{productSelected.categoryId}</Link>
                                     {/* <a href="index.html">{productSelected.categoryId}</a> */}
                                 </div> 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import productList from '../mock/productList'
-import Item from '../components/item';
+import Item from '../components/Item';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -71,14 +71,14 @@ const ItemListContainer = (props) => {
                 {categoryId?
                 ( <>
                 
-                <div class="ex-basic-1">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="breadcrumbs">
+                <div className="ex-basic-1">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="breadcrumbs">
                                     <Link to="/tienda"> Tienda </Link>
                                     {/* <a href="index.html">Tienda</a> */}
-                                    <i class="fa fa-angle-double-right"></i>
+                                    <i className="fa fa-angle-double-right"></i>
                                     {categoryId?<Link to={`/tienda/${categoryId}`}>{categoryId}</Link>:null}
                                     {/* <a href="index.html">{productSelected.categoryId}</a> */}
                                 </div> 
