@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import ItemCountComponent from "../../components/ItemCount"
+import ItemCount from "../ItemCount"
 import {CartContext} from "../../context/CartContext";
 
 const ItemDetail = ({product}) => {
@@ -68,7 +68,7 @@ const ItemDetail = ({product}) => {
 
                         </ul>
                         <p className="price"><span>${product.price}</span></p>
-                        <ItemCountComponent isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}   />
+                        <ItemCount isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}   />
 
                     </div>
 

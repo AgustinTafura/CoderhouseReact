@@ -2,8 +2,8 @@ import React, { } from "react";
 import './style.scss';
 import { Link } from "react-router-dom";
 
-const ItemCount = ({contador, product,  onAdd, onRemove, className, quantityAdded, addToCArt, isInCart}) => {
-
+const ItemCount = ({contador, product,  onAdd, onRemove, className, quantityAdded, addToCart, isInCart, showButton}) => {
+  console.log('showButto', (showButton))
 
     return (
       <>
@@ -18,8 +18,8 @@ const ItemCount = ({contador, product,  onAdd, onRemove, className, quantityAdde
         }
         <div>
           {isInCart?
-          (quantityAdded !== contador) ? <button onClick={()=>{addToCArt()}}>Actualizar Carrito</button> : <Link to={`/cart`}><button ><i className="material-icons">shopping_cart</i></button></Link>
-            : ( <button onClick={()=>{addToCArt()}}>Agregar a Carrito</button>)}
+          (quantityAdded !== contador) ? <button className={!showButton?'d-none':null} onClick={()=>{addToCart()}}>Actualizar Carrito</button> : <Link className={!showButton?'d-none':null} to={`/cart`}><button ><i className="material-icons">shopping_cart</i></button></Link>
+            : ( <button onClick={()=>{addToCart()}}>Agregar a Carrito</button>)}
         </div>
       </> 
     );

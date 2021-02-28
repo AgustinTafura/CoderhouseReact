@@ -1,4 +1,4 @@
-import { createContext, useState} from "react";
+import { createContext, useState, useEffect} from "react";
 
 
 // Creamos el espacio de memoria
@@ -6,15 +6,42 @@ export const CartContext = createContext();
 
 export const CartProvider = ({children}) => {
     const [cart, setCart] = useState([])
+    const [quantityproductsInCart, setQuantityproductsInCart] = useState(0)
 
     const addItemToCart = (itemId, q) => {
-        (isInCart(itemId))? 
-        updateItem(itemId, q)
-        :   setCart([...cart, {id: itemId, quantity: q}])
-        { console.log(cart)}
-        
+
+        if(isInCart(itemId)){
+
+            updateItem(itemId, q)
+
+        } else{
+            setCart([...cart, {id: itemId, quantity: q}])
+        }
+                
+    }
+
+    const removeItemCart = (itemId) => {
+
+        if(isInCart(itemId)){
+
+            const index = cart.findIndex( product => product.id === itemId)
+            const newCart = [...cart];
+            newCart.splice(index, 1)
+            setCart(newCart)
+
+        } 
+                
     }
     
+    const quantityproductsAdded = () => {
+        let quantity = 0
+        cart.forEach(product => {
+            quantity += quantityItemAdded(product.id)
+        })
+        console.log(quantity)
+        setQuantityproductsInCart(quantity)
+    }
+
 
     const clearCart = () => {
         setCart([])
@@ -33,19 +60,34 @@ export const CartProvider = ({children}) => {
             const itemQuantityItemAdded = cart.find( product => product.id === itemId).quantity
             return itemQuantityItemAdded
         }
-        // console.log(itemQuantityItemAdded)
+
     }
+
+
 
     const updateItem = (itemId, q) => {
-
         const index = cart.findIndex( product => product.id === itemId)
-        const cartUpdated = cart.splice(index, 1, {id: itemId, quantity: q})
+        const newCart = [...cart];
+        newCart.splice(index, 1, {id: itemId, quantity: q})
+        setCart(newCart)
+
     }
 
+    useEffect(() => {
 
+        localStorage.getItem("cart") !== null && setCart(JSON.parse(localStorage.getItem("cart")))
+
+    }, [])
+
+    useEffect(() => {
+
+        localStorage.setItem("cart", JSON.stringify(cart))
+        quantityproductsAdded()
+    }, [cart])
+    
 
     return (
-        <CartContext.Provider value={{cart, addItemToCart, isInCart, quantityItemAdded, updateItem}}>
+        <CartContext.Provider value={{cart, addItemToCart, isInCart, quantityItemAdded, updateItem, quantityproductsInCart, removeItemCart}}>
             {children}
         </CartContext.Provider>
     )

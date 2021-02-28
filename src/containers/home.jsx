@@ -28,18 +28,18 @@ const HomeContainer = () => {
 
     useEffect(() => {
 
-        setIsLoading(true)
+        // setIsLoading(true)
 
-        const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(true), 5000)
-        })
+        // const myPromise = new Promise((resolve, reject) => {
+        //     setTimeout(()=>resolve(true), 5000)
+        // })
         
-        myPromise.then(
-            (result)=>{
+        // myPromise.then(
+        //     (result)=>{
 
-                setIsLoading(false);
-            }
-        )
+        //         setIsLoading(false);
+        //     }
+        // )
             
     }, [])
 

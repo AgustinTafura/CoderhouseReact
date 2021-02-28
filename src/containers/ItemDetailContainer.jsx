@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ItemDetail from "../components/itemDetail";
+import ItemDetail from "../components/ItemDetail";
 import productList from '../mock/productList';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";

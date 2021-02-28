@@ -3,47 +3,51 @@ import logo from './logo.svg';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import NavBarComponent from './components/navBar';
+import NavBarComponent from './components/NavBar';
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import  React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import HomeContainer from './containers/home';
+import HomeContainer from './containers/Home';
+import CartContainer from './containers/Cart';
 import {CartProvider} from './context/CartContext';
+import {CommercialProvider} from './context/CommercialContext';
 
 const App = () => {
 
     
         return ( 
-                <CartProvider>
-                        <BrowserRouter>
-                                
-                                <NavBarComponent />
-                               
-                                <Switch>
-
-                                <Route exact path="/">
-                                        <HomeContainer/>    
-                                </Route>
-
-                                <Route exact path="/product/:id">
+                <CommercialProvider>
+                        <CartProvider>
+                                <BrowserRouter>
                                         
-                                        <ItemDetailContainer/>
-                                </Route>
+                                        <NavBarComponent />
+                                
+                                        <Switch>
 
-                                <Route exact path='/tienda/:categoryId?'>
-                                        <ItemListContainer/>
-                                </Route>
+                                        <Route exact path="/">
+                                                <HomeContainer/>    
+                                        </Route>
 
-                                <Route exact path="/cart">
-                                        <h1>HOLA CARRITO</h1>
-                                </Route>
+                                        <Route exact path="/product/:id">
+                                                
+                                                <ItemDetailContainer/>
+                                        </Route>
 
-                                <Route path="*" children={<div>Not found</div>} />
+                                        <Route exact path='/tienda/:categoryId?'>
+                                                <ItemListContainer/>
+                                        </Route>
 
-                                </Switch>
-                        </BrowserRouter>
-                </CartProvider>
+                                        <Route exact path="/cart">
+                                                <CartContainer/> 
+                                        </Route>
+
+                                        <Route path="*" children={<div>Not found</div>} />
+
+                                        </Switch>
+                                </BrowserRouter>
+                        </CartProvider>
+                </CommercialProvider>
 
         );
 }

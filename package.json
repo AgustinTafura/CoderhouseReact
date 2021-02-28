@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.6.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.6.0",
+    "firebase": "^8.2.9",
     "isotope-layout": "^3.0.6",
     "jquery": "^3.5.1",
     "jquery.easing": "^1.4.1",

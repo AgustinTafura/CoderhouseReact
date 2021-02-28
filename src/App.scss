@@ -59,7 +59,9 @@ Colors:
 }
 
 
-
+body {
+	background-color: var(--background-light);
+}
 .App {
   text-align: center;
 }

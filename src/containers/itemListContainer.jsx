@@ -1,40 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import productList from '../mock/productList'
 import Item from '../components/Item';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { getFirestore } from "../firebase";
+import { CommercialContext } from "../context/CommercialContext";
 
 const ItemListContainer = (props) => {
     
     const { categoryId } = useParams()
     const [isLoading, setIsLoading] = useState(false)
-    const [products, setProducts] = useState([])
-
+    // const [products, setProducts] = useState([])
+    const {products} = useContext(CommercialContext)
     
     useEffect(() => {
 
         setIsLoading(true)
 
-        const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(productList), 3000)
-        })
-        
-        myPromise.then(
-            (result)=>{
-                if (categoryId) {
-                    const categoryProductList = result.filter(product => product.categoryId === categoryId)
-                    setProducts(categoryProductList)
-                    setIsLoading(false);
-                    
-                } else {
-                    setProducts(result);
-                    setIsLoading(false);
-                }
-                
-            }
-        )
+        // const db = getFirestore();
+        // const productCollection = db.collection("products")
+        // productCollection.get().then((value) => {
             
-    }, [categoryId])
+        //     const productsList = value.docs.map(element => { return {...element.data(), id:element.id}})
+        //     // console.log('consume')
+
+        //     setProducts(productsList)
+            
+        // })
+        
+        // console.log(products)
+        
+        setTimeout(() => {
+                setIsLoading(false);
+            
+        }, 2000);
+            
+    }, [])
 
 
     if(isLoading){
@@ -68,26 +69,27 @@ const ItemListContainer = (props) => {
                         <h2>Elige el plan ideal que mejor<br></br> se adapte a tus objetivos</h2>
                     </div> 
                 </div> 
+
                 {categoryId?
-                ( <>
-                
-                <div className="ex-basic-1">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="breadcrumbs">
-                                    <Link to="/tienda"> Tienda </Link>
-                                    {/* <a href="index.html">Tienda</a> */}
-                                    <i className="fa fa-angle-double-right"></i>
-                                    {categoryId?<Link to={`/tienda/${categoryId}`}>{categoryId}</Link>:null}
-                                    {/* <a href="index.html">{productSelected.categoryId}</a> */}
+                    ( <>
+                    
+                    <div className="ex-basic-1">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="breadcrumbs">
+                                        <Link to="/tienda"> Tienda </Link>
+                                        {/* <a href="index.html">Tienda</a> */}
+                                        <i className="fa fa-angle-double-right"></i>
+                                        {categoryId?<Link to={`/tienda/${categoryId}`}>{categoryId}</Link>:null}
+                                        {/* <a href="index.html">{productSelected.categoryId}</a> */}
+                                    </div> 
                                 </div> 
                             </div> 
                         </div> 
-                    </div> 
-                </div>
-                </>
-                ):null 
+                    </div>
+                    </>
+                    ) :null 
                 }
                 
                 <div className="row">

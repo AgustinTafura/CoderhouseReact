@@ -9,7 +9,8 @@ const Item = ({product}) => {
     const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
     const [contador, setContador] = useState(1)
     const [quantityAdded, setQuantityAdded] = useState([])
-
+    const showButton = true
+    
     const onAdd = (stock) => {
 
         if (contador < stock) {
@@ -24,7 +25,7 @@ const Item = ({product}) => {
         }
     }
 
-    const addToCArt = () => {
+    const addToCart = () => {
         addItemToCart(product.id, contador)
         setQuantityAdded(contador)
     }
@@ -53,9 +54,10 @@ const Item = ({product}) => {
                         <p> {product.description} </p>
                         <ul className="list-unstyled li-space-lg">
                             {(product.features)?                         
-                            (product.features).map((feature)=>{
-                                return (
-                                <li className="media">
+                            (product.features).map((feature, index)=>{
+                                
+                                return ( 
+                                <li key={index} className="media">
                                     <i className="fas fa-square"></i>
                                     <div className="media-body">{feature}</div>
                                 </li>
@@ -65,7 +67,7 @@ const Item = ({product}) => {
 
                         </ul>
                         <p className="price"><span>$ {product.price}</span></p>
-                        <ItemCountComponent isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}  />
+                        <ItemCountComponent showButton={showButton} isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCart={addToCart}  />
 
                     </div>
 
