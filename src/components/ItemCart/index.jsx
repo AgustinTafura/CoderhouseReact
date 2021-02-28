@@ -50,7 +50,9 @@ const ItemCart = ({product}) => {
             <div className="row mb-4">
                 <div className="col-12 col-lg-3">
                     <div className="image-container">
-                        <img className="img-fluid" src="../images/7healthyhabitsforahealthylifestyle.jpg" alt="alternative"/>                       
+                        <Link to={`/product/${product.id}`}>
+                            <img className="img-fluid" src={`../images/${product.image}`} alt="alternative"/> 
+                        </Link>                      
                     </div>
                 </div>
                 <div className="col-12 col-lg-9 rounded-right card-text row">

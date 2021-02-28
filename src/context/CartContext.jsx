@@ -38,7 +38,7 @@ export const CartProvider = ({children}) => {
         cart.forEach(product => {
             quantity += quantityItemAdded(product.id)
         })
-        console.log(quantity)
+
         setQuantityproductsInCart(quantity)
     }
 

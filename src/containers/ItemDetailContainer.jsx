@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ItemDetail from "../components/ItemDetail";
 import productList from '../mock/productList';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { CommercialContext } from "../context/CommercialContext";
 
 const ItemDetailContainer = (props) => {
     
@@ -10,23 +11,17 @@ const ItemDetailContainer = (props) => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [productSelected, setProductSelected] = useState([])
+    const {products} = useContext(CommercialContext)
 
     useEffect(() => {
 
         setIsLoading(true)
-
-        const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(productList), 1000)
-        })
         
-        myPromise.then(
-            (result)=>{
-                result.filter( product => {
-                   return product.id.toString() === id? setProductSelected(product) : null;                 
-                })
+        setTimeout(() => {
                 setIsLoading(false);
-            }
-        )
+            
+        }, 1000);
+        id && setProductSelected(products.find(element => element.id == id))
             
     }, [id])
 

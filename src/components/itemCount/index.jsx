@@ -3,7 +3,7 @@ import './style.scss';
 import { Link } from "react-router-dom";
 
 const ItemCount = ({contador, product,  onAdd, onRemove, className, quantityAdded, addToCart, isInCart, showButton}) => {
-  console.log('showButto', (showButton))
+
 
     return (
       <>

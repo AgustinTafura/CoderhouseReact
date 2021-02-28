@@ -10,32 +10,19 @@ const ItemListContainer = (props) => {
     
     const { categoryId } = useParams()
     const [isLoading, setIsLoading] = useState(false)
-    // const [products, setProducts] = useState([])
+
     const {products} = useContext(CommercialContext)
+
     
     useEffect(() => {
-
         setIsLoading(true)
-
-        // const db = getFirestore();
-        // const productCollection = db.collection("products")
-        // productCollection.get().then((value) => {
-            
-        //     const productsList = value.docs.map(element => { return {...element.data(), id:element.id}})
-        //     // console.log('consume')
-
-        //     setProducts(productsList)
-            
-        // })
-        
-        // console.log(products)
         
         setTimeout(() => {
                 setIsLoading(false);
             
-        }, 2000);
+        }, 1000);
             
-    }, [])
+    }, [categoryId])
 
 
     if(isLoading){
@@ -82,7 +69,7 @@ const ItemListContainer = (props) => {
                                         {/* <a href="index.html">Tienda</a> */}
                                         <i className="fa fa-angle-double-right"></i>
                                         {categoryId?<Link to={`/tienda/${categoryId}`}>{categoryId}</Link>:null}
-                                        {/* <a href="index.html">{productSelected.categoryId}</a> */}
+                                        {/* <a href="index.html">{productsSelected.categoryId}</a> */}
                                     </div> 
                                 </div> 
                             </div> 
@@ -96,14 +83,25 @@ const ItemListContainer = (props) => {
                     <div className="col-lg-12">
 
                         {products.length !== 0?
+                            (categoryId?
+                                products.map((product, index)=>{
+                                    if(product.categoryId == categoryId){
 
-                            products.map((product, index)=>{
-                                return (
-                                    <Item key={index}  
-                                        product={product}
-                                    />
-                                )
-                            })
+                                        return (
+                                            <Item key={index}  
+                                                product={product}
+                                            />
+                                        )
+                                    }
+                                })
+                                :products.map((product, index)=>{
+                                    return (
+                                        <Item key={index}  
+                                            product={product}
+                                        />
+                                    )
+                                })
+                            )
                             :<>
                                 <h4>No hemos encontrado productos para ésta categoría</h4>
                                 <Link to="/tienda" className="btn-solid-lg page-scroll">VER OTROS PRODUCTOS</Link>
