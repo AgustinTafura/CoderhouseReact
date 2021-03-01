@@ -2,18 +2,19 @@ import { Link } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import {CartContext} from "../context/CartContext";
+import {getFireStorage} from "../firebase";
+
 
 const HomeContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const {cart} = useContext(CartContext)
-
    
     const content = [
         {
             text: "  PLANIFICACIÓN",
             animation: "fade",
-        },
+        },  
         {
             text: "  ENTRENAMIENTO",
             animation: "fade",
@@ -40,7 +41,7 @@ const HomeContainer = () => {
         //         setIsLoading(false);
         //     }
         // )
-            
+
     }, [])
 
 
@@ -62,7 +63,6 @@ const HomeContainer = () => {
     }
     return (
         <>
-
 
              {/* <!-- Header --> */}
             <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/images/logo-055.jpg') no-repeat`, backgroundSize:`cover` }}>

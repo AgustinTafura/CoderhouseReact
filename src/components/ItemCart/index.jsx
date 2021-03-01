@@ -83,7 +83,7 @@ const ItemCart = ({product}) => {
                                         Quitar
                                 </a>
                             </div>
-                            <p className="mb-0"><span><strong>$ {product.price}</strong></span></p>
+                            <p className="mb-0"><span><strong>$ {product.price * contador}</strong></span></p>
                         </div>
                     </div>
                 </div>

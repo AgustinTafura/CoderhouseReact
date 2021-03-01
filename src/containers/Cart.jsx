@@ -57,27 +57,26 @@ const CartContainer = (props) => {
                             <div className="col-lg-12">
                                 <div className="">
                                     <div className="card-body">
-                                        <h5 className="mb-3">The total amount of</h5>
+                                        <h5 className="mb-3">Resumen    </h5>
                                         <ul className="list-group list-group-flush">
                                             <li
                                                 className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                                Temporary amount<span>$25.98</span></li>
+                                                Subtotal<span>$25.98</span></li>
                                             <li
                                                 className="list-group-item d-flex justify-content-between align-items-center px-0">
-                                                Shipping<span>Gratis</span></li>
+                                                Envío<span>Gratis</span></li>
                                             <li
                                                 className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                                <div><strong>The total amount of</strong><strong>
-                                                        <p className="mb-0">(including VAT)</p>
+                                                <div><strong>Monto Total</strong><strong>
+                                                      
                                                     </strong></div><span><strong>$53.98</strong></span>
                                             </li>
                                         </ul>
                                         <div className="">
-                                            <div className="card-text"><a
+                                            <div className="card-text"><a style={{ color: "#14bf98" }}
                                                     className="dark-grey-text d-flex justify-content-between collapsed"
                                                     data-toggle="collapse" href="#collapseExample1"
-                                                    aria-expanded="false" aria-controls="collapseExample1">Add a
-                                                    discount code (optional)<span><i className="fas fa-chevron-down pt-1"
+                                                    aria-expanded="false" aria-controls="collapseExample1">Agregar un Código de Descuento (opcional)<span><i className="fas fa-chevron-down pt-1"
                                                             aria-hidden="true"></i></span></a>
                                                 <div className="collapse" id="collapseExample1" >
                                                     <div className="mt-3">
@@ -88,9 +87,8 @@ const CartContainer = (props) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div><button type="button"
-                                            className="btn btn-primary btn-block waves-effect waves-light">go to
-                                            checkout</button>
+                                        </div><button type="button" style={{ background: "#14bf98", borderColor:"#14bf98"}}
+                                            className="btn btn-primary btn-block waves-effect waves-light">Continuar con la Compra</button>
                                     </div>
                                 </div>
                             </div>

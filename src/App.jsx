@@ -12,7 +12,10 @@ import HomeContainer from './containers/Home';
 import CartContainer from './containers/Cart';
 import {CartProvider} from './context/CartContext';
 import {CommercialProvider} from './context/CommercialContext';
-
+import productList from './mock/productList.jsx'
+import {getFirestore} from "./firebase";
+// var baseDeDatos = getFirestore();
+// productList.map((u, i) => { baseDeDatos.collection("products").add(u)})
 const App = () => {
 
     
@@ -27,6 +30,12 @@ const App = () => {
 
                                         <Route exact path="/">
                                                 <HomeContainer/>    
+                                        </Route>
+
+                                        <Route exact path="/booking">
+                                                { 
+                                                console.log(111)
+                                                }
                                         </Route>
 
                                         <Route exact path="/product/:id">
