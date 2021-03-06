@@ -11,7 +11,7 @@ const ItemListContainer = (props) => {
     const { categoryId } = useParams()
     const [isLoading, setIsLoading] = useState(false)
 
-    const {products} = useContext(CommercialContext)
+    const {products, numberToPrice} = useContext(CommercialContext)
 
     
     useEffect(() => {
@@ -20,7 +20,7 @@ const ItemListContainer = (props) => {
         setTimeout(() => {
                 setIsLoading(false);
             
-        }, 1000);
+        }, 2000);
             
     }, [categoryId])
 
@@ -85,11 +85,12 @@ const ItemListContainer = (props) => {
                         {products.length !== 0?
                             (categoryId?
                                 products.map((product, index)=>{
-                                    if(product.categoryId == categoryId){
+                                    if(product.category == categoryId){
 
                                         return (
                                             <Item key={index}  
                                                 product={product}
+                                                numberToPrice={numberToPrice}
                                             />
                                         )
                                     }
@@ -98,6 +99,7 @@ const ItemListContainer = (props) => {
                                     return (
                                         <Item key={index}  
                                             product={product}
+                                            numberToPrice={numberToPrice}
                                         />
                                     )
                                 })

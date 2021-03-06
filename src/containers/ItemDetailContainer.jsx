@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import ItemDetail from "../components/ItemDetail";
-import productList from '../mock/productList';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CommercialContext } from "../context/CommercialContext";
@@ -10,18 +9,18 @@ const ItemDetailContainer = (props) => {
     const {id} = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
+    const {products, numberToPrice} = useContext(CommercialContext)
     const [productSelected, setProductSelected] = useState([])
-    const {products} = useContext(CommercialContext)
 
-    useEffect(() => {
+    useEffect(async () => {
 
+        id && setProductSelected(await products.find(element => element.id == id))
         setIsLoading(true)
         
         setTimeout(() => {
                 setIsLoading(false);
-            
+                console.log(111)
         }, 1000);
-        id && setProductSelected(products.find(element => element.id == id))
             
     }, [id])
 
@@ -48,6 +47,8 @@ const ItemDetailContainer = (props) => {
     }
 
     return (
+        console.log(productSelected),
+        // console.log(product),
         <>
             <div id="services" className="counter">
                 <div className="container" style={{textAlign:"center"}}>
@@ -66,14 +67,15 @@ const ItemDetailContainer = (props) => {
                                     <Link to="/tienda"> Tienda </Link>
                                     {/* <a href="index.html">Tienda</a> */}
                                     <i className="fa fa-angle-double-right"></i>
-                                    <Link to={`/tienda/${productSelected.categoryId}`}>{productSelected.categoryId}</Link>
+                                    <Link to={`/tienda/${productSelected.category}`}>{productSelected.category}</Link>
                                     {/* <a href="index.html">{productSelected.categoryId}</a> */}
                                 </div> 
                             </div> 
                         </div> 
                     </div> 
                 </div>
-                    <ItemDetail product={productSelected}/>
+                {console.log(products)}
+                {products.length !== 0&&<ItemDetail product={productSelected} numberToPrice={numberToPrice}/>}
                 </div> 
             </div>
 

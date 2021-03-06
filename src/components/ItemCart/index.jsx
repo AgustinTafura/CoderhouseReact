@@ -4,9 +4,9 @@ import ItemCountComponent from "../ItemCount";
 import {CartContext} from "../../context/CartContext";
 
 
-const ItemCart = ({product}) => {
+const ItemCart = ({product, numberToPrice}) => {
 
-    console.log(9999999999)
+
     const {updateItem,removeItemCart, isInCart, quantityItemAdded} = useContext(CartContext)
 
     const [contador, setContador] = useState(1)
@@ -17,17 +17,17 @@ const ItemCart = ({product}) => {
 
         if (contador < stock) {
             setContador(contador + 1)           
+            updateItem(product.id, contador + 1, product.price)
         }
-        console.log(contador)
-        updateItem(product.id, contador + 1)
         
     }
     
     const onRemove = (stock) => {
+
         if (contador > 1) {
             setContador(contador - 1)
+            updateItem(product.id, contador - 1,product.price)
         }
-        updateItem(product.id, contador - 1)
     }
 
     const addToCart = () => {
@@ -47,7 +47,7 @@ const ItemCart = ({product}) => {
     return (
         <>
 
-            <div className="row mb-4">
+            <div className="row mb-4 no-gutters">
                 <div className="col-12 col-lg-3">
                     <div className="image-container">
                         <Link to={`/product/${product.id}`}>
@@ -55,7 +55,7 @@ const ItemCart = ({product}) => {
                         </Link>                      
                     </div>
                 </div>
-                <div className="col-12 col-lg-9 rounded-right card-text row">
+                <div className="col-12 col-lg-9 rounded-right card-text row no-gutters">
                     <div className="col-12 col-lg-4">
                         <h4 className="card-title">{product.name}</h4>
                         {(product.features)?                         
@@ -83,7 +83,7 @@ const ItemCart = ({product}) => {
                                         Quitar
                                 </a>
                             </div>
-                            <p className="mb-0"><span><strong>$ {product.price * contador}</strong></span></p>
+                            <p className="mb-0"><span><strong>$ {numberToPrice(product.price * contador)}</strong></span></p>
                         </div>
                     </div>
                 </div>

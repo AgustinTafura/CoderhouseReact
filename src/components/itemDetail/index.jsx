@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import ItemCount from "../ItemCount"
 import {CartContext} from "../../context/CartContext";
 
-const ItemDetail = ({product}) => {
+const ItemDetail = ({product, numberToPrice}) => {
 
     const {addItemToCart, isInCart, quantityItemAdded} = useContext(CartContext)
     
@@ -26,7 +26,7 @@ const ItemDetail = ({product}) => {
     }
 
     const addToCArt = () => {
-        addItemToCart(product.id, contador)
+        addItemToCart(product.id, contador, product.price)
         setQuantityAdded(contador)
     }
 
@@ -41,6 +41,7 @@ const ItemDetail = ({product}) => {
 
     return (
         <>
+        {console.log(product)}
         <div className="row">
             <div className="col-lg-12">
 
@@ -55,19 +56,8 @@ const ItemDetail = ({product}) => {
                         <h1 className="card-title">{product.name}</h1>
                         <h3> {product.description} </h3>
                         <ul className="list-unstyled li-space-lg">
-                            {/* {(product.features)?                         
-                            features.map((feature)=>{
-                                return (
-                                <li className="media">
-                                    <i className="fas fa-square"></i>
-                                    <div className="media-body">{feature}</div>
-                                </li>
-                                ) 
-                            })                            
-                            :null} */}
-
                         </ul>
-                        <p className="price"><span>${product.price}</span></p>
+                        {/* <p className="price"><span>${numberToPrice(product.price)}</span></p> */}
                         <ItemCount isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}   />
 
                     </div>

@@ -4,7 +4,7 @@ import ItemCountComponent from "../ItemCount";
 import {CartContext} from "../../context/CartContext";
 
 
-const Item = ({product}) => {
+const Item = ({product, numberToPrice}) => {
 
     const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
     const [contador, setContador] = useState(1)
@@ -26,7 +26,7 @@ const Item = ({product}) => {
     }
 
     const addToCart = () => {
-        addItemToCart(product.id, contador)
+        addItemToCart(product.id, contador, product.price)
         setQuantityAdded(contador)
     }
 
@@ -66,7 +66,7 @@ const Item = ({product}) => {
                             :null}
 
                         </ul>
-                        <p className="price"><span>$ {product.price}</span></p>
+                        <p className="price"><span>$ {numberToPrice(product.price)}</span></p>
                         <ItemCountComponent showButton={showButton} isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCart={addToCart}  />
 
                     </div>
