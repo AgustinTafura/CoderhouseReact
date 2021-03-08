@@ -37,7 +37,6 @@ export const CommercialProvider = ({children}) => {
             )
 
             
-            console.log(productsList)
             setProducts(productsList)
 
 

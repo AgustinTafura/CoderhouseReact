@@ -9,19 +9,23 @@ export const CartProvider = ({children}) => {
     const [quantityproductsInCart, setQuantityproductsInCart] = useState(0)
     const [subtotalCart, setSubtotalCart] = useState(0)
     const [promotionalDiscount, setPromotionalDiscount] = useState()
-    const [totalCart, setTotalCart] = useState(subtotalCart)
+    const [totalCart, setTotalCart] = useState()
     const [promocodes, setPromocodes] = useState([])
 
 
-    const addDiscount = (code) => {
+    const addDiscount = (e) => {
+        let code = e.target.value
         let today = Date.now()
         promocodes.filter(promocode => {
             if(promocode.code === code) {
-                // console.log('subtotalCart', subtotalCart*(100-promocode.discountRate)/100)
-                // console.log('promocode.discountrate', promocode.discountRate)
-                today > promocode.start.toMillis() && today <promocode.end.toMillis()?
+
+                if(today > promocode.start.toMillis() && today <promocode.end.toMillis()) {
                     setPromotionalDiscount({code: promocode.code, discount: promocode.discountRate, mount:subtotalCart*(promocode.discountRate)/100})
-                    :alert(`¡El cupón «${code}» ya venció!`)
+                    sessionStorage.setItem('promotionalDiscount',JSON.stringify({code: promocode.code, discount: promocode.discountRate, mount:subtotalCart*(promocode.discountRate)/100}))
+                } else {
+                    alert(`¡El cupón «${code}» ya venció!`)
+                }
+
             } else {
                 setPromotionalDiscount('')
             }
@@ -109,7 +113,8 @@ export const CartProvider = ({children}) => {
             setPromocodes(promocodeList)
         })
         localStorage.getItem("cart") !== null && setCart(JSON.parse(localStorage.getItem("cart")))
-    
+        
+        sessionStorage.getItem("promotionalDiscount") !== null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
     }, [])
 
 

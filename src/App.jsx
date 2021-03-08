@@ -10,6 +10,7 @@ import  React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import CartContainer from './containers/CartContainer';
+import CheckoutContainer from './containers/CheckoutContainer';
 import {CartProvider} from './context/CartContext';
 import {CommercialProvider} from './context/CommercialContext';
 import productList from './mock/productList.jsx'
@@ -37,7 +38,7 @@ const App = () => {
                                                 </Route>
 
                                                 <Route exact path="/checkout">
-                                                        PAGINA DE PAGO
+                                                        <CheckoutContainer/>
                                                 </Route>
 
                                                 <Route exact path="/product/:id">

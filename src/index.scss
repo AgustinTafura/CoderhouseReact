@@ -271,7 +271,7 @@ strong {
 	left: 1.375rem;
 	color: var(--body-text);
 	opacity: 1;
-	font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
+	font: 500 0.875rem/1.375rem "Open Sans", sans-serif;
 	cursor: text;
 	transition: all 0.2s ease;
 }
@@ -290,7 +290,20 @@ strong {
 	top: 0.125rem;
 	opacity: 1;
 	font-size: 0.75rem;
-	font-weight: 500;
+	font-weight: 700;
+	color: var(--primary)
+	
+}
+
+
+.form-control-input.errorData + .label-control,
+.form-control-textarea.errorData + .label-control {
+	top: 0.125rem;
+	opacity: 1;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: red
+	
 }
 
 .form-control-input,
@@ -2436,3 +2449,6 @@ a:hover.back-to-top {
 	/* end of navigation */
 }
 /* end of min-width width 1200px */
+
+
+
