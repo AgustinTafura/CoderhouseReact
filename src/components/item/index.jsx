@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import ItemCountComponent from "../ItemCount";
+import ItemCount from "../ItemCount";
 import {CartContext} from "../../context/CartContext";
 
 
@@ -26,7 +26,7 @@ const Item = ({product, numberToPrice}) => {
     }
 
     const addToCart = () => {
-        addItemToCart(product.id, contador, product.price)
+        addItemToCart(product.id, contador, product.price, product.category, product.name)
         setQuantityAdded(contador)
     }
 
@@ -67,8 +67,8 @@ const Item = ({product, numberToPrice}) => {
 
                         </ul>
                         <p className="price"><span>$ {numberToPrice(product.price)}</span></p>
-                        <ItemCountComponent showButton={showButton} isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCart={addToCart}  />
-
+                        <ItemCount showButton={showButton} isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCart={addToCart}  />
+                        
                     </div>
 
                 </div>

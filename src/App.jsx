@@ -13,6 +13,7 @@ import CartContainer from './containers/CartContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
 import {CartProvider} from './context/CartContext';
 import {CommercialProvider} from './context/CommercialContext';
+import {MercadoPagoProvider} from './context/MercadoPagoContext';
 import productList from './mock/productList.jsx'
 import {getFirestore} from "./firebase";
 // var baseDeDatos = getFirestore();
@@ -23,41 +24,45 @@ const App = () => {
         return ( 
                 <CommercialProvider>
                         <CartProvider>
-                                <BrowserRouter>
+                                        <BrowserRouter>
+                                                
+                                                <NavBarComponent />
                                         
-                                        <NavBarComponent />
-                                
-                                        <Switch>
+                                                <Switch>
 
-                                                <Route exact path="/">
-                                                        <HomeContainer/>    
-                                                </Route>
+                                                        <Route exact path="/">
+                                                                <HomeContainer/>    
+                                                        </Route>
 
-                                                <Route exact path="/booking">
-                                                        PROXIMAMENTE TURNOS ONLINE
-                                                </Route>
+                                                        <Route exact path="/booking">
+                                                                PROXIMAMENTE TURNOS ONLINE
+                                                        </Route>
 
-                                                <Route exact path="/checkout">
-                                                        <CheckoutContainer/>
-                                                </Route>
+                                                        <Route exact path="/checkout">
 
-                                                <Route exact path="/product/:id">
-                                                        
-                                                        <ItemDetailContainer/>
-                                                </Route>
+                                                                        <CheckoutContainer/>
 
-                                                <Route exact path='/tienda/:categoryId?'>
-                                                        <ItemListContainer/>
-                                                </Route>
+                                                        </Route>
 
-                                                <Route exact path="/cart">
-                                                        <CartContainer/> 
-                                                </Route>
+                                                        <Route exact path="/product/:id">
+                                                                
+                                                                <ItemDetailContainer/>
+                                                        </Route>
 
-                                                <Route path="*" children={<div>Not found</div>} />
+                                                        <Route exact path='/tienda/:categoryId?'>
+                                                                <ItemListContainer/>
+                                                        </Route>
 
-                                        </Switch>
-                                </BrowserRouter>
+                                                        <MercadoPagoProvider>
+                                                                <Route exact path="/cart">
+                                                                        <CartContainer/> 
+                                                                </Route>
+                                                        </MercadoPagoProvider>
+
+                                                        <Route path="*" children={<div>Not found</div>} />
+
+                                                </Switch>
+                                        </BrowserRouter>
                         </CartProvider>
                 </CommercialProvider>
 

@@ -20,12 +20,16 @@ const ItemListContainer = (props) => {
         setTimeout(() => {
                 setIsLoading(false);
             
-        }, 2000);
+        }, 1000);
+        return () => {
+                setIsLoading(false);
+        }
             
     }, [categoryId])
 
 
-    if(isLoading){
+
+    if(isLoading || products.length === 0){
         return (
             < >
                 <div className='loadingComponent'>

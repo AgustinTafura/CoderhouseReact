@@ -1,10 +1,10 @@
-import { createContext, useState, useEffect} from "react";
+import { createContext, useState, useEffect } from "react";
 import { getFirestore } from "../firebase";
 
 // Creamos el espacio de memoria
 export const CartContext = createContext();
 
-export const CartProvider = ({children}) => {
+export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [quantityproductsInCart, setQuantityproductsInCart] = useState(0)
     const [subtotalCart, setSubtotalCart] = useState(0)
@@ -17,11 +17,11 @@ export const CartProvider = ({children}) => {
         let code = e.target.value
         let today = Date.now()
         promocodes.filter(promocode => {
-            if(promocode.code === code) {
+            if (promocode.code === code) {
 
-                if(today > promocode.start.toMillis() && today <promocode.end.toMillis()) {
-                    setPromotionalDiscount({code: promocode.code, discount: promocode.discountRate, mount:subtotalCart*(promocode.discountRate)/100})
-                    sessionStorage.setItem('promotionalDiscount',JSON.stringify({code: promocode.code, discount: promocode.discountRate, mount:subtotalCart*(promocode.discountRate)/100}))
+                if (today > promocode.start.toMillis() && today < promocode.end.toMillis()) {
+                    setPromotionalDiscount({ code: promocode.code, discount: promocode.discountRate, mount: subtotalCart * (promocode.discountRate) / 100 })
+                    sessionStorage.setItem('promotionalDiscount', JSON.stringify({ code: promocode.code, discount: promocode.discountRate, mount: subtotalCart * (promocode.discountRate) / 100 }))
                 } else {
                     alert(`¡El cupón «${code}» ya venció!`)
                 }
@@ -32,44 +32,44 @@ export const CartProvider = ({children}) => {
         })
     }
 
-    const addItemToCart = (itemId, q, p) => {
+    const addItemToCart = (itemId, q, p, c, n) => {
 
-        if(isInCart(itemId)){
+        if (isInCart(itemId)) {
 
-            updateItem(itemId, q, p)
+            updateItem(itemId, q, p, c, n)
 
-        } else{
-            setCart([...cart, {id: itemId, quantity: q, unitPrice: p}])
+        } else {
+            setCart([...cart, { id: itemId, quantity: q, unitPrice: p, category: c, currency: "ARS", name: n }])
         }
-                
+
     }
 
     const removeItemCart = (itemId) => {
 
-        if(isInCart(itemId)){
+        if (isInCart(itemId)) {
 
-            const index = cart.findIndex( product => product.id === itemId)
+            const index = cart.findIndex(product => product.id === itemId)
             const newCart = [...cart];
             newCart.splice(index, 1)
             setCart(newCart)
 
-        } 
-                
+        }
+
     }
-    
+
     const quantityproductsAdded = () => {
         let quantity = 0
-        
+
         cart.forEach(product => {
             quantity += quantityItemAdded(product.id)
         })
 
         setQuantityproductsInCart(quantity)
 
-        const subtotal = cart.reduce(function(subtotal, element, indice, vector){
-            return subtotal += element.unitPrice*element.quantity;
-        },0);
-        
+        const subtotal = cart.reduce(function (subtotal, element, indice, vector) {
+            return subtotal += element.unitPrice * element.quantity;
+        }, 0);
+
         setSubtotalCart(subtotal)
     }
 
@@ -80,15 +80,15 @@ export const CartProvider = ({children}) => {
 
     const isInCart = (x) => {
 
-        const index = cart.findIndex( product => product.id === x) 
+        const index = cart.findIndex(product => product.id === x)
 
-        return index >= 0? true: false;
+        return index >= 0 ? true : false;
     }
 
     const quantityItemAdded = (itemId) => {
-        if(isInCart(itemId)) {
+        if (isInCart(itemId)) {
 
-            const itemQuantityItemAdded = cart.find( product => product.id === itemId).quantity
+            const itemQuantityItemAdded = cart.find(product => product.id === itemId).quantity
             return itemQuantityItemAdded
         }
 
@@ -96,10 +96,10 @@ export const CartProvider = ({children}) => {
 
 
 
-    const updateItem = (itemId, q, p) => {
-        const index = cart.findIndex( product => product.id === itemId)
+    const updateItem = (itemId, q, p, c , n) => {
+        const index = cart.findIndex(product => product.id === itemId)
         const newCart = [...cart];
-        newCart.splice(index, 1, {id: itemId, quantity: q, unitPrice: p})
+        newCart.splice(index, 1, { id: itemId, quantity: q, unitPrice: p, category: c, currency: "ARS", name: n })
         setCart(newCart)
 
     }
@@ -108,12 +108,12 @@ export const CartProvider = ({children}) => {
         const db = getFirestore();
         const productCollection = db.collection("promocode")
         productCollection.get().then((value) => {
-            const promocodeList = value.docs.map(element => { return {...element.data()}})
-            
+            const promocodeList = value.docs.map(element => { return { ...element.data() } })
+
             setPromocodes(promocodeList)
         })
         localStorage.getItem("cart") !== null && setCart(JSON.parse(localStorage.getItem("cart")))
-        
+
         sessionStorage.getItem("promotionalDiscount") !== null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
     }, [])
 
@@ -125,10 +125,10 @@ export const CartProvider = ({children}) => {
 
     }, [cart])
 
-    
+
 
     return (
-        <CartContext.Provider value={{cart,subtotalCart,totalCart,promotionalDiscount,addDiscount, addItemToCart, isInCart, quantityItemAdded, updateItem, quantityproductsInCart, removeItemCart}}>
+        <CartContext.Provider value={{ cart, subtotalCart, totalCart, promotionalDiscount, addDiscount, addItemToCart, isInCart, quantityItemAdded, updateItem, quantityproductsInCart, removeItemCart }}>
             {children}
         </CartContext.Provider>
     )

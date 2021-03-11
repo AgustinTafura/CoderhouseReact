@@ -4,10 +4,10 @@ import {CartContext} from "../../context/CartContext";
 
 const ItemDetail = ({product, numberToPrice}) => {
 
-    const {addItemToCart, isInCart, quantityItemAdded} = useContext(CartContext)
-    
+    const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
     const [contador, setContador] = useState(1)
     const [quantityAdded, setQuantityAdded] = useState([])
+    const showButton = true
     
 
 
@@ -25,8 +25,8 @@ const ItemDetail = ({product, numberToPrice}) => {
         }
     }
 
-    const addToCArt = () => {
-        addItemToCart(product.id, contador, product.price)
+    const addToCart = () => {
+        addItemToCart(product.id, contador, product.price, product.category, product.name)
         setQuantityAdded(contador)
     }
 
@@ -36,12 +36,12 @@ const ItemDetail = ({product, numberToPrice}) => {
             setContador(quantityItemAdded(product.id))
             setQuantityAdded(quantityItemAdded(product.id))
         }
-
     }, [])
+
 
     return (
         <>
-        {console.log(product)}
+
         <div className="row">
             <div className="col-lg-12">
 
@@ -58,7 +58,7 @@ const ItemDetail = ({product, numberToPrice}) => {
                         <ul className="list-unstyled li-space-lg">
                         </ul>
                         {/* <p className="price"><span>${numberToPrice(product.price)}</span></p> */}
-                        <ItemCount isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCArt={addToCArt}   />
+                        <ItemCount  showButton={showButton} isInCart={isInCart(product.id)} product={product} onRemove={onRemove} onAdd={onAdd} contador={contador} quantityAdded={quantityAdded} addToCart={addToCart}   />
 
                     </div>
 

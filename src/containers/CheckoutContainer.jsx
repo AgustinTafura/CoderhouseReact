@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 import { CommercialContext } from "../context/CommercialContext";
 import { CartContext } from "../context/CartContext";
-import ItemCart from "../components/ItemCart";
+import { MercadoPagoContext } from "../context/MercadoPagoContext";
 import { useForm } from "react-hook-form";
 
 
 const CheckoutContainer = (props) => {
 
+// const {} = useContext(MercadoPagoContext)    
 const {products, numberToPrice} = useContext(CommercialContext)
 const {cart, subtotalCart, totalCart, promotionalDiscount, addDiscount} = useContext(CartContext)
 const { register, handleSubmit, errors, watch } = useForm();
@@ -22,24 +23,16 @@ const isEmpty = (e) => {
         e.target.classList.contains("notEmpty") && e.target.classList.remove("notEmpty")
 
     }  
-    // console.log(document.getElementsByName(e.target.name))
     
 }
 
 useEffect(() => {
-        // console.log(errors['name'])
-        // Object.keys(errors).length !== 0 && Object.entries(errors).map(error => {
-        //     let elem = document.getElementsByName(error[0])
-        //     onSubmit()
-        //     console.log(watch().map(element => console.log))
+    console.log(cart)
+
         let elements = watch()
         Object.keys(elements).map(name => {
             let element = document.getElementsByName(name)
-            // console.log(name, errors[name])
-            // errors[name] !== undefined  && console.log(name, errors[name], Object.keys(errors[name]).length !== 0)
            errors[name] === undefined ? element[0].classList.remove('errorData') : element[0].classList.add('errorData')
-
-
         })
 
 
@@ -177,7 +170,24 @@ return (
                                     <div className="card-body">
                                         <h5 className="mb-3">Detalle    </h5>
                                         <ul className="list-group list-group-flush">
+                                        {
+                                            
+                                            
+                                            cart.map((item, index) => {
+                                                return (<li key={index} className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                {item.name} 
+                                                <span> $ {numberToPrice(item.unitPrice)}</span>
+                                                </li>)
+                                            })
+
+
+                                        }
+
+                                        </ul>
+                                            <hr className="mb-1"></hr>
+                                        <ul className="list-group list-group-flush">
                                             <li
+                                                style={{fontWeight: "500"}}
                                                 className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                                 Subtotal<span>$ {numberToPrice(subtotalCart)}</span></li>
                                             {
