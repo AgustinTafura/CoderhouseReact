@@ -183,3 +183,10 @@ body {
     text-align: center;
 }
 
+.social-icon {
+	color: var(--primary);
+
+	&:hover{
+		color:#12846a;
+	}
+}

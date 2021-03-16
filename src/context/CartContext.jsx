@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 import { getFirestore } from "../firebase";
+import { useLocation } from "react-router-dom";
 
 // Creamos el espacio de memoria
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+    
     const [cart, setCart] = useState([])
     const [quantityproductsInCart, setQuantityproductsInCart] = useState(0)
     const [subtotalCart, setSubtotalCart] = useState(0)
@@ -75,7 +77,7 @@ export const CartProvider = ({ children }) => {
 
 
     const clearCart = () => {
-        setCart([])
+        cart.length != 0 && setCart([])
     }
 
     const isInCart = (x) => {
@@ -112,6 +114,7 @@ export const CartProvider = ({ children }) => {
 
             setPromocodes(promocodeList)
         })
+
         localStorage.getItem("cart") !== null && setCart(JSON.parse(localStorage.getItem("cart")))
 
         sessionStorage.getItem("promotionalDiscount") !== null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
@@ -128,7 +131,7 @@ export const CartProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cart, subtotalCart, totalCart, promotionalDiscount, addDiscount, addItemToCart, isInCart, quantityItemAdded, updateItem, quantityproductsInCart, removeItemCart }}>
+        <CartContext.Provider value={{clearCart, cart, subtotalCart, totalCart, promotionalDiscount, addDiscount, addItemToCart, isInCart, quantityItemAdded, updateItem, quantityproductsInCart, removeItemCart }}>
             {children}
         </CartContext.Provider>
     )

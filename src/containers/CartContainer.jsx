@@ -10,6 +10,9 @@ const CartContainer = (props) => {
     const { products, numberToPrice } = useContext(CommercialContext)
     const { cart, subtotalCart, totalCart, promotionalDiscount, addDiscount } = useContext(CartContext)
 
+    useEffect(()=>{
+        document.getElementById('discount-code1') != null && promotionalDiscount && console.log(document.getElementById('discount-code1').setAttribute('value', promotionalDiscount.code))
+    })
 
 
 

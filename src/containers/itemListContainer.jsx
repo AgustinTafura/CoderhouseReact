@@ -57,7 +57,7 @@ const ItemListContainer = (props) => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-title">{categoryId?categoryId:'TIENDA'}</div>
-                        <h2>Elige el plan ideal que mejor<br></br> se adapte a tus objetivos</h2>
+                        <h2>Elige la opción ideal que mejor<br></br> se adapte a tus objetivos</h2>
                     </div> 
                 </div> 
 

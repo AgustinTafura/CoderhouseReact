@@ -7,20 +7,23 @@ import NavBarComponent from './components/NavBar';
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import  React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, useLocation, Redirect} from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import CartContainer from './containers/CartContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
+import ThanksContainer from './containers/ThanksContainer';
 import {CartProvider} from './context/CartContext';
 import {CommercialProvider} from './context/CommercialContext';
 import {MercadoPagoProvider} from './context/MercadoPagoContext';
 import productList from './mock/productList.jsx'
 import {getFirestore} from "./firebase";
-// var baseDeDatos = getFirestore();
-// productList.map((u, i) => { baseDeDatos.collection("products").add(u)})
-const App = () => {
 
-    
+
+const App = () => {
+        
+
+
+
         return ( 
                 <CommercialProvider>
                         <CartProvider>
@@ -38,11 +41,7 @@ const App = () => {
                                                                 PROXIMAMENTE TURNOS ONLINE
                                                         </Route>
 
-                                                        <Route exact path="/checkout">
 
-                                                                        <CheckoutContainer/>
-
-                                                        </Route>
 
                                                         <Route exact path="/product/:id">
                                                                 
@@ -57,9 +56,18 @@ const App = () => {
                                                                 <Route exact path="/cart">
                                                                         <CartContainer/> 
                                                                 </Route>
+
+                                                                <Route exact path="/checkout">
+                                                                        <CheckoutContainer/>
+                                                                </Route>
+
+                                                                <Route exact path="/thankYou">
+                                                                        <ThanksContainer/>    
+                                                                </Route>
                                                         </MercadoPagoProvider>
 
-                                                        <Route path="*" children={<div>Not found</div>} />
+                                                        <Route path="*" children={<div style={{marginTop: '100px'}}>Not found</div>} />
+
 
                                                 </Switch>
                                         </BrowserRouter>

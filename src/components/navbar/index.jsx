@@ -11,13 +11,16 @@ import React, { useEffect } from "react";
 
 const NavBar = () => {
     const actualLocation = useLocation()
-    
+
+
     document.addEventListener('DOMContentLoaded', function() {
 
     })
-            
-    useEffect(() => {
 
+    $('.dropdown-item').on('click', (e)=> console.log(111), $('#navbarsExampleDefault').collapse('hide'))
+
+
+    useEffect(() => {
         const efectNav = () => {
             if ($(".navbar").offset().top > 20) {
                 $(".fixed-top").addClass("top-nav-collapse");

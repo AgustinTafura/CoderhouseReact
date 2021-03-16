@@ -10,6 +10,7 @@ const HomeContainer = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { cart } = useContext(CartContext)
 
+
     const content = [
         {
             text: "  PLANIFICACIÓN",
@@ -65,7 +66,7 @@ const HomeContainer = () => {
         <>
 
             {/* <!-- Header --> */}
-            <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/images/logo-055.jpg') no-repeat`, backgroundSize: `cover` }}>
+            <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/images/logo-055.jpg') no-repeat`, backgroundSize: `cover`}}>
                 <div className="header-content">
                     <div className="container">
                         <div className="row">
