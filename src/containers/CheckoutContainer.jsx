@@ -1,25 +1,29 @@
 import { MercadoPagoContext } from "../context/MercadoPagoContext";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CommercialContext } from "../context/CommercialContext";
 import { CartContext } from "../context/CartContext";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-
+import ModalError from "../components/ModalError"
+import $ from 'jquery'; 
 
 
 const CheckoutContainer = (props) => {
     
     let location = useLocation()
     let location_params = new URLSearchParams(location.search)
-
-    location_params.get('status') != null && console.log(location_params.get('collection_status'))
     
+    // location_params.get('status') != null && console.log(location_params.get('collection_status'))
+    // location_params.get('status') === 'rejected' && console.log('error')
 
+    const [errorPayment, setErrorpayment] = useState(false)
     const {payOnMP} = useContext(MercadoPagoContext)
     const {products, numberToPrice} = useContext(CommercialContext)
     const {cart, subtotalCart, totalCart, promotionalDiscount, addDiscount} = useContext(CartContext)
     const { register, handleSubmit, errors, watch } = useForm();
     const onSubmit = data => {
+
+        localStorage.setItem('formCheckout', JSON.stringify(data))
 
         const itemsDetail = 
             cart.map(product => { return { 
@@ -59,13 +63,14 @@ const CheckoutContainer = (props) => {
 
 
     const isEmpty = (e) => {
-
-        if(e.target.value.trim().length >0) {
-            e.target.classList.contains("errorData") && e.target.classList.remove("errorData")
-            e.target.classList.add("notEmpty") 
+        if(e.value.trim().length >0) {
+            console.log('a')
+            e.classList.contains("errorData") && e.classList.remove("errorData")
+            e.classList.add("notEmpty") 
 
         } else {
-            e.target.classList.contains("notEmpty") && e.target.classList.remove("notEmpty")
+            console.log('b')
+            e.classList.contains("notEmpty") && e.classList.remove("notEmpty")
 
         }  
         
@@ -73,19 +78,31 @@ const CheckoutContainer = (props) => {
 
     useEffect(() => {
         
-            let elements = watch()
-            Object.keys(elements).map(name => {
-                let element = document.getElementsByName(name)
-            errors[name] === undefined ? element[0].classList.remove('errorData') : element[0].classList.add('errorData')
-            })
+        let elements = watch()
+        Object.keys(elements).map(elementName => {
+            let element = document.getElementsByName(elementName)
+            
+            errors[elementName] === undefined ? element[0].classList.remove('errorData') : element[0].classList.add('errorData')
+            
+            
+            if (location_params.get('status') == 'rejected' && JSON.parse(localStorage.getItem('formCheckout'))[elementName]){
+                element[0].setAttribute('value', JSON.parse(localStorage.getItem('formCheckout'))[elementName] )
+                isEmpty(element[0]) 
+                console.log(8888)
+                
+            }
+            
+        })
+
+
+        location_params.get('status') == 'rejected' && $('#modalErrorMayment').modal('show')
+
+    }, [errors, location_params])
 
 
 
 
-        
-    }, [errors])
-
-    console.log(watch());
+    // console.log(watch());
 
 
     if(products.length == 0){
@@ -111,6 +128,8 @@ const CheckoutContainer = (props) => {
 
     return (
     <>
+        {/* ModalError */}
+        <ModalError></ModalError>
 
         <div id="services" className="cards-2">
             <div className="container" style={{ textAlign: "center" }}>
@@ -129,7 +148,7 @@ const CheckoutContainer = (props) => {
 
                                         <div className='row'>
                                             <div className="form-group col-6">
-                                                <input onBlur={(e) => isEmpty(e)} className="form-control-input" type="text" id="name" name="name" ref={register({required: true, minLength: 3, maxLength: 80})} />
+                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} className="form-control-input" type="text" id="name" name="name" ref={register({required: true, minLength: 3, maxLength: 80})} />
                                                 <label className="label-control" htmlFor="name">
                                                     Nombre
                                                     {errors.name? <small className="text-muted"> - Debe contener 3 letras o más  </small> : null }
@@ -137,7 +156,7 @@ const CheckoutContainer = (props) => {
                                             </div>
 
                                             <div className="form-group col-6">
-                                            <input onBlur={(e) => isEmpty(e)} className="form-control-input" type="text" id="surname" name="surname" ref={register({required: true, minLength: 3, maxLength: 80})} />
+                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)}  className="form-control-input" type="text" id="surname" name="surname" ref={register({required: true, minLength: 3, maxLength: 80})} />
                                             <label className="label-control" htmlFor="surname">
                                                 Apellido 
                                                 {errors.name? <small className="text-muted"> - Debe contener 3 letras o más  </small> : null }
@@ -147,14 +166,14 @@ const CheckoutContainer = (props) => {
                                         </div>
 
                                         <div className="form-group">
-                                            <input onBlur={(e) => isEmpty(e)} className="form-control-input" id="id" type="text" name="id" ref={register({required: true, minLength: 8, maxLength: 11, pattern: /[0-9]/i})} />
+                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} className="form-control-input" id="id" type="text" name="id" ref={register({required: true, minLength: 8, maxLength: 11, pattern: /[0-9]/i})} />
                                             <label className="label-control" htmlFor="id">DNI / CUIT
-                                            {errors.id? <small className="text-muted"> - Debe contener solo números  </small> : null }
+                                            {errors.id? <small className="text-muted"> - Debe contener al menos 8 números  </small> : null }
                                             </label>
                                         </div>
 
                                         <div className="form-group">
-                                            <input onBlur={(e) => isEmpty(e)} type="text"  className="form-control-input" id="email" name="email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="email" name="email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
                                             <label className="label-control" htmlFor="email">Email
                                             {errors.email? <small className="text-muted"> - Con formato ejemplo@mail.com  </small> : null }
                                             </label>
@@ -164,13 +183,13 @@ const CheckoutContainer = (props) => {
                                         <div className="row">
 
                                         <div className="form-group col-12 col-sm-6 col-md-4">
-                                            <input onBlur={(e) => isEmpty(e)} type="tel"  className="form-control-input" id="mobile" name="mobile" ref={register({required: true, minLength: 8})} />
+                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="tel"  className="form-control-input" id="mobile" name="mobile" ref={register({required: true, minLength: 8})} />
                                             <label className="label-control" htmlFor="mobile">Telefono celular
                                             {errors.mobile? <small className="text-muted"> - Solo números  </small> : null }
                                             </label>
                                         </div>
                                             <div className="form-group col-12 col-sm-6 col-md-4">
-                                                <select onBlur={(e) => isEmpty(e)} className="form-control-input" id="country" name="country" ref={register({ required: true })}>
+                                                <select onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} className="form-control-input" id="country" name="country" ref={register({ required: true })}>
                                                     <option value=""></option>
                                                     <option value="Argentina">Argentina</option>
                                                     <option value="Brasil">Brasil</option>
@@ -185,14 +204,14 @@ const CheckoutContainer = (props) => {
                                             </div>
 
                                             <div className="form-group col-12 col-sm-6 col-md-4">
-                                                <input onBlur={(e) => isEmpty(e)} type="text"  className="form-control-input" id="state" name="state" ref={register({required: true, min: 3})} />
+                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="state" name="state" ref={register({required: true, min: 3})} />
                                                 <label className="label-control" htmlFor="state">Provincia
                                                 {errors.state? <small className="text-muted"> - Seleccione una opción  </small> : null }
                                                 </label>
                                             </div>
 
                                             <div className="form-group col-12 col-sm-6 col-md-4">
-                                                <input onBlur={(e) => isEmpty(e)} type="text"  className="form-control-input" id="city" name="city" ref={register({required: true, min: 3})} />
+                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="city" name="city" ref={register({required: true, min: 3})} />
                                                 <label className="label-control" htmlFor="city">Ciudad
                                                 {errors.city? <small className="text-muted"> - Seleccione una opción  </small> : null }
                                                 </label>
@@ -200,7 +219,7 @@ const CheckoutContainer = (props) => {
                                         </div>
 
                                         <div className="form-group ">
-                                            <input onBlur={(e) => isEmpty(e)} type="text"  className="form-control-input" id="address" name="address" ref={register({required: true})} />
+                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="address" name="address" ref={register({required: true})} />
                                             <label className="label-control" htmlFor="address">Calle y número
                                             {errors.address? <small className="text-muted"> - No puede estas vacío  </small> : null }
                                             </label>
@@ -208,13 +227,13 @@ const CheckoutContainer = (props) => {
                                         <div className="row">
 
                                             <div className="form-group col-7 col-sm-8">
-                                                <input onBlur={(e) => isEmpty(e)} type="text"  className="form-control-input" id="address2" name="address2" ref={register} />
+                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="address2" name="address2" ref={register} />
                                                 <label className="label-control" htmlFor="address2">Piso, depto, etc.(opcional)
                                                 </label>
                                             </div>
 
                                             <div className="form-group col-5 col-sm-4">
-                                                <input onBlur={(e) => isEmpty(e)} type="text"  className="form-control-input" id="cp" name="cp" ref={register({required: true, min: 4})} />
+                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="cp" name="cp" ref={register({required: true, min: 4})} />
                                                 <label className="label-control" htmlFor="cp">CP
                                                 {errors.cp? <small className="text-muted"> - Min. 3 carácteres   </small> : null }
                                                 </label>
@@ -263,7 +282,7 @@ const CheckoutContainer = (props) => {
                                                         </strong></div><span><strong>${promotionalDiscount?numberToPrice(subtotalCart-promotionalDiscount.mount):numberToPrice(subtotalCart)}</strong></span>
                                                 </li>
                                             </ul>
-                                            <input onBlur={(e) => isEmpty(e)} type="submit" value="COMPRAR"className="btn-solid-lg waves-effect waves-light btn-block"/>
+                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="submit" value="COMPRAR"className="btn-solid-lg waves-effect waves-light btn-block"/>
                                         </div>
                                     </div>
 

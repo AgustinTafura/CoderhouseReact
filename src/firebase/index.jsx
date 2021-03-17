@@ -3,16 +3,16 @@
   import '@firebase/storage';
   
   const app = firebase.initializeApp({
-    apiKey: "AIzaSyDfhLdHOQCC_ILPdsN033J75tKCvIweImE",
-    authDomain: "jpl-nutricion.firebaseapp.com",
-    projectId: "jpl-nutricion",
-    storageBucket: "jpl-nutricion.appspot.com",
-    messagingSenderId: "715865958241",
-    appId: "1:715865958241:web:cb90b59fea1d1f44764720",
-    measurementId: "G-SGQ7VF9ESC"
+    apiKey: process.env.REACT_APP_DB_FB_apiKey,
+    authDomain: process.env.REACT_APP_DB_FB_authDomain,
+    projectId: process.env.REACT_APP_DB_FB_projectId,
+    storageBucket: process.env.REACT_APP_DB_FB_storageBucket,
+    messagingSenderId: process.env.REACT_APP_DB_FB_messagingSenderId,
+    appId: process.env.REACT_APP_DB_FB_appId,
+    measurementId: process.env.REACT_APP_DB_FB_measurementId,
   })
 
-  
+
   export function getFirebase() {
       return app
   }
