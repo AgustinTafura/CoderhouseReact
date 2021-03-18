@@ -10,13 +10,12 @@ import $ from 'jquery';
 
 const CheckoutContainer = (props) => {
     
-    let location = useLocation()
-    let location_params = new URLSearchParams(location.search)
-    
-    // location_params.get('status') != null && console.log(location_params.get('collection_status'))
-    // location_params.get('status') === 'rejected' && console.log('error')
+    const location = useLocation()
+    const location_params = new URLSearchParams(location.search)
+    const statusError = location_params.get('status')
 
-    const [errorPayment, setErrorpayment] = useState(false)
+
+
     const {payOnMP} = useContext(MercadoPagoContext)
     const {products, numberToPrice} = useContext(CommercialContext)
     const {cart, subtotalCart, totalCart, promotionalDiscount, addDiscount} = useContext(CartContext)
@@ -53,57 +52,71 @@ const CheckoutContainer = (props) => {
                     zip_code: data.cp 
                 }
             },
-            external_reference: `${data.email}`
-
-
+            external_reference: `${data.email}`,
         }
-        // console.log('buyer = ', data,", subtotal = ", subtotalCart, ", discount = ", promotionalDiscount.mount, ", total = ", subtotalCart - promotionalDiscount.mount);
+
         payOnMP(dataToPayment)
     }
 
 
     const isEmpty = (e) => {
         if(e.value.trim().length >0) {
-            console.log('a')
-            e.classList.contains("errorData") && e.classList.remove("errorData")
+            
+            errors[e.name] == undefined && e.classList.contains("errorData") && e.classList.remove("errorData")
             e.classList.add("notEmpty") 
 
         } else {
-            console.log('b')
             e.classList.contains("notEmpty") && e.classList.remove("notEmpty")
 
         }  
-        
     }
 
+  
+    $(document).ready(function() { 
+
+    })
+
     useEffect(() => {
-        
+
         let elements = watch()
         Object.keys(elements).map(elementName => {
             let element = document.getElementsByName(elementName)
             
             errors[elementName] === undefined ? element[0].classList.remove('errorData') : element[0].classList.add('errorData')
+
             
-            
-            if (location_params.get('status') == 'rejected' && JSON.parse(localStorage.getItem('formCheckout'))[elementName]){
-                element[0].setAttribute('value', JSON.parse(localStorage.getItem('formCheckout'))[elementName] )
-                isEmpty(element[0]) 
-                console.log(8888)
+            if (location_params.get('status') == 'rejected' || location_params.get('status') == 'null' && JSON.parse(localStorage.getItem('formCheckout'))[elementName]){
+                
+                element[0].type == 'select-one' ?
+                    element[0].value = JSON.parse(localStorage.getItem('formCheckout'))[elementName]
+                :   element[0].setAttribute('value', JSON.parse(localStorage.getItem('formCheckout'))[elementName] )
+                
+                
                 
             }
+            isEmpty(element[0]) 
+            // console.log(errors)
             
-        })
+        })  
+        
 
 
-        location_params.get('status') == 'rejected' && $('#modalErrorMayment').modal('show')
+        location_params.get('status') == 'rejected' || location_params.get('status') == 'null' && $('#modalErrorPayment').modal('show')
+        console.log(1, $('#modalErrorPayment'))
+        
 
-    }, [errors, location_params])
+        return()=>{
+            $('#modalErrorPayment').on('hidden.bs.modal',function(e){
+            console.log(4444)
+            $(this).remove()
+            });
+        }
+        
 
-
-
-
-    // console.log(watch());
-
+        console.log(3, $('#modalErrorPayment'))
+        
+    }, [location_params])
+    
 
     if(products.length == 0){
     return (
@@ -129,7 +142,7 @@ const CheckoutContainer = (props) => {
     return (
     <>
         {/* ModalError */}
-        <ModalError></ModalError>
+        <ModalError  ></ModalError>
 
         <div id="services" className="cards-2">
             <div className="container" style={{ textAlign: "center" }}>
@@ -148,7 +161,7 @@ const CheckoutContainer = (props) => {
 
                                         <div className='row'>
                                             <div className="form-group col-6">
-                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} className="form-control-input" type="text" id="name" name="name" ref={register({required: true, minLength: 3, maxLength: 80})} />
+                                                <input  className="form-control-input" type="text" id="name" name="name" ref={register({required: true, minLength: 3, maxLength: 80})} />
                                                 <label className="label-control" htmlFor="name">
                                                     Nombre
                                                     {errors.name? <small className="text-muted"> - Debe contener 3 letras o más  </small> : null }
@@ -156,24 +169,24 @@ const CheckoutContainer = (props) => {
                                             </div>
 
                                             <div className="form-group col-6">
-                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)}  className="form-control-input" type="text" id="surname" name="surname" ref={register({required: true, minLength: 3, maxLength: 80})} />
+                                            <input   className="form-control-input" type="text" id="surname" name="surname" ref={register({required: true, minLength: 3, maxLength: 80})} />
                                             <label className="label-control" htmlFor="surname">
                                                 Apellido 
-                                                {errors.name? <small className="text-muted"> - Debe contener 3 letras o más  </small> : null }
+                                                {errors.surname? <small className="text-muted"> - Debe contener 3 letras o más  </small> : null }
                                                 </label>
                                             </div>
 
                                         </div>
 
                                         <div className="form-group">
-                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} className="form-control-input" id="id" type="text" name="id" ref={register({required: true, minLength: 8, maxLength: 11, pattern: /[0-9]/i})} />
+                                            <input  className="form-control-input" id="id" type="text" name="id" ref={register({required: true, minLength: 8, maxLength: 11, pattern: /[0-9]/i})} />
                                             <label className="label-control" htmlFor="id">DNI / CUIT
                                             {errors.id? <small className="text-muted"> - Debe contener al menos 8 números  </small> : null }
                                             </label>
                                         </div>
 
                                         <div className="form-group">
-                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="email" name="email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+                                            <input  type="text"  className="form-control-input" id="email" name="email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
                                             <label className="label-control" htmlFor="email">Email
                                             {errors.email? <small className="text-muted"> - Con formato ejemplo@mail.com  </small> : null }
                                             </label>
@@ -183,13 +196,13 @@ const CheckoutContainer = (props) => {
                                         <div className="row">
 
                                         <div className="form-group col-12 col-sm-6 col-md-4">
-                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="tel"  className="form-control-input" id="mobile" name="mobile" ref={register({required: true, minLength: 8})} />
+                                            <input  type="tel"  className="form-control-input" id="mobile" name="mobile" ref={register({required: true, minLength: 8})} />
                                             <label className="label-control" htmlFor="mobile">Telefono celular
                                             {errors.mobile? <small className="text-muted"> - Solo números  </small> : null }
                                             </label>
                                         </div>
                                             <div className="form-group col-12 col-sm-6 col-md-4">
-                                                <select onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} className="form-control-input" id="country" name="country" ref={register({ required: true })}>
+                                                <select  className="form-control-input" id="country" name="country" ref={register({ required: true })}>
                                                     <option value=""></option>
                                                     <option value="Argentina">Argentina</option>
                                                     <option value="Brasil">Brasil</option>
@@ -204,14 +217,14 @@ const CheckoutContainer = (props) => {
                                             </div>
 
                                             <div className="form-group col-12 col-sm-6 col-md-4">
-                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="state" name="state" ref={register({required: true, min: 3})} />
+                                                <input  type="text"  className="form-control-input" id="state" name="state" ref={register({required: true, minLength: 3})} />
                                                 <label className="label-control" htmlFor="state">Provincia
                                                 {errors.state? <small className="text-muted"> - Seleccione una opción  </small> : null }
                                                 </label>
                                             </div>
 
                                             <div className="form-group col-12 col-sm-6 col-md-4">
-                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="city" name="city" ref={register({required: true, min: 3})} />
+                                                <input  type="text"  className="form-control-input" id="city" name="city" ref={register({required: true, minLength: 3})} />
                                                 <label className="label-control" htmlFor="city">Ciudad
                                                 {errors.city? <small className="text-muted"> - Seleccione una opción  </small> : null }
                                                 </label>
@@ -219,7 +232,7 @@ const CheckoutContainer = (props) => {
                                         </div>
 
                                         <div className="form-group ">
-                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="address" name="address" ref={register({required: true})} />
+                                            <input  type="text"  className="form-control-input" id="address" name="address" ref={register({required: true})} />
                                             <label className="label-control" htmlFor="address">Calle y número
                                             {errors.address? <small className="text-muted"> - No puede estas vacío  </small> : null }
                                             </label>
@@ -227,15 +240,15 @@ const CheckoutContainer = (props) => {
                                         <div className="row">
 
                                             <div className="form-group col-7 col-sm-8">
-                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="address2" name="address2" ref={register} />
+                                                <input  type="text"  className="form-control-input" id="address2" name="address2" ref={register} />
                                                 <label className="label-control" htmlFor="address2">Piso, depto, etc.(opcional)
                                                 </label>
                                             </div>
 
                                             <div className="form-group col-5 col-sm-4">
-                                                <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="text"  className="form-control-input" id="cp" name="cp" ref={register({required: true, min: 4})} />
+                                                <input  type="text"  className="form-control-input" id="cp" name="cp" ref={register({required: true, minLength: 4})} />
                                                 <label className="label-control" htmlFor="cp">CP
-                                                {errors.cp? <small className="text-muted"> - Min. 3 carácteres   </small> : null }
+                                                {errors.cp? <small className="text-muted"> - Min. 4 carácteres   </small> : null }
                                                 </label>
                                             </div>
                                         </div>
@@ -282,7 +295,7 @@ const CheckoutContainer = (props) => {
                                                         </strong></div><span><strong>${promotionalDiscount?numberToPrice(subtotalCart-promotionalDiscount.mount):numberToPrice(subtotalCart)}</strong></span>
                                                 </li>
                                             </ul>
-                                            <input onBlur={(e) => isEmpty(e.target)}  onChange={(e) => isEmpty(e.target)} type="submit" value="COMPRAR"className="btn-solid-lg waves-effect waves-light btn-block"/>
+                                            <input  type="submit" value="COMPRAR" className="btn-solid-lg waves-effect waves-light btn-block"/>
                                         </div>
                                     </div>
 

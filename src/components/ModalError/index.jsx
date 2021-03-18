@@ -5,7 +5,7 @@ import './style.scss';
 const ModalError = () => {
     return (
         <>
-           <div id="modalErrorMayment" className="modal fade">
+           <div id="modalErrorPayment" className="modal fade">
                <div className="modal-dialog modal-confirm">
                    <div className="modal-content">
                        <div className="modal-header">

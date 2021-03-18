@@ -16,7 +16,7 @@ const ThanksContainer = (props) => {
 
     localStorage.removeItem("cart")
     localStorage.removeItem("formCheckout")
-    sessionStorage.getItem("promotionalDiscount") !== null && sessionStorage.setItem('promotionalDiscount', '')
+    sessionStorage.getItem("promotionalDiscount") !== null && sessionStorage.setItem('promotionalDiscount', '{}')
     
 
     

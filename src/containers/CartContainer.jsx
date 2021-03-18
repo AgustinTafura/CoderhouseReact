@@ -14,7 +14,7 @@ const CartContainer = (props) => {
         document.getElementById('discount-code1') != null && promotionalDiscount && console.log(document.getElementById('discount-code1').setAttribute('value', promotionalDiscount.code))
     })
 
-
+    console.log(promotionalDiscount == undefined)
 
     if (products.length == 0) {
         return (

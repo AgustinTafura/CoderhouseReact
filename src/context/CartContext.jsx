@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [quantityproductsInCart, setQuantityproductsInCart] = useState(0)
     const [subtotalCart, setSubtotalCart] = useState(0)
-    const [promotionalDiscount, setPromotionalDiscount] = useState()
+    const [promotionalDiscount, setPromotionalDiscount] = useState('')
     const [totalCart, setTotalCart] = useState()
     const [promocodes, setPromocodes] = useState([])
 
@@ -114,10 +114,9 @@ export const CartProvider = ({ children }) => {
 
             setPromocodes(promocodeList)
         })
-
-        localStorage.getItem("cart") !== null && setCart(JSON.parse(localStorage.getItem("cart")))
-
-        sessionStorage.getItem("promotionalDiscount") !== null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
+        
+        localStorage.getItem("cart") !== null && localStorage.getItem("cart").length != 0  && setCart(JSON.parse(localStorage.getItem("cart")))
+        sessionStorage.getItem("promotionalDiscount") != null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
     }, [])
 
 

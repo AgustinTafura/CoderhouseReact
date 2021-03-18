@@ -46,7 +46,10 @@ export const CommercialProvider = ({children}) => {
     }, [])
 
     const numberToPrice = (x) => {
-        return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+            return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+
     }
     
     
