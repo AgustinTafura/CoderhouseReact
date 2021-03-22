@@ -183,10 +183,18 @@ body {
     text-align: center;
 }
 
-.social-icon {
+a, .social-icon {
 	color: var(--primary);
 
 	&:hover{
 		color:#12846a;
 	}
 }
+
+.form-control:focus {
+
+    border-color: transparent;
+
+    box-shadow: 0 0 0 0.2rem #14bf9840;
+}
+

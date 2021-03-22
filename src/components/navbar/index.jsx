@@ -7,9 +7,14 @@ import ItemDropdown from '../../containers/ItemDropdown';
 import ListDropdownContainer from '../../containers/ListDropdownContainer';
 import CartWidgetComponent from '../CartWidget';
 import { Link, useLocation } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+
 
 const NavBar = () => {
+
+    const { user, logOutUser } = useContext(UserContext)
+    
     const actualLocation = useLocation()
 
 
@@ -17,7 +22,7 @@ const NavBar = () => {
 
     })
 
-    $('.dropdown-item').on('click', (e)=> console.log(111), $('#navbarsExampleDefault').collapse('hide'))
+    $('.dropdown-item, #cartLogo').on('click', (e)=> $('#navbarsExampleDefault').collapse('hide'))
 
 
     useEffect(() => {
@@ -64,43 +69,78 @@ const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul className="navbar-nav ml-auto">
 
+                    {!user&&
+                        (
+                                <li className="nav-item logged-out">
+                                    <a className="nav-link" href="#" data-toggle="modal" data-target="#signinModal">INGRESAR</a>
+                                </li>
+                        )
+
+                    }
                     <ItemNavContainer  href={'/booking'} name={'RESERVAR TURNO'}/>
 
+                    <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
+                        <ItemDropdown href={'/tienda/planes'} name={'PLANES'}/>
+                        <div className="dropdown-items-divide-hr"></div>
+                        <ItemDropdown href={'/tienda/recetas'} name={'RECETAS'}/>
+                        {/* <div className="dropdown-items-divide-hr"></div> */}
+                        {/* <ItemDropdown href={'/tienda/turnos'} name={'TURNOS ONLINE'}/> */}
+                    </ListDropdownContainer>
 
-                        <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
-                            <ItemDropdown href={'/tienda/planes'} name={'PLANES'}/>
-                            <div className="dropdown-items-divide-hr"></div>
-                            <ItemDropdown href={'/tienda/recetas'} name={'RECETAS'}/>
-                            {/* <div className="dropdown-items-divide-hr"></div> */}
-                            {/* <ItemDropdown href={'/tienda/turnos'} name={'TURNOS ONLINE'}/> */}
-                        </ListDropdownContainer>
 
                     <CartWidgetComponent href={'/cart'}/>
-                    
+                   {user?
+                            (<li className="nav-item dropdown no-arrow">
+                                <a className="nav-link dropdown-toggle" href="#"
+                                    id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                        <span className="mr-2 d-none d-lg-inline text-gray-600 text-uppercase">{user.email}</span>
+                                        {/* <img className="img-profile rounded-circle" src="img/undraw_profile.svg"/> */}
+                                </a>
+                                <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in text-uppercase" aria-labelledby="userDropdown">
+                                        <a className="dropdown-item" href="#">
+                                            <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
+                                            <span className="item-text">MIS DATOS</span>
+                                        </a>
+                                        <a className="dropdown-item" href="#">
+                                            <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
+                                            <span className="item-text">CONFIGURACIÓN</span>
+                                        </a>
+                                        <a className="dropdown-item" href="#">
+                                            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
+                                            <span className="item-text">MI ACTIVIDAD</span>
+                                        </a>
+                                        <div className="dropdown-divider"></div>
+                                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
+                                            <span className="item-text">CERRAR SESIÓN</span>
+                                        </a>
+                                </div>
+                            </li>)
+                        :   
+                            (
+                                <span className="nav-item social-icons">
+                                    <span className="fa-stack">
+                                        <a href="https://www.instagram.com/juampilabollita/">
+                                            <span className="hexagon"></span>
+                                            <i className="fab fa-instagram fa-stack-1x"></i>
+                                        </a>
+                                    </span>
+                                    <span className="fa-stack">
+                                        <a href="https://www.facebook.com/juanpablo.labollita">
+                                            <span className="hexagon"></span>
+                                            <i className="fab fa-facebook-f fa-stack-1x"></i>
+                                        </a>
+                                    </span>
+                                </span>
+                            )
+                    } 
+
                 </ul>
                 
-                <span className="nav-item social-icons">
-                    <span className="fa-stack">
-                        <a href="https://www.instagram.com/juampilabollita/">
-                            <span className="hexagon"></span>
-                            <i className="fab fa-instagram fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span className="fa-stack">
-                        <a href="https://www.facebook.com/juanpablo.labollita">
-                            <span className="hexagon"></span>
-                            <i className="fab fa-facebook-f fa-stack-1x"></i>
-                        </a>
-                    </span>
-                </span>
             </div>
         </nav>
         
-        
- 
-
-
-    
   
 
         </>

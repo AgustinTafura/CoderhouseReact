@@ -22,6 +22,8 @@ code {
     monospace;
 }
 
+
+
 /*****************************************
 Table Of Contents:
 
@@ -375,6 +377,8 @@ select::-ms-expand {
 	transition: all 0.2s;
 }
 
+
+
 .form-control-input:focus,
 .form-control-select:focus,
 .form-control-textarea:focus {
@@ -664,10 +668,12 @@ input[type='checkbox'] {
 }
 
 /* Dropdown Menu */
+
 .navbar-custom .dropdown:hover > .dropdown-menu {
 	display: block; /* this makes the dropdown menu stay open while hovering it */
 	min-width: auto;
 	animation: fadeDropdown 0.2s; /* required for the fade animation */
+
 }
 
 @keyframes fadeDropdown {
@@ -782,6 +788,7 @@ input[type='checkbox'] {
 .header h1 {
 	margin-bottom: 0.5rem;
 	color: var(--tertiarity);
+	font-size: 2rem;
 }
 
 .header .p-large {
@@ -1849,7 +1856,13 @@ a:hover.back-to-top {
 /* Min-width width 768px */
 @media (min-width: 768px) {
 	
+
+	
 	/* General Styles */
+	.header h1 {
+
+		font-size: 2.5rem;
+	}
 	.p-heading {
 		width: 85%;
 		margin-right: auto;

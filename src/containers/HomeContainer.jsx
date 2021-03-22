@@ -3,13 +3,13 @@ import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import { CartContext } from "../context/CartContext";
 import { getFireStorage } from "../firebase";
-
+import $ from 'jquery'
 
 const HomeContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const { cart } = useContext(CartContext)
-
+    const { innerWidth: width, innerHeight: height } = window;
 
     const content = [
         {
@@ -66,7 +66,7 @@ const HomeContainer = () => {
         <>
 
             {/* <!-- Header --> */}
-            <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/images/logo-055.jpg') no-repeat`, backgroundSize: `cover`}}>
+            <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), ${width>=768?`url('/images/logo-055.jpg')`:`url('/images/logo-0555.jpg')`}  no-repeat`, backgroundSize: `cover`,  backgroundPositionY: `center`}}>
                 <div className="header-content">
                     <div className="container">
                         <div className="row">
