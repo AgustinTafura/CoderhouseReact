@@ -131,7 +131,7 @@ const NotFound = () => {
     
     useEffect(() => {
       
-        // setIsLoading(true)
+        setIsLoading(true)
 
         const myPromise = new Promise((resolve, reject) => {
             setTimeout(()=>resolve(true), 1000)
@@ -166,7 +166,7 @@ const NotFound = () => {
     return (
         <>
             <div className="ag-page-404">
-                <h5 className="text-center" style={{fontFamily: "Montserrat"}} >PAGINA NO ENCONTRADA</h5>
+                <h5 className="text-center" style={{fontFamily: "Montserrat"}} >PÁGINA NO ENCONTRADA</h5>
                 <div className="ag-toaster-wrap">
                     <div className="ag-toaster">
                         <div className="ag-toaster_back"></div>
@@ -187,8 +187,8 @@ const NotFound = () => {
 
             <div className="container mt-5" >
               <div className="row  justify-content-center justify-content-md-around">
-              <Link className="btn btn-solid-lg btn-dark d-md-inline-block d-sm-block  col-8 col-md-4 " to='#' onClick={history.goBack} >Volver</Link>
-              <Link className="btn btn-solid-lg btn-dark d-md-inline-block d-sm-block  mt-3 mt-md-0 col-8 col-md-4" to='/'>Ir al Inicio</Link>
+              <Link className="btn btn-solid-lg btn-dark d-md-inline-block d-sm-block  col-8 col-md-3 " to='#' onClick={history.goBack} >Volver</Link>
+              <Link className="btn btn-solid-lg btn-dark d-md-inline-block d-sm-block  mt-3 mt-md-0 col-8 col-md-3" to='/'>Ir al Inicio</Link>
 
               </div>
 

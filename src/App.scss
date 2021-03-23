@@ -23,6 +23,8 @@ Colors:
 	--body-text-light: #dfe5ec;
 }
 
+
+
 @font-face {
 	font-family: 'Montserrat';
 	src: local('Montserrat'), url(/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
@@ -56,6 +58,26 @@ Colors:
 @font-face {
 	font-family: 'Cream_cake';
 	src: local(Cream_cake), url(fonts/Cream_cake/Cream_cake.ttf) format("truetype");
+}
+
+
+//PARAMETERS
+.text-principal {
+	color: var(--primary);
+}
+
+.bg-principal {
+	background-color: var(--primary);
+	
+	&:hover {
+		background-color: transparent;
+		color: var(--primary);
+		border-color: var(--primary)
+	}	
+}
+
+.br-principal {
+	border-color: var(--primary);	
 }
 
 
