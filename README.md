@@ -1,33 +1,29 @@
 # Proyect
 
-Este proyecto se enfocará comunicar los servicios brindados por un profesional de la salud, particularmente en nutrición y entrenamiento, incluyendo principalemente las siguientes secciones:
+Este proyecto se enfocará comunicar y ofrecer los servicios brindados por un profesional de la salud, particularmente enfocado en nutrición y entrenamiento, incluyendo las siguientes secciones:
 
- - Profesional: dedicado presentacion del profesional en Nutrición y Entrenamiento.
- - Blog: dedicado a la publicación de contenido relevante para sus pacientes.
- - Tienda: dedicada a venta de los servicios/productos.
- - Turnos: dedicada a la comunicación directa para obtener turnos online y/o presencial.
-
-
-## NPM additional dependencies
-
-
+ - Tienda: dedicada a venta de los servicios/productos otorgados por el profesional.
+ - Turnos: dedicada a usuarios/pacientes para obtener un turno online o presencial con el profesional. (pendiente)
+ - Profesional: dedicado presentacion del profesional. (pendiente)
+ - Blog: dedicado a la publicación de contenido relevante para sus pacientes. (pendiente)
 
 
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto se inició con [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-In the project directory, you can run:
+En el directorio del proyecto, puede ejecutar:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Corre la app en modo desarrollador.\
+ingresa a [http://localhost:3000](http://localhost:3000) para visualizarlo en el tu navegador.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+La pagina se recargará si realizar cambios en el código.\
+También podrá visualizar cualquier error en la consola.\
+
 
 ### `npm test`
 

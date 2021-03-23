@@ -11,10 +11,9 @@ const CartContainer = (props) => {
     const { cart, subtotalCart, totalCart, promotionalDiscount, addDiscount } = useContext(CartContext)
 
     useEffect(()=>{
-        document.getElementById('discount-code1') != null && promotionalDiscount && console.log(document.getElementById('discount-code1').setAttribute('value', promotionalDiscount.code))
+        document.getElementById('discount-code1') != null && promotionalDiscount && document.getElementById('discount-code1').setAttribute('value', promotionalDiscount.code)
     })
 
-    console.log(promotionalDiscount == undefined)
 
     if (products.length == 0) {
         return (

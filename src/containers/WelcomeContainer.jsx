@@ -11,12 +11,12 @@ const WelcomeContainer = () => {
     const { cart } = useContext(CartContext)
     const { innerWidth: width, innerHeight: height } = window;
 
- 
+    
 
 
     useEffect(() => {
 
-        // setIsLoading(true)
+        setIsLoading(true)
 
         const myPromise = new Promise((resolve, reject) => {
             setTimeout(()=>resolve(true), 1000)
@@ -48,6 +48,8 @@ const WelcomeContainer = () => {
             </>
         )
     }
+
+    
     return (
         <>
 
@@ -206,7 +208,7 @@ const WelcomeContainer = () => {
                                         {/* <!-- Card Header - Dropdown --> */}
                                         <div
                                             className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h6 className="m-0 font-weight-bold text-principal">Revenue Sources</h6>
+                                            <h6 className="m-0 font-weight-bold text-principal">Composicion Corporal</h6>
                                             <div className="dropdown no-arrow">
                                                 <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -302,10 +304,9 @@ const WelcomeContainer = () => {
                                                 <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: "25rem"}}
                                                     src="img/undraw_posting_photo.svg" alt=""/>
                                             </div>
-                                            <p>Add some quality, svg illustrations to your project courtesy of <a
-                                                    target="_blank" rel="nofollow" href="#">unDraw</a>, a
-                                                constantly updated collection of beautiful svg images that you can use
-                                                completely free and without attribution!</p>
+                                            <p>klajdkasjdlkajsdk ajslkdjalksdj aslkd alsdk alskdj; asldk; alskd;al skd;laskd  <a
+                                                    target="_blank" rel="nofollow" href="#">lalalal</a>, a
+                                                sdfSDFsdfmhsba dgfdsajhg kadjfhg kajdfhvkjzlxckvjzxclkvjhzxlckjv zxkjh !</p>
                                             <a target="_blank" rel="nofollow" href="#">Ver mas &rarr;</a>
                                         </div>
                                     </div>
@@ -313,14 +314,14 @@ const WelcomeContainer = () => {
                                     {/* <!-- Approach --> */}
                                     <div className="card shadow mb-4">
                                         <div className="card-header py-3">
-                                            <h6 className="m-0 font-weight-bold text-principal">Development Approach</h6>
+                                            <h6 className="m-0 font-weight-bold text-principal">Tips Nutricionales</h6>
                                         </div>
                                         <div className="card-body">
-                                            <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                                CSS bloat and poor page performance. Custom CSS classes are used to create
-                                                custom components and custom utility classes.</p>
-                                            <p className="mb-0">Before working with this theme, you should become familiar with the
-                                                Bootstrap framework, especially the utility classes.</p>
+                                            <p>zxf,vkjzdfnvlkjxnczvnzdkflbjv nzdkf;jnbzcfbzdf bxzcbz xbcxzvzxv 
+                                                xcv xzcv zxcv vxcvxcv bzcx bxcv bxcvbcx vbc xvb 
+                                                cvb cxvbcvbxcvbxcvbxcvbxcvbcvb.</p>
+                                            <p className="mb-0">dfgvxcbcxv,bmxnvc ,nb vnvbnvcbnvc nvcb nvcbn vbn vbnvbn vbnc vbn vbn 
+                                             fcb cxvbcvb xcvb xcvb xcvbxcvbcxvbxcvbcv</p>
                                         </div>
                                     </div>
 

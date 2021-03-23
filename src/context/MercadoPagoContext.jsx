@@ -12,17 +12,8 @@ export const MercadoPagoProvider = ({ children }) => {
 
 
     const payOnMP = (data) => {
-            console.log(JSON.stringify({
-                items: data.items,
-                payer: data.payer,       
-                back_urls: {
-                    success: 'http://localhost:3000/checkout',
-                    pending: 'http://localhost:3000/checkout',
-                    failure: 'http://localhost:3000/checkout',
-                },
-                statement_descriptor: "JPL NUTRICIÓN"
-            }))
-            fetch('https://api.mercadopago.com/checkout/preferences', {
+
+        fetch('https://api.mercadopago.com/checkout/preferences', {
             method: 'POST', 
             headers: {
                 'content-type': 'application/json',
@@ -42,7 +33,7 @@ export const MercadoPagoProvider = ({ children }) => {
 
             }
             
-            ),
+        ),
 
         }).then(result=>{
             return result.json();

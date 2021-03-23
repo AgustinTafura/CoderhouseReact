@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import { CartContext } from "../context/CartContext";
-import { getFireStorage } from "../firebase";
 import $ from 'jquery'
 
 const HomeContainer = () => {

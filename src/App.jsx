@@ -2,13 +2,14 @@
 import logo from './logo.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import 'animate.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import NavBarComponent from './components/NavBar';
 import AuthModal from './components/AuthModal';
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer';
-import  React from 'react';
+import  React, { useContext } from 'react';
 import {BrowserRouter, Switch, Route, useLocation, Redirect} from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import CartContainer from './containers/CartContainer';
@@ -23,15 +24,11 @@ import { ToastContainer } from 'react-toastify';
 import NotFound from './components/NotFound';
 
 const App = () => {
-        
-
-
-
         return ( 
+                <UserProvider>
                 <CommercialProvider>
                         <CartProvider>
                                 <MercadoPagoProvider>
-                                        <UserProvider>
                                                         <BrowserRouter>
         
                                                                 <NavBarComponent />
@@ -52,7 +49,7 @@ const App = () => {
 
                                                                         
                                                                         <Route exact path="/welcome">
-                                                                                <WelcomeContainer/>
+                                                                                <WelcomeContainer/>     
                                                                         </Route>
 
 
@@ -87,10 +84,10 @@ const App = () => {
 
                                                                 </Switch>
                                                         </BrowserRouter>
-                                        </UserProvider>
                                 </MercadoPagoProvider>
                         </CartProvider>
                 </CommercialProvider>
+                </UserProvider>
 
         );
 }

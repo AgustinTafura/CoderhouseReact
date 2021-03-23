@@ -26,8 +26,6 @@ export const CommercialProvider = ({children}) => {
                 value.docs.map( async (product) => { 
                     
                     
-                    // console.log(product.data().categoryId)
-                    // console.log()
                     let categoryName =  categoryList.find(category => category.id === product.data().categoryId)
 
                     return {...product.data(), id:product.id, category: categoryName.name} 
@@ -47,7 +45,7 @@ export const CommercialProvider = ({children}) => {
 
     const numberToPrice = (x) => {
 
-            return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        if(x != undefined) {   return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
 
 
     }

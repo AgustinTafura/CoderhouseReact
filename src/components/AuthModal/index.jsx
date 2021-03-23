@@ -32,7 +32,7 @@ const AuthModal = () => {
                 $('#signupModal').modal("hide");
                 // clear the form
                 signUpForm.reset();
-    
+
               });
         })
     
@@ -50,7 +50,9 @@ const AuthModal = () => {
                 $('#signinModal').modal("hide");
                 // clear the form
                 signInForm.reset();
-    
+                // redirect to welcome
+                window.location.replace("/welcome");
+
               });
     
         })           
@@ -107,8 +109,8 @@ const AuthModal = () => {
                         <input type="password" id="login-password" className="form-control" placeholder="Contraseña" required/>
                         </div>
                         <button type="submit" className="btn-solid-lg btn-block">Entrar</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button>
+                        {/* <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
+                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button> */}
                         <div className="nav-item logged-out justify-content-center ml-3 mt-2">
                             <span >No tienes una cuenta?</span> <a className="mx-2 registerModal" href="#" >Registrarse</a>
                         </div>

@@ -34,6 +34,15 @@ const ItemCart = ({product, numberToPrice}) => {
 
     }
 
+    const removeFromCart = (e) => {
+        let element = document.getElementById(product.id)
+        element.classList.add('animate__bounceOut') 
+        element.addEventListener('animationend', () => {
+            removeItemCart(product.id)
+            element.classList.remove('animate__bounceOut') 
+          });
+    }
+
    
     useEffect(() => {
         if(isInCart(product.id)) {
@@ -47,7 +56,7 @@ const ItemCart = ({product, numberToPrice}) => {
     return (
         <>
 
-            <div className="row mb-4 no-gutters">
+            <div id={`${product.id}`} className="row mb-4 no-gutters ">
                 <div className="col-12 col-lg-3">
                     <div className="image-container">
                         <Link to={`/product/${product.id}`}>
@@ -74,7 +83,7 @@ const ItemCart = ({product, numberToPrice}) => {
                     </div>
                     <div className="col-12 col-lg-3" style={{alignSelf: 'center'}}>
                         <div style={{justifyContent:'space-between'}} className="d-flex  ">
-                            <div onClick={() => {removeItemCart(product.id)}}>
+                            <div onClick={(e) => {removeFromCart(e)}}>
                                 <a href="#!" type="button"
                                     className="card-link-secondary small text-uppercase mr-3"
                                     style={{color:'#14bf98'}}

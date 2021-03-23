@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const ItemDropdown = ({href, name}) => {
+const ItemDropdownContainer = ({href, name}) => {
 
     return (
         <>
@@ -15,4 +15,4 @@ const ItemDropdown = ({href, name}) => {
     )
     
 }
-export default ItemDropdown;
+export default ItemDropdownContainer;
