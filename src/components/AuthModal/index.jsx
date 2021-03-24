@@ -6,9 +6,9 @@ import { withRouter } from "react-router-dom";
 
 const AuthModal = (props) => {
     const {history} = props;
-    const { logInUser, createNewUserWithEmailAndPassword, logOutUser } = useContext(UserContext)
+    const { logInUser, createNewUserWithEmailAndPassword, logOutUser, logInWhitGoogle, logInWhitFacebook } = useContext(UserContext)
 
-    window.onload = ()=>{
+    window.addEventListener("load", ()=>{
 
         //SignUp
         const registerButton = document.querySelector(".registerModal");
@@ -33,11 +33,8 @@ const AuthModal = (props) => {
 
               });
         })
-
-
     
-    
-        //SignIn
+        //SignIn with Email and Pass
         const signInForm = document.querySelector("#login-form");
         
         signInForm.addEventListener("submit",  (e) => {
@@ -55,9 +52,34 @@ const AuthModal = (props) => {
 
               });
     
-        })           
+        })
+        
+
+        // Login with Google
+        const googleButton = document.querySelector("#googleLogin");
+
+        googleButton.addEventListener("click", (e) => {
+        // e.preventDefault();
+        signInForm.reset();
+        $("#signinModal").modal("hide");
+
+        logInWhitGoogle()
+        });
+
+        
+        // Login with Facebook
+        const facebookButton = document.querySelector("#facebookLogin");
+
+        facebookButton.addEventListener("click", (e) => {
+            console.log(99999999)
+        // e.preventDefault();
+        signInForm.reset();
+        $("#signinModal").modal("hide");
+
+        logInWhitFacebook()
+        });
     
-    };
+    })
 
     const logout = ()=>{
         logOutUser();
@@ -114,8 +136,8 @@ const AuthModal = (props) => {
                         <input type="password" id="login-password" className="form-control" placeholder="Contraseña" required/>
                         </div>
                         <button type="submit" className="btn-solid-lg btn-block">Entrar</button>
-                        {/* <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button> */}
+                        <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
+                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button>
                         <div className="nav-item logged-out justify-content-center ml-3 mt-2">
                             <span >No tienes una cuenta?</span> <a className="mx-2 registerModal" href="#" >Registrarse</a>
                         </div>

@@ -3,7 +3,6 @@ import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import { CartContext } from "../context/CartContext";
 import $ from 'jquery'
-import TextTransition, { presets } from "react-text-transition";
 
 const HomeContainer = () => {
 
@@ -26,6 +25,7 @@ const HomeContainer = () => {
         },
     ];
 
+
     useEffect(() => {
 
         // setIsLoading(true)
@@ -40,7 +40,6 @@ const HomeContainer = () => {
                 setIsLoading(false);
             }
         )
-
 
 
     }, [])
@@ -78,9 +77,11 @@ const HomeContainer = () => {
 
                                         <ReactTextRotator
                                             content={content}
-                                            time={2000}
-                                            startDelay={100}
+                                            time={3000}
+                                            startDelay={1000}
                                         />
+
+
 
 
                                     </h1>

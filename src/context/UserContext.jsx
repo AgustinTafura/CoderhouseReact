@@ -11,11 +11,11 @@ export const UserContext = createContext();
 export const UserProvider = ({ props, children }) => {
 
     const [user, setUser] = useState()
-    const [logout, setLogout] = useState(false)
+
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-
+            // console.log(11, user)
             setUser( user)
 
         } else {
@@ -36,11 +36,29 @@ export const UserProvider = ({ props, children }) => {
         return userCredentials
     }
 
-
-      
     const logInUser = (email,pass) => {
         const user = auth.signInWithEmailAndPassword(email,pass)
         return user
+    }
+
+    const logInWhitGoogle = ()=> {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).then((result) => {
+            console.log(result)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+    const logInWhitFacebook = ()=> {
+        const provider = new firebase.auth.FacebookAuthProvider();
+        auth.signInWithPopup(provider).then((result) => {
+
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     const logOutUser = () => {
@@ -60,7 +78,7 @@ export const UserProvider = ({ props, children }) => {
             }, 1500) 
         )
         setUser(false)
-        setLogout(true)
+
         
         
 
@@ -70,7 +88,7 @@ export const UserProvider = ({ props, children }) => {
     
 
     return (
-        <UserContext.Provider value={{ logInUser, createNewUserWithEmailAndPassword , user, logOutUser, logout}}>
+        <UserContext.Provider value={{ logInUser, logInWhitGoogle, logInWhitFacebook, createNewUserWithEmailAndPassword , user, logOutUser}}>
             {children}
         </UserContext.Provider>
     )
