@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import { CartContext } from "../context/CartContext";
 import $ from 'jquery'
+import TextTransition, { presets } from "react-text-transition";
 
 const HomeContainer = () => {
 
@@ -25,11 +26,9 @@ const HomeContainer = () => {
         },
     ];
 
-
-
     useEffect(() => {
 
-        setIsLoading(true)
+        // setIsLoading(true)
 
         const myPromise = new Promise((resolve, reject) => {
             setTimeout(()=>resolve(true), 1200)
@@ -41,6 +40,8 @@ const HomeContainer = () => {
                 setIsLoading(false);
             }
         )
+
+
 
     }, [])
 
@@ -71,13 +72,16 @@ const HomeContainer = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="text-container">
-                                    <h1>NUTRICIÓN
+                                    <h1>
+                                    <span> NUTRICIÓN </span> 
                                     <span style={{ fontFamily: "Mansalva" }}> +  </span>
+
                                         <ReactTextRotator
                                             content={content}
                                             time={2000}
                                             startDelay={100}
                                         />
+
 
                                     </h1>
                                     <p className="p-heading p-large">Consultas Online, Planes personalizados y Monitoreo de los objetivos alcanzados</p>

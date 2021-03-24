@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import { CartContext } from "../context/CartContext";
 import { getFireStorage } from "../firebase";
 import $ from 'jquery'
+import { UserContext } from "../context/UserContext";
 
 const WelcomeContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const { cart } = useContext(CartContext)
     const { innerWidth: width, innerHeight: height } = window;
-
-    
 
 
     useEffect(() => {
@@ -28,8 +27,10 @@ const WelcomeContainer = () => {
                 setIsLoading(false);
             }
         )
-
+    
+        
     }, [])
+    
 
 
 
@@ -37,6 +38,9 @@ const WelcomeContainer = () => {
     if (isLoading) {
         return (
             <>
+
+
+
                 {/* <!-- Preloader --> */}
                 <div className="spinner-wrapper">
                     <div className="spinner">
@@ -49,10 +53,10 @@ const WelcomeContainer = () => {
         )
     }
 
+
     
     return (
         <>
-
         {/* <!-- Page Wrapper --> */}
             <div id="wrapper" className="pt-5">
 

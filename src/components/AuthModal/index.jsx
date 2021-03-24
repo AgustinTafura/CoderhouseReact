@@ -2,9 +2,10 @@ import $ from 'jquery'
 import './style.scss';
 import { UserContext } from "../../context/UserContext";
 import { useContext } from "react";
+import { withRouter } from "react-router-dom";
 
-const AuthModal = () => {
-    
+const AuthModal = (props) => {
+    const {history} = props;
     const { logInUser, createNewUserWithEmailAndPassword, logOutUser } = useContext(UserContext)
 
     window.onload = ()=>{
@@ -17,9 +18,6 @@ const AuthModal = () => {
             e.preventDefault()
             $('#signinModal').modal("hide");
             $('#signupModal').modal("show");
-
-            // data-toggle="modal" data-target="#signupModal"
-            // console.log('abre el register')
         })
 
         signUpForm.addEventListener("submit", (e) => {
@@ -35,6 +33,8 @@ const AuthModal = () => {
 
               });
         })
+
+
     
     
         //SignIn
@@ -59,7 +59,12 @@ const AuthModal = () => {
     
     };
 
+    const logout = ()=>{
+        logOutUser();
+        $('#logoutModal').modal("hide");
+        history.push("/")
 
+    }
 
 
     return (
@@ -134,7 +139,7 @@ const AuthModal = () => {
                         {/* <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div> */}
                         <div className="modal-footer">
                             <button className="btn-solid-lg btn-light" type="button" data-dismiss="modal">Cancel</button>
-                            <a onClick={()=>{logOutUser();$('#logoutModal').modal("hide")} } className="btn-solid-lg " id="logOutButton">Logout</a>
+                            <a onClick={()=>{logout() }} className="btn-solid-lg " id="logOutButton">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -143,5 +148,5 @@ const AuthModal = () => {
     )
 }
 
-export default AuthModal
+export default withRouter(AuthModal)
 

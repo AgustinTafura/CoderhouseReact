@@ -26,6 +26,7 @@
     "react-scripts": "4.0.1",
     "react-text-loop": "^2.3.0",
     "react-text-rotator": "^1.1.0",
+    "react-text-transition": "^1.3.0",
     "react-toastify": "^7.0.3",
     "react-transition-group": "^4.4.1",
     "swiper": "^6.4.8",

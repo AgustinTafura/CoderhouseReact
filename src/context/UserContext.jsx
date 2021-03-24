@@ -8,15 +8,14 @@ import { ToastContainer, toast } from 'react-toastify';
 export const UserContext = createContext();
 
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ props, children }) => {
 
     const [user, setUser] = useState()
     const [logout, setLogout] = useState(false)
 
-
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            // User is signed in.
+
             setUser( user)
 
         } else {
@@ -50,12 +49,15 @@ export const UserProvider = ({ children }) => {
             position: "top-right",
         });
 
-        toast.onChange((numberOfToastDisplayed) => {
-            numberOfToastDisplayed == 0 &&  window.location.replace('/')
-        });
+        // toast.onChange((numberOfToastDisplayed) => {
+        //     numberOfToastDisplayed == 0 &&  window.location.replace('/')
+        // });
 
 
-        auth.signOut().then(  notify
+        auth.signOut().then( 
+            setTimeout(() => {
+                notify()
+            }, 1500) 
         )
         setUser(false)
         setLogout(true)

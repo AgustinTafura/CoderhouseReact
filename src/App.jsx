@@ -10,7 +10,7 @@ import AuthModal from './components/AuthModal';
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import  React, { useContext } from 'react';
-import {BrowserRouter, Switch, Route, useLocation, Redirect} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, } from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import CartContainer from './containers/CartContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
@@ -24,6 +24,9 @@ import { ToastContainer } from 'react-toastify';
 import NotFound from './components/NotFound';
 
 const App = () => {
+
+
+
         return ( 
                 <UserProvider>
                 <CommercialProvider>
@@ -35,7 +38,6 @@ const App = () => {
                                                                 <ToastContainer />
 
                                                                 <AuthModal/>
-
                                                         
                                                                 <Switch>
 
