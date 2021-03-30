@@ -98,10 +98,10 @@ const NavBar = () => {
                                         {/* <img className="img-profile rounded-circle" src="img/undraw_profile.svg"/> */}
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in text-uppercase" aria-labelledby="userDropdown">
-                                        <a className="dropdown-item" href="/welcome">
+                                        <Link className="dropdown-item" to="/welcome">
                                             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
                                             <span className="item-text">MIS DATOS</span>
-                                        </a>
+                                        </Link>
                                         <a className="dropdown-item" href="#">
                                             <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
                                             <span className="item-text">CONFIGURACIÓN</span>

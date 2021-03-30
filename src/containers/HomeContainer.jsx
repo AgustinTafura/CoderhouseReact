@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
 import { CartContext } from "../context/CartContext";
@@ -9,6 +9,7 @@ const HomeContainer = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { cart } = useContext(CartContext)
     const { innerWidth: width, innerHeight: height } = window;
+
 
     const content = [
         {

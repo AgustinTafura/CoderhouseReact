@@ -8,38 +8,43 @@ export const CommercialProvider = ({children}) => {
     const [products, setProducts] = useState([])
 
 
-    useEffect(async () => {
-        const db = getFirestore();
-        const productCollection = db.collection("products")
+    useEffect(() => {
 
-        const CategoryCollection = db.collection("categories")
+         const getProducts =  async ()=>{
 
-        const categoryList = await CategoryCollection.get().then(async (value) => {
-            return Promise.all(
-                value.docs.map(async (category) => {return await {...category.data(), id:category.id}})
-            )
-        })
-        productCollection.get().then(async (value) => {
-
-            let productsList = await Promise.all(
-
-                value.docs.map( async (product) => { 
-                    
-                    
-                    let categoryName =  categoryList.find(category => category.id === product.data().categoryId)
-
-                    return {...product.data(), id:product.id, category: categoryName.name} 
-                    
-                    
-                })
-            )
-
-            
-            setProducts(productsList)
-
-
-        })
+            const db = getFirestore();
+            const productCollection = db.collection("products")
+    
+            const CategoryCollection = db.collection("categories")
+    
+            const categoryList = await CategoryCollection.get().then(async (value) => {
+                return Promise.all(
+                    value.docs.map(async (category) => {return await {...category.data(), id:category.id}})
+                )
+            })
+            productCollection.get().then(async (value) => {
+    
+                let productsList = await Promise.all(
+    
+                    value.docs.map( async (product) => { 
+                        
+                        
+                        let categoryName =  categoryList.find(category => category.id === product.data().categoryId)
+    
+                        return {...product.data(), id:product.id, category: categoryName.name} 
+                        
+                        
+                    })
+                )
+    
+                
+                setProducts(productsList)
+    
+    
+            })
+        }
         
+        getProducts()
 
     }, [])
 

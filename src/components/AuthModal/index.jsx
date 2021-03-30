@@ -1,12 +1,15 @@
 import $ from 'jquery'
 import './style.scss';
 import { UserContext } from "../../context/UserContext";
-import { useContext } from "react";
+import { useContext} from "react";
 import { withRouter } from "react-router-dom";
+import { auth } from '../../firebase';
 
 const AuthModal = (props) => {
     const {history} = props;
     const { logInUser, createNewUserWithEmailAndPassword, logOutUser, logInWhitGoogle, logInWhitFacebook } = useContext(UserContext)
+
+
 
     window.addEventListener("load", ()=>{
 
@@ -16,17 +19,23 @@ const AuthModal = (props) => {
     
         registerButton.addEventListener('click', (e) => {
             e.preventDefault()
+            e.stopImmediatePropagation();
             $('#signinModal').modal("hide");
             $('#signupModal').modal("show");
         })
 
         signUpForm.addEventListener("submit", (e) => {
-            e.preventDefault();
+            e.stopImmediatePropagation();
             const email = signUpForm["signup-email"].value;
             const password = signUpForm["signup-password"].value;
             
             createNewUserWithEmailAndPassword(email,password).then((userCredential) => {
-                // close the modal
+                console.log(userCredential)
+                // userCredential.sendEmailVerification().then(function(a) {
+                //     console.log('Email sent.', a)
+                // }).catch(function(error) {
+                //     console.log('An error happened.', error)
+                // });
                 $('#signupModal').modal("hide");
                 // clear the form
                 signUpForm.reset();
@@ -39,18 +48,22 @@ const AuthModal = (props) => {
         
         signInForm.addEventListener("submit",  (e) => {
             e.preventDefault();
-            const email = signInForm["login-email"].value;
+            e.stopImmediatePropagation()
+            const email = signInForm["login-email"].value.toString();
             const password = signInForm["login-password"].value;
-            
-            logInUser(email,password).then((user) => {
-                // close the modal
-                $('#signinModal').modal("hide");
-                // clear the form
-                signInForm.reset();
-                // redirect to welcome
-                window.location.replace("/welcome");
+            console.log(777, typeof email, email)
 
-              });
+
+            logInUser(email,password)
+            .then((user)=>
+                {
+                    signInForm.reset()
+                    $("#signinModal").modal("hide");
+                    console.log(user)
+
+                })
+            .catch(error=>console.log(error))
+
     
         })
         
@@ -59,7 +72,8 @@ const AuthModal = (props) => {
         const googleButton = document.querySelector("#googleLogin");
 
         googleButton.addEventListener("click", (e) => {
-        // e.preventDefault();
+
+        e.stopImmediatePropagation();
         signInForm.reset();
         $("#signinModal").modal("hide");
 
@@ -71,16 +85,16 @@ const AuthModal = (props) => {
         const facebookButton = document.querySelector("#facebookLogin");
 
         facebookButton.addEventListener("click", (e) => {
-            console.log(99999999)
-        // e.preventDefault();
+
+        e.stopImmediatePropagation();
         signInForm.reset();
         $("#signinModal").modal("hide");
-
-        logInWhitFacebook()
+        logInWhitFacebook().then((user)=>console.log(user)).catch(error=>console.log(error))
         });
     
+        
     })
-
+    
     const logout = ()=>{
         logOutUser();
         $('#logoutModal').modal("hide");

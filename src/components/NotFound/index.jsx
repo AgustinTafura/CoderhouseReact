@@ -14,17 +14,16 @@ const NotFound = () => {
     
     
     document.addEventListener('DOMContentLoaded', function() {
-      (function ($) {
-        $(function () {
-          $().ready(function () {
-            (function () {
+
+
+
               var requestAnimationFrame =
                 window.requestAnimationFrame ||
                 window.mozRequestAnimationFrame ||
                 window.webkitRequestAnimationFrame ||
                 window.msRequestAnimationFrame;
               window.requestAnimationFrame = requestAnimationFrame;
-            })();
+
             var canvas = document.getElementById("canvas-404");
             if (canvas === null) return;
             setTimeout(function () {
@@ -54,9 +53,10 @@ const NotFound = () => {
               }
             }
             function render() {
+
               if (loading) {
                 load();
-                return false;
+                return true;
               }
               var len = parts.length;
               ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -122,19 +122,19 @@ const NotFound = () => {
             }
       
             render();
-          });
-        });
-      })($);
+      
+
 
     })            
     
+
     
     useEffect(() => {
-      
-        setIsLoading(true)
-
+        
+        // setIsLoading(true)
+        console.log(isLoading)
         const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(true), 1000)
+            setTimeout(()=>resolve(true), 2000)
         })
 
         myPromise.then(
@@ -143,6 +143,10 @@ const NotFound = () => {
                 setIsLoading(false);
             }
         )
+
+        return() => {
+          setIsLoading(false)
+        }
 
     }, [])
 

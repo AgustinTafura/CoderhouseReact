@@ -10,7 +10,7 @@ import AuthModal from './components/AuthModal';
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import  React, { useContext } from 'react';
-import {BrowserRouter, Switch, Route, } from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect, } from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import CartContainer from './containers/CartContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
@@ -22,74 +22,30 @@ import {CommercialProvider} from './context/CommercialContext';
 import {MercadoPagoProvider} from './context/MercadoPagoContext';
 import { ToastContainer } from 'react-toastify';
 import NotFound from './components/NotFound';
+import { isLoggedIn } from './firebase';
+import Routes from './routes/routes';
 
-const App = () => {
+const App = (props) => {
 
-
-
+        
         return ( 
+                <BrowserRouter>
                 <UserProvider>
                 <CommercialProvider>
-                        <CartProvider>
-                                <MercadoPagoProvider>
-                                                        <BrowserRouter>
+                <CartProvider>
+                <MercadoPagoProvider>
         
-                                                                <NavBarComponent />
-                                                                <ToastContainer />
+                        <NavBarComponent />
+                        <ToastContainer />
 
-                                                                <AuthModal/>
-                                                        
-                                                                <Switch>
+                        <AuthModal/>
+                        <Routes/>
 
-                                                                        <Route exact path="/">
-                                                                                <HomeContainer/>    
-                                                                        </Route>
-
-                                                                        <Route exact path="/booking">
-                                                                                PROXIMAMENTE TURNOS ONLINE
-                                                                        </Route>
-
-                                                                        
-                                                                        <Route exact path="/welcome">
-                                                                                <WelcomeContainer/>     
-                                                                        </Route>
-
-
-
-                                                                        <Route exact path="/product/:id">
-                                                                                
-                                                                                <ItemDetailContainer/>
-                                                                        </Route>
-
-                                                                        <Route exact path='/tienda/:categoryId?'>
-                                                                                <ItemListContainer/>
-                                                                        </Route>
-
-                                                                        
-                                                                        <Route exact path="/cart">
-                                                                                <CartContainer/> 
-                                                                        </Route>
-
-                                                                        <Route exact path="/checkout">
-                                                                                <CheckoutContainer/>
-                                                                        </Route>
-
-                                                                        <Route exact path="/thankYou">
-                                                                                <ThanksContainer/>    
-                                                                        </Route>
-                                                                        
-                                                                        <Route path="*">
-                                                                                <NotFound/>
-                                                                        </Route>
-
-
-
-                                                                </Switch>
-                                                        </BrowserRouter>
-                                </MercadoPagoProvider>
-                        </CartProvider>
+                </MercadoPagoProvider>
+                </CartProvider>
                 </CommercialProvider>
                 </UserProvider>
+                </BrowserRouter>
 
         );
 }
