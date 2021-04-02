@@ -220,3 +220,12 @@ a, .social-icon {
     box-shadow: 0 0 0 0.2rem #14bf9840;
 }
 
+ .Toastify__progress-bar--default {
+	background: #14bf9887;
+	
+}
+
+.Toastify__toast--default {
+	background-color: var(--background-light);
+	color: var(--primary);
+}

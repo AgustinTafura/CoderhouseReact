@@ -72,9 +72,7 @@ const CheckoutContainer = (props) => {
     }
 
   
-    $(document).ready(function() { 
 
-    })
 
     useEffect(() => {
 
@@ -98,8 +96,6 @@ const CheckoutContainer = (props) => {
             // console.log(errors)
             
         })  
-        
-
 
         location_params.get('status') == 'rejected' || location_params.get('status') == 'null' && $('#modalErrorPayment').modal('show')
         console.log(1, $('#modalErrorPayment'))
@@ -107,13 +103,10 @@ const CheckoutContainer = (props) => {
 
         return()=>{
             $('#modalErrorPayment').on('hidden.bs.modal',function(e){
-            console.log(4444)
             $(this).remove()
             });
         }
         
-
-        console.log(3, $('#modalErrorPayment'))
         
     }, [location_params])
     

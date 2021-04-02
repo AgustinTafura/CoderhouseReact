@@ -36,7 +36,7 @@ const App = (props) => {
                 <MercadoPagoProvider>
         
                         <NavBarComponent />
-                        <ToastContainer />
+                        <ToastContainer limit={1} />
 
                         <AuthModal/>
                         <Routes/>

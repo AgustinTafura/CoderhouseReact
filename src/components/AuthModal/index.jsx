@@ -1,96 +1,159 @@
 import $ from 'jquery'
 import './style.scss';
 import { UserContext } from "../../context/UserContext";
-import { useContext} from "react";
-import { withRouter } from "react-router-dom";
-import { auth } from '../../firebase';
+import { useContext, useState, useEffect} from "react";
+import { withRouter, useLocation } from "react-router-dom";
+
 
 const AuthModal = (props) => {
     const {history} = props;
     const { logInUser, createNewUserWithEmailAndPassword, logOutUser, logInWhitGoogle, logInWhitFacebook } = useContext(UserContext)
+    const [errors, setErrors] = useState({})
+    const location = useLocation()
+    const signInForm = document.querySelector("#login-form");
+
+    //check empty inputs
+    const checkErrors = (e) => {
+        if(e.value.trim().length >0) {
+            console.log(1)
+            setErrors({}) 
+            !e.classList.contains("notEmpty") && e.classList.add("notEmpty")
+        } else {
+            console.log('aca')
+            return e.classList.contains("notEmpty") && e.classList.remove("notEmpty")
+        }  
+        e.classList.add("notEmpty")
+    }
+
+
+        useEffect(() => {
+ 
+        
 
 
 
+
+        return () => {
+            
+        }
+    }, [])
+        
     window.addEventListener("load", ()=>{
 
-        //SignUp
-        const registerButton = document.querySelector(".registerModal");
-        const signUpForm = document.querySelector("#signup-form");
+                   //show register Form
+                   const registerButton = document.querySelector(".registerModal");
+                   registerButton.addEventListener('click', (e) => {
+                       e.preventDefault()
+                       e.stopImmediatePropagation();
+                       $('#signinModal').modal("hide");
+                       $('#signupModal').modal("show");
+                       
+                   })
+                   
+                   //show login Form
+                   const loginButton = document.querySelector(".loginModal");
+                   loginButton.addEventListener('click', (e) => {
+                       e.preventDefault()
+                       e.stopImmediatePropagation();
+                       $('#signupModal').modal("hide");
+                       $('#signinModal').modal("show");
+                   })
+                   
+                   //manage RegisterForm submit
+                   const signUpForm = document.querySelector("#signup-form");
+                   signUpForm.addEventListener("submit", (e) => {
+           
+                       console.log(999)
+                       e.preventDefault();
+                       e.stopImmediatePropagation();
+                       const email = signUpForm["signup-email"].value;
+                       const password = signUpForm["signup-password"].value;
+                       
+                       createNewUserWithEmailAndPassword(email,password)
+                       .then((userCredential) => {
+                           console.log(userCredential)
+           
+                           // clear the form
+                           $('#signupModal').modal("hide");
+                           signUpForm.reset();
+           
+                       }).catch((err)=>{
+                           console.log(err)
+                           setErrors({email:'Éste email ya esta en uso'})
+                       });
+                   })
+           
+               
+                   //SignIn with Email and Pass
+                   const signInForm = document.querySelector("#login-form");
+                   
+                   signInForm.addEventListener("submit",  (e) => {
+           
+                       e.preventDefault();
+                       e.stopImmediatePropagation()
+                       const email = signInForm["login-email"].value.toString();
+                       const password = signInForm["login-password"].value;
+                       console.log(777, typeof email, email)
+           
+           
+                       logInUser(email,password)
+                       .then((user)=>
+                           {
+                               let currentLocation = location.pathname
+           
+                               signInForm.reset()
+                               $("#signinModal").modal("hide");
+                               console.log(1)
+                               currentLocation == "/" && history.push("/welcome")
+           
+                           })
+                       .catch(error=>console.log(2))
+           
+               
+                   })
+            // Login with Google
+            const googleButton = document.querySelector("#googleLogin");
+
+            googleButton.addEventListener("click", (e) => {
     
-        registerButton.addEventListener('click', (e) => {
-            e.preventDefault()
             e.stopImmediatePropagation();
-            $('#signinModal').modal("hide");
-            $('#signupModal').modal("show");
-        })
-
-        signUpForm.addEventListener("submit", (e) => {
-            e.stopImmediatePropagation();
-            const email = signUpForm["signup-email"].value;
-            const password = signUpForm["signup-password"].value;
-            
-            createNewUserWithEmailAndPassword(email,password).then((userCredential) => {
-                console.log(userCredential)
-                // userCredential.sendEmailVerification().then(function(a) {
-                //     console.log('Email sent.', a)
-                // }).catch(function(error) {
-                //     console.log('An error happened.', error)
-                // });
-                $('#signupModal').modal("hide");
-                // clear the form
-                signUpForm.reset();
-
-              });
-        })
     
-        //SignIn with Email and Pass
-        const signInForm = document.querySelector("#login-form");
-        
-        signInForm.addEventListener("submit",  (e) => {
-            e.preventDefault();
-            e.stopImmediatePropagation()
-            const email = signInForm["login-email"].value.toString();
-            const password = signInForm["login-password"].value;
-            console.log(777, typeof email, email)
-
-
-            logInUser(email,password)
+            logInWhitGoogle()
             .then((user)=>
                 {
+                    let currentLocation = location.pathname
+    
                     signInForm.reset()
                     $("#signinModal").modal("hide");
                     console.log(user)
-
+                    currentLocation == "/" && history.push("/welcome")
+    
                 })
             .catch(error=>console.log(error))
-
+            });
     
-        })
-        
-
-        // Login with Google
-        const googleButton = document.querySelector("#googleLogin");
-
-        googleButton.addEventListener("click", (e) => {
-
-        e.stopImmediatePropagation();
-        signInForm.reset();
-        $("#signinModal").modal("hide");
-
-        logInWhitGoogle()
-        });
-
-        
-        // Login with Facebook
-        const facebookButton = document.querySelector("#facebookLogin");
-
-        facebookButton.addEventListener("click", (e) => {
-
-        e.stopImmediatePropagation();
-        signInForm.reset();
-        $("#signinModal").modal("hide");
-        logInWhitFacebook().then((user)=>console.log(user)).catch(error=>console.log(error))
-        });
+            
+            // Login with Facebook
+            const facebookButton = document.querySelector("#facebookLogin");
+    
+            facebookButton.addEventListener("click", (e) => {
+    
+                e.stopImmediatePropagation();
+    
+                logInWhitFacebook()
+                .then((user)=>
+                    {
+                        let currentLocation = location.pathname
+    
+                        signInForm.reset()
+                        $("#signinModal").modal("hide");
+                        console.log(user)
+                        currentLocation == "/" && history.push("/welcome")
+    
+                    })
+                .catch(error=>console.log(error))
+                
+            });
     
         
     })
@@ -117,14 +180,29 @@ const AuthModal = (props) => {
                     </button>
                     </div>
                     <div className="modal-body">
-                    <form id="signup-form">
+                    <form id="signup-form" >
+
                         <div className="form-group">
-                        <input type="text" id="signup-email" className="form-control" placeholder="Mail" required/>
+                            <input onFocus={(e)=>checkErrors(e.target)} onBlur={(e)=>checkErrors(e.target)} type="email"  className={`form-control-input ${errors.email ? 'notEmpty errorData':''} `} id="signup-email" name="email" required />
+                            <label className="label-control" htmlFor="email">Email
+                            {errors.email? <small className="text-muted"> -  {errors.email}  </small> : null }
+                            </label>
                         </div>
+                        
                         <div className="form-group">
-                        <input type="password" id="signup-password" className="form-control" placeholder="Contrseña" required/>
+                            <input onFocus={(e)=>e.target.classList.add("notEmpty")} onBlur={(e)=>checkErrors(e.target)} type="password" className="form-control-input" id="signup-password" name="password" minLength="6" required/>
+                            <label className="label-control" htmlFor="email">Password
+                            {errors.password? <small className="text-muted"> - {errors.password}  </small> : null }
+                            </label>
                         </div>
-                        <button type="submit" className="btn-solid-lg">Registrarse</button>
+                        
+                        <button type="submit" className="btn-solid-lg btn-block">Registrarse</button>
+                        <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
+                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button>
+ 
+                        <div className="nav-item logged-out justify-content-center mt-2">
+                            <span >¿Tienes cuenta?</span> <a className="mx-2 loginModal" href="#" >Ingresar</a>
+                        </div>
                     </form>
                     </div>
                 </div>
@@ -153,7 +231,7 @@ const AuthModal = (props) => {
                         <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
                         <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button>
                         <div className="nav-item logged-out justify-content-center ml-3 mt-2">
-                            <span >No tienes una cuenta?</span> <a className="mx-2 registerModal" href="#" >Registrarse</a>
+                            <span >¿No tienes una cuenta?</span> <a className="mx-2 registerModal" href="#" >Registrarse</a>
                         </div>
                     </form>
                     </div>
@@ -176,6 +254,7 @@ const AuthModal = (props) => {
                         <div className="modal-footer">
                             <button className="btn-solid-lg btn-light" type="button" data-dismiss="modal">Cancel</button>
                             <a onClick={()=>{logout() }} className="btn-solid-lg " id="logOutButton">Logout</a>
+ 
                         </div>
                     </div>
                 </div>
