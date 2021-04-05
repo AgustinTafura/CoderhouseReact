@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { OrderContext } from "../context/OrderContext";
 
 
 const ThanksContainer = (props) => {
@@ -9,10 +10,22 @@ const ThanksContainer = (props) => {
     const {clearCart, setPromotionalDiscount} = useContext(CartContext)
     const location = useLocation()
     const location_params = new URLSearchParams(location.search)
+    const {updateOrder} = useContext(OrderContext)
     
     if (location_params.get('status')== null) {
         window.location.href =  '/';
-    } 
+    } else {
+        
+        const paymentData = JSON.parse('{"' + location_params.toString().replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key ===""? value : decodeURIComponent(value) })
+        // const external_reference = location_params('external_reference')
+        // const order_id = external_reference.order_id
+        const order_id = JSON.parse(location_params.get('external_reference')).order_id
+        updateOrder(order_id, {payment: paymentData})
+        //Remove external info
+        // delete paymentData.external_reference
+        
+        
+    }
 
     localStorage.removeItem("cart")
     localStorage.removeItem("formCheckout")
@@ -65,7 +78,7 @@ const ThanksContainer = (props) => {
                             <span style={{ fontFamily: "Mansalva" }}>por su </span> compra!</h1>
                             
                             <h5 className='mt-5'>
-                                En breve  te llegará un mail a <b className="p-0">{location_params.get('external_reference')}</b> con la información de tu compra. 
+                                En breve  te llegará un mail a <b className="p-0">{JSON.parse(location_params.get('external_reference')).email}</b> con la información de tu compra. 
                             </h5>
 
                             <h5 className='mt-3 mt-lg-5'>Tu <b className="p-0">orden de pago</b> es:

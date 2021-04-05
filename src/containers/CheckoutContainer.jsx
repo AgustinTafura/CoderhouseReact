@@ -46,28 +46,32 @@ const payer = {
 }
 
 
-const dataToPayment = {
-    items: itemsDetail,
-    payer: payer,
-    name: data.name ,
-    surname: data.surname ,
-    email: data.email ,
-    phone: {
-        number: data.mobile
-    },
-    identification: {
-        number: data.id
-    },
-    address: {
-        street_name: `${data.address} ${data.address2}`,
-        street_number: null,
-        zip_code: data.cp
-    },
-    external_reference: `${data.email}`,
-}
 
 createNewOrder(payer)
-    .then(()=>{
+    .then((orderId)=>{
+        const dataToPayment = {
+            items: itemsDetail,
+            payer: payer,
+            name: data.name ,
+            surname: data.surname ,
+            email: data.email ,
+            phone: {
+                number: data.mobile
+            },
+            identification: {
+                number: data.id
+            },
+            address: {
+                street_name: `${data.address} ${data.address2}`,
+                street_number: null,
+                zip_code: data.cp
+            },
+            external_reference: {
+                email: data.email,
+                order_id: orderId
+            }
+        }
+
         payOnMP(dataToPayment)
 
     })

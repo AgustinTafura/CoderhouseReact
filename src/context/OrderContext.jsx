@@ -46,8 +46,25 @@ export const OrderProvider = ({ children }) => {
 
     }
 
+      /** 
+     * Creat new order
+     * @param {string} orderId 
+      * @param {object} dataToUpdate 
+    */
+    const updateOrder = async (orderId, dataToUpdate)=>{
+        const db = getFirestore()
+        const docRef = db.collection("orders").doc(orderId);
+        
+        try {
+            await docRef.update(dataToUpdate);
+            return ;
+        } catch (e) {
+            return ;
+        }
+    }
+
     return (
-        <OrderContext.Provider value={{ createNewOrder }}>
+        <OrderContext.Provider value={{ createNewOrder, updateOrder }}>
             {children}
         </OrderContext.Provider>
     )
