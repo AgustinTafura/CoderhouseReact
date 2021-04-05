@@ -53,14 +53,26 @@ export const UserProvider = ({ children }) => {
                     return user
                 }
             ).catch(
-                (error)=> {
-                    toast.error("No hemos podido crear tu cuenta. Intentalo nuevamente!", {
-                        // autoClose: false,
-                        position: "top-right",
-                    });
-                
-                throw error
-            })
+                (errors)=> {
+                    console.log(errors)
+                    if(errors.code == "auth/email-already-in-use") {
+                        auth.fetchSignInMethodsForEmail(email).then(function(providers) {
+        
+                            var msg = providers.length > 0 && providers == "password" ? `Intenta ingresar con email y contraseña`: `Ya existe una cuenta con este Email, intenta ingresando con tu cuenta de ${providers}`
+                            toast.error(msg, {
+                                // autoClose: false,
+                                position: "top-right",
+                            });
+                        });
+                    } else {
+                                toast.error("No hemos podido crear a tu cuenta. Intentalo nuevamente!", {
+                            // autoClose: false,
+                            position: "top-right",
+                        });
+                    }
+                    throw errors
+                }
+            )
             
         return newUser
     }
@@ -74,16 +86,17 @@ export const UserProvider = ({ children }) => {
             switch (errors.code) {
                 case "auth/user-not-found": toast('No existen cuentas con éste email', {position: "top-right"});
                     break;   
-                case "auth/wrong-password": {
-                    auth.fetchSignInMethodsForEmail(email).then(function(providers) {
+                case "auth/wrong-password": 
+                    {
+                        auth.fetchSignInMethodsForEmail(email).then(function(providers) {
 
-                        var msg = providers.length > 0 && providers == "password" ? ` Contraseña erronea`: `Intenta ingresando con tu cuenta de ${providers}`
-                        toast(msg, {
-                            // autoClose: false,
-                            position: "top-right",
+                            var msg = providers.length > 0 && providers == "password" ? ` Contraseña erronea`: `Intenta ingresando con tu cuenta de ${providers}`
+                            toast(msg, {
+                                // autoClose: false,
+                                position: "top-right",
+                            });
                         });
-                    });
-                }
+                    }
                     break;
                 case "auth/too-many-requests": toast('Has realizado muchos intentos incorrecto, intenta más tarde nuevamente', {position: "top-right"});  
                     break;

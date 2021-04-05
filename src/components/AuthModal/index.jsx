@@ -19,7 +19,6 @@ const AuthModal = (props) => {
             setErrors({}) 
             !e.classList.contains("notEmpty") && e.classList.add("notEmpty")
         } else {
-            console.log('aca')
             return e.classList.contains("notEmpty") && e.classList.remove("notEmpty")
         }  
         e.classList.add("notEmpty")
@@ -66,7 +65,10 @@ const AuthModal = (props) => {
                        console.log(999)
                        e.preventDefault();
                        e.stopImmediatePropagation();
-                       const email = signUpForm["signup-email"].value;
+                       const email = signUpForm["signup-email"].value.toString();
+                       console.log(email)
+                       console.log(typeof email)
+                       console.log((typeof email == 'string'))
                        const password = signUpForm["signup-password"].value;
                        
                        createNewUserWithEmailAndPassword(email,password)
@@ -110,50 +112,59 @@ const AuthModal = (props) => {
                        .catch(error=>console.log(2))
            
                
-                   })
-            // Login with Google
-            const googleButton = document.querySelector("#googleLogin");
+            })
 
-            googleButton.addEventListener("click", (e) => {
-    
-            e.stopImmediatePropagation();
-    
-            logInWhitGoogle()
-            .then((user)=>
-                {
-                    let currentLocation = location.pathname
-    
-                    signInForm.reset()
-                    $("#signinModal").modal("hide");
-                    console.log(user)
-                    currentLocation == "/" && history.push("/welcome")
-    
-                })
-            .catch(error=>console.log(error))
-            });
-    
-            
-            // Login with Facebook
-            const facebookButton = document.querySelector("#facebookLogin");
-    
-            facebookButton.addEventListener("click", (e) => {
-    
+
+            // Access with Google
+            const googleButtons = document.querySelectorAll(".googleLogin");
+
+            googleButtons.forEach((googleButton)=>{
+
+                googleButton.addEventListener("click", (e) => {
+                    
                 e.stopImmediatePropagation();
-    
-                logInWhitFacebook()
+        
+                logInWhitGoogle()
                 .then((user)=>
                     {
                         let currentLocation = location.pathname
-    
+        
                         signInForm.reset()
                         $("#signinModal").modal("hide");
                         console.log(user)
                         currentLocation == "/" && history.push("/welcome")
-    
+        
                     })
                 .catch(error=>console.log(error))
-                
-            });
+                });
+            })
+            
+    
+            
+            // Access with Facebook
+            const facebookButtons = document.querySelectorAll(".facebookLogin");
+            
+            facebookButtons.forEach(facebookButton=>{
+
+                facebookButton.addEventListener("click", (e) => {
+        
+                    e.stopImmediatePropagation();
+        
+                    logInWhitFacebook()
+                    .then((user)=>
+                        {
+                            let currentLocation = location.pathname
+        
+                            signInForm.reset()
+                            $("#signinModal").modal("hide");
+                            console.log(user)
+                            currentLocation == "/" && history.push("/welcome")
+        
+                        })
+                    .catch(error=>console.log(error))
+                    
+                });
+            })
     
         
     })
@@ -197,8 +208,8 @@ const AuthModal = (props) => {
                         </div>
                         
                         <button type="submit" className="btn-solid-lg btn-block">Registrarse</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button>
+                        <button type="button" className="btn-solid-lg btn-block googleLogin">Ingresar con tu cuenta de Google</button>
+                        <button type="button" className="btn-solid-lg btn-block facebookLogin">Ingresar con tu cuenta de Facebook</button>
  
                         <div className="nav-item logged-out justify-content-center mt-2">
                             <span >¿Tienes cuenta?</span> <a className="mx-2 loginModal" href="#" >Ingresar</a>
@@ -221,15 +232,22 @@ const AuthModal = (props) => {
                     </div>
                     <div className="modal-body">
                     <form id="login-form">
-                        <div className="form-group">
-                        <input type="text" id="login-email" className="form-control" placeholder="Mail" required/>
+                    <div className="form-group">
+                            <input onFocus={(e)=>checkErrors(e.target)} onBlur={(e)=>checkErrors(e.target)} type="email"  className={`form-control-input ${errors.email ? 'notEmpty errorData':''} `} id="login-email" name="email" required />
+                            <label className="label-control" htmlFor="email">Email
+                            {errors.email? <small className="text-muted"> -  {errors.email}  </small> : null }
+                            </label>
                         </div>
+                        
                         <div className="form-group">
-                        <input type="password" id="login-password" className="form-control" placeholder="Contraseña" required/>
+                            <input onFocus={(e)=>e.target.classList.add("notEmpty")} onBlur={(e)=>checkErrors(e.target)} type="password" className="form-control-input" id="login-password" name="password" minLength="6" required/>
+                            <label className="label-control" htmlFor="email">Password
+                            {errors.password? <small className="text-muted"> - {errors.password}  </small> : null }
+                            </label>
                         </div>
                         <button type="submit" className="btn-solid-lg btn-block">Entrar</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="googleLogin">Ingresar con tu cuenta de Google</button>
-                        <button type="button" className="btn-solid-lg btn-block" id="facebookLogin">Ingresar con tu cuenta de Facebook</button>
+                        <button type="button" className="btn-solid-lg btn-block googleLogin">Ingresar con tu cuenta de Google</button>
+                        <button type="button" className="btn-solid-lg btn-block facebookLogin">Ingresar con tu cuenta de Facebook</button>
                         <div className="nav-item logged-out justify-content-center ml-3 mt-2">
                             <span >¿No tienes una cuenta?</span> <a className="mx-2 registerModal" href="#" >Registrarse</a>
                         </div>
