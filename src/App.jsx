@@ -24,6 +24,8 @@ import { ToastContainer } from 'react-toastify';
 import NotFound from './components/NotFound';
 import { isLoggedIn } from './firebase';
 import Routes from './routes/routes';
+import { OrderProvider } from './context/OrderContext';
+
 
 const App = (props) => {
 
@@ -33,6 +35,7 @@ const App = (props) => {
                 <UserProvider>
                 <CommercialProvider>
                 <CartProvider>
+                <OrderProvider>
                 <MercadoPagoProvider>
         
                         <NavBarComponent />
@@ -42,6 +45,7 @@ const App = (props) => {
                         <Routes/>
 
                 </MercadoPagoProvider>
+                </OrderProvider>      
                 </CartProvider>
                 </CommercialProvider>
                 </UserProvider>

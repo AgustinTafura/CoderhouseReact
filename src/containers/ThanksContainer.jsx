@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+
 
 const ThanksContainer = (props) => {
     
@@ -17,15 +17,15 @@ const ThanksContainer = (props) => {
     localStorage.removeItem("cart")
     localStorage.removeItem("formCheckout")
     sessionStorage.getItem("promotionalDiscount") !== null && sessionStorage.setItem('promotionalDiscount', '{}')
-    
+
 
     
     useEffect(() => {
      
         
-        setIsLoading(false) 
+        // setIsLoading(true) 
         
-        setTimeout(()=>setIsLoading(false), 3000)
+        setTimeout(()=>setIsLoading(false), 1500)
         
 
         

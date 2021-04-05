@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import ModalError from "../components/ModalError"
 import $ from 'jquery';
+import { OrderContext } from "../context/OrderContext";
+import { toast } from "react-toastify";
 
 
 const CheckoutContainer = (props) => {
@@ -15,7 +17,7 @@ const location_params = new URLSearchParams(location.search)
 const statusError = location_params.get('status')
 
 
-
+const {createNewOrder} = useContext(OrderContext)
 const {payOnMP} = useContext(MercadoPagoContext)
 const {products, numberToPrice} = useContext(CommercialContext)
 const {cart, subtotalCart, totalCart, promotionalDiscount, addDiscount} = useContext(CartContext)
@@ -33,29 +35,48 @@ currency_id: product.currency,
 unit_price: product.unitPrice
 } })
 
+const payer = {
+    
+    name: data.name ,
+    surname: data.surname ,
+    email: data.email ,
+    phone: {
+       number: data.mobile
+    }
+}
+
 
 const dataToPayment = {
-items: itemsDetail,
-payer: {
-name: data.name ,
-surname: data.surname ,
-email: data.email ,
-phone: {
-number: data.mobile
-},
-identification: {
-number: data.id
-},
-address: {
-street_name: `${data.address} ${data.address2}`,
-street_number: null,
-zip_code: data.cp
-}
-},
-external_reference: `${data.email}`,
+    items: itemsDetail,
+    payer: payer,
+    name: data.name ,
+    surname: data.surname ,
+    email: data.email ,
+    phone: {
+        number: data.mobile
+    },
+    identification: {
+        number: data.id
+    },
+    address: {
+        street_name: `${data.address} ${data.address2}`,
+        street_number: null,
+        zip_code: data.cp
+    },
+    external_reference: `${data.email}`,
 }
 
-payOnMP(dataToPayment)
+createNewOrder(payer)
+    .then(()=>{
+        payOnMP(dataToPayment)
+
+    })
+    .catch((errors)=>{
+        toast.error('tuvimos un inconveniente, intente nuevamente', {
+            // autoClose: false,
+            position: "top-right",
+        });
+    })
 }
 
 

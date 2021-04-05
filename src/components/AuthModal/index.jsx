@@ -23,20 +23,7 @@ const AuthModal = (props) => {
         }  
         e.classList.add("notEmpty")
     }
-
-
-        useEffect(() => {
- 
-        
-
-
-
-
-        return () => {
-            
-        }
-    }, [])
-        
+       
     window.addEventListener("load", ()=>{
 
                    //show register Form

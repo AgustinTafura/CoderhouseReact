@@ -10,6 +10,7 @@ import {PublicRoute} from './helperRoutes';
 import {PrivateRoute} from './helperRoutes';
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
+import ThanksContainer from "../containers/ThanksContainer";
 
 const Routes = () => {
 
@@ -29,6 +30,8 @@ const Routes = () => {
             <PublicRoute exact path="/cart" component={CartContainer} />
 
             <PublicRoute exact path="/checkout" component={CheckoutContainer} />
+
+            <PublicRoute exact path="/thankyou" component={ThanksContainer} />
 
             {isAuthenticated && <PrivateRoute exact path="/welcome" component={WelcomeContainer}/>}
             <Route path="/**"  component={NotFound}/>
