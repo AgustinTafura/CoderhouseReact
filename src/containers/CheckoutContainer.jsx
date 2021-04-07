@@ -68,7 +68,9 @@ createNewOrder(payer)
             },
             external_reference: {
                 email: data.email,
-                order_id: orderId
+                order_id: orderId,
+                name: data.name,
+                surname: data.surname ,
             }
         }
 

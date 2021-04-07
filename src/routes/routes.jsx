@@ -11,6 +11,8 @@ import {PrivateRoute} from './helperRoutes';
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import ThanksContainer from "../containers/ThanksContainer";
+import BookingContainer from "../containers/BookingContainer";
+import EmailContainer from "../containers/EmailContainer";
 
 const Routes = () => {
 
@@ -20,7 +22,11 @@ const Routes = () => {
             <PublicRoute exact path="/" component={HomeContainer}/>
                         
             <PublicRoute path="/booking" >
-                PROXIMAMENTE TURNOS ONLINE
+                <BookingContainer/>
+            </PublicRoute>
+
+            <PublicRoute path="/mail" >
+                <EmailContainer/>
             </PublicRoute>
                                 
             <PublicRoute exact path="/product/:id" component={ItemDetailContainer} />
