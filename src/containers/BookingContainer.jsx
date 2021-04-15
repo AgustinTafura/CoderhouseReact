@@ -1,57 +1,76 @@
 import React, { useContext, useState, useEffect } from "react";
-import firebase from "firebase/app";
-import 'firebase/storage';
 
-// Get a reference to the storage service, which is used to create references in your storage bucket
-var storage = firebase.storage();
+import { openPopupWidget,InlineWidget,CalendlyEventListener  } from "react-calendly";
 
-// Create a storage reference from our storage service
-var storageRef = storage.ref();
-// Create a reference to the file we want to download
-var starsRef = storageRef.child('logo-055.jpg');
+    // const data  = {
+    const   url = 'https://calendly.com/juampilabollita'
+    const prefill = null
+    const pageSettings = null
+    const utm = null
+    
+    function isCalendlyEvent(e) {
+        return e.data.event &&
+               e.data.event.indexOf('calendly') === 0;
+      };
+       
+      window.addEventListener(
+        'message',
+        function(e) {
+          if (isCalendlyEvent(e)) {
+            console.log(5, e.data);
+            if(e.data.event == "calendly.date_and_time_selected"){
 
-// Get the download URL
-starsRef.getDownloadURL().then(function(url) {
+                var button = document.getElementsByTagName("iframe")
+                // var button = document.getElementsByClassName("_1vty3-psjP _3jd0brMbl7 _1-Q37xqIVF _3NUf4XXPRW _6zb5ZygPrI _16lJIvga5w _26bxlZFZ4O _3jdvikh0KV _1NKUM54h_1 _3NimS-g7Hg")
+  
+                
+                console.log(button)
 
-    // This can be downloaded directly:
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function(event) {
-      var blob = xhr.response;
-      var fileName = starsRef.name //if you have the fileName header available
-      var link=document.createElement('a');
-      link.href=window.URL.createObjectURL(blob);
-      link.download=fileName;
-      link.click();
-    };
-    // xhr.open('GET', url);
-    // xhr.send();
-}).catch(function(error) {
 
-  switch (error.code) {
-    case 'storage/object-not-found':
-      console.log("File doesn't exist")
-      break;
-
-    case 'storage/unauthorized':
-      console.log("User doesn't have permission to access the object")
-      break;
-
-    case 'storage/canceled':
-      console.log("User canceled the upload")
-      break;
-
-    case 'storage/unknown':
-      console.log("Unknown error occurred, inspect the server response")
-      break;
-  }
-});
+            }
+          }
+        }
+      );
+    
 
 
 const BookingContainer = (props) => {
     return (
         <>
-        <img src="" alt=""/>
+            <div id="services" className="counter">
+                <div className="container" style={{textAlign:"center"}}>
+                <CalendlyEventListener 
+                    onDateAndTimeSelected={(e)=>console.log(1,e)}
+                    onEventScheduled={(e)=> {e.preventDefault(); console.log(2,e)}}
+                    onEventTypeViewed={(e)=>console.log(3,e)}
+                    onProfilePageViewed={(e)=>console.log(4,e)}
+                />
+                <InlineWidget 
+                    url="https://calendly.com/agustintafura?primary_color=14bf98"  
+                    styles={{minWidth: '360px', height: '1000px'}}
+                    prefill={{
+                        email: 'test@test.com',
+                        firstName: 'Jon',
+                        lastName: 'Snow',
+                        name: 'Jon Snow',
+                        customAnswers: {
+                          a1: 'a1',
+                          a2: 'a2',
+                          a3: 'a3',
+                          a4: 'a4',
+                          a5: 'a5',
+                          a6: 'a6',
+                          a7: 'a7',
+                          a8: 'a8',
+                          a9: 'a9',
+                          a10: 'a10'
+                        }
+                      }}
+                />
+                </div> 
+            </div>
+       
+
         </>
     )
 }

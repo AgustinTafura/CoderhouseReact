@@ -13,6 +13,7 @@ import { useContext } from "react";
 import ThanksContainer from "../containers/ThanksContainer";
 import BookingContainer from "../containers/BookingContainer";
 import EmailContainer from "../containers/EmailContainer";
+import OrderContainer from "../containers/BookingContainer";
 
 const Routes = () => {
 
@@ -38,6 +39,8 @@ const Routes = () => {
             <PublicRoute exact path="/checkout" component={CheckoutContainer} />
 
             <PublicRoute exact path="/thankyou" component={ThanksContainer} />
+
+            <PublicRoute exact path="/compras/:order_id?" component={OrderContainer} />
 
             {isAuthenticated && <PrivateRoute exact path="/welcome" component={WelcomeContainer}/>}
             <Route path="/**"  component={NotFound}/>

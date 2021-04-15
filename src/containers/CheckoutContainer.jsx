@@ -36,7 +36,7 @@ unit_price: product.unitPrice
 } })
 
 const payer = {
-    
+    fullName: `${data.name} ${data.surname}`,
     name: data.name ,
     surname: data.surname ,
     email: data.email ,
@@ -127,7 +127,7 @@ isEmpty(element[0])
 
 location_params.get('status') == 'rejected' || location_params.get('status') == 'null' &&
 $('#modalErrorPayment').modal('show')
-console.log(1, $('#modalErrorPayment'))
+
 
 
 return()=>{
@@ -181,7 +181,7 @@ return (
                             <form className="row" id="checkoutForm" onSubmit={handleSubmit(onSubmit)}>
                                 <div className="col-12 col-lg-6">
                                     <div className="card-body">
-                                        <h4 class="mb-3">Ingrese sus datos </h4>
+                                        <h4 className="mb-3">Ingrese sus datos </h4>
                                         <div className='row'>
                                             <div className="form-group col-6">
                                                 <input className="form-control-input" type="text" id="name" name="name"
@@ -316,7 +316,6 @@ return (
                                             cart.map((item, index) => {
                                             return (<li key={index}
                                                 className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                                {console.log(item)}
                                                 {item.name}
                                                 <span> $ {numberToPrice(item.unitPrice)}</span>
                                             </li>)
@@ -353,9 +352,9 @@ return (
                                             </li>
                                         </ul>
                                         
-                                        <div class="accordion" id="accordionExample" style={{textAlignLast: "center", height: 'auto'}}>
-                                            <div class="" style={{marginBottom: "17px"}}>
-                                                <div class="btn btn-link btn-block text-left collapsed card-header collapsed" id="headingOne" type="div"
+                                        <div className="accordion" id="accordionExample" style={{textAlignLast: "center", height: 'auto'}}>
+                                            <div className="" style={{marginBottom: "17px"}}>
+                                                <div className="btn btn-link btn-block text-left collapsed card-header collapsed" id="headingOne" type="div"
                                                     data-toggle="collapse" data-target="#collapseOne"
                                                     aria-expanded="false" aria-controls="collapseOne" style={{
                                                         fontSize: "13px",
@@ -363,18 +362,18 @@ return (
                                                         background: '#8f989612',
                                                         color: "black"}}>
                                                         Te redireccionaremos al sitio de Mercado Pago 
-                                                    <div class="text-center m-bottom method-logo-wrapper">
-                                                        <img alt="Mercado Pago" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/redirect-gateway.svg" class="img-large" style={{width: "60px"}}/>
-                                                        <img alt="Mercado Pago" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/mercadopago.svg" class="img-large" style={{width: "60px"}}/>
+                                                    <div className="text-center m-bottom method-logo-wrapper">
+                                                        <img alt="Mercado Pago" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/redirect-gateway.svg" className="img-large" style={{width: "60px"}}/>
+                                                        <img alt="Mercado Pago" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/mercadopago.svg" className="img-large" style={{width: "60px"}}/>
                                                     </div>
                                                 </div>
-                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                                <div id="collapseOne" className="collapse" aria-labelledby="headingOne"
                                                     data-parent="#accordionExample" >
-                                                    <div class="checkout-method">
-                                                        <div class="row">
-                                                            <div class="col p-all text-center mb-2"><span>Podrás elegir uno de los medios de pago debajo.</span>
-                                                                <div class="m-top payment-brands">
-                                                                    <div class="m-bottom-quarter">Tarjeta de crédito/Débito</div>
+                                                    <div className="checkout-method">
+                                                        <div className="row">
+                                                            <div className="col p-all text-center mb-2"><span>Podrás elegir uno de los medios de pago debajo.</span>
+                                                                <div className="m-top payment-brands">
+                                                                    <div className="m-bottom-quarter">Tarjeta de crédito/Débito</div>
                                                                     <img alt="visa" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/visa.svg" style={{height: "18px", marginRight: "5px"}}/>
                                                                     <img alt="mastercard" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/mastercard.svg" style={{height: "18px", marginRight: "5px"}}/>
                                                                     <img alt="amex" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/amex.svg" style={{height: "18px", marginRight: "5px"}}/>
@@ -389,8 +388,8 @@ return (
                                                                     <img alt="visadebit" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/visadebit.svg" style={{height: "18px", marginRight: "5px"}}/>
                                                                     <img alt="maestro" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/maestro.svg" style={{height: "18px", marginRight: "0px"}}/>
                                                                </div>
-                                                                <div class="m-top payment-brands">
-                                                                    <div class="m-bottom-quarter">Efectivo</div>
+                                                                <div className="m-top payment-brands">
+                                                                    <div className="m-bottom-quarter">Efectivo</div>
                                                                     <img alt="pagofacil" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/pagofacil.svg" style={{height: "18px", marginRight: "5px"}}/>
                                                                     <img alt="rapipago" src="https://d1zxmlch3z83cq.cloudfront.net/production/2.1.82/_next/server/static/img/brands/rapipago.svg" style={{height: "18px", marginRight: "0px"}}/>
                                                                 </div>
@@ -402,7 +401,7 @@ return (
                                         </div>
 
                                         <button type="submit" value="COMPRAR" className="btn-solid-lg waves-effect waves-light btn-block" >
-                                          <span>PAGAR A TRAVÉS DE <bold>MERCADO PAGO</bold></span>
+                                          <span>PAGAR A TRAVÉS DE MERCADO PAGO</span>
                                         </button>
                                     </div>
                                 </div>

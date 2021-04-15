@@ -8,14 +8,14 @@ const ItemCount = ({contador, product,  onAdd, onRemove, className, quantityAdde
     return (
       <>
 
-        <button onClick={() =>{onRemove(product.stock)}} className={`btn-solid-reg ${className}`}>-</button>
+        {/* <button onClick={() =>{onRemove(product.stock)}} className={`btn-solid-reg ${className}`}>-</button>
   
         <b>  {contador}  </b>
         
         {(contador < product.stock) ?
           <button onClick={() =>{onAdd(product.stock)}} className={`btn-solid-reg ${className}`}>+</button>
           : <button className={`btn-solid-reg disabled ${className}`} >+</button>
-        }
+        } */}
         <div>
           {isInCart?
           (quantityAdded !== contador) ? <button className={!showButton?'d-none':null} onClick={()=>{addToCart()}}>Actualizar Carrito</button> : <Link className={!showButton?'d-none':null} to={`/cart`}><button ><i className="material-icons">shopping_cart</i></button></Link>

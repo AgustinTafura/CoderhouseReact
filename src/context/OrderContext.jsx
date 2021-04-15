@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import { getFirestore } from "../firebase";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -10,23 +10,23 @@ export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
     
+
     const { user  } = useContext(UserContext)
     const { cart, subtotalCart, totalCart, promotionalDiscount, } = useContext(CartContext)
-    
+    const db = getFirestore()
     
     /** 
      * Creat new order
      * @param {object} buyer 
     */
     const createNewOrder = async (buyer)=>{
-        const db = getFirestore()
         const orders = db.collection("orders")
         const discount = promotionalDiscount? promotionalDiscount.mount: 0;
 
 
         const newOrder = {
-            user: user ? true : false,
-            buyer: user ? user : buyer,
+            user: user ? 'true' : 'false',
+            buyer: buyer,
             items: cart,
             date: firebase.firestore.Timestamp.fromDate(new Date()),
             subtotal:subtotalCart,
@@ -37,10 +37,10 @@ export const OrderProvider = ({ children }) => {
 
         try {
             const { id } = await orders.add(newOrder);
-            console.log('id', id);
+            console.log('orderId', id);
             return id;
         } catch (errors) {
-            console.log('errores en nueva orden:', errors);
+            console.log('errores al crear tu orden:', errors);
             throw errors;
         }
 
@@ -52,7 +52,6 @@ export const OrderProvider = ({ children }) => {
       * @param {object} dataToUpdate 
     */
     const updateOrder = async (orderId, dataToUpdate)=>{
-        const db = getFirestore()
         const docRef = db.collection("orders").doc(orderId);
         
         try {
@@ -63,8 +62,29 @@ export const OrderProvider = ({ children }) => {
         }
     }
 
+          /** 
+     * Creat new order
+     * @param {string} orderId 
+      * @param {object} dataToUpdate 
+    */
+        const getOrderById = async (orderId)=>{
+            const docRef = db.collection("orders").doc(orderId)
+
+            return docRef.get().then(async (doc) => {
+                if (doc.exists) {
+                    return doc.data();
+                } else {
+                    // doc.data() will be undefined in this case
+                    // console.log("No such document!");
+                }
+            }).catch((error) => {
+                // console.log("Error getting document:", error);
+            });
+            
+        }
+
     return (
-        <OrderContext.Provider value={{ createNewOrder, updateOrder }}>
+        <OrderContext.Provider value={{ createNewOrder, updateOrder, getOrderById}}>
             {children}
         </OrderContext.Provider>
     )

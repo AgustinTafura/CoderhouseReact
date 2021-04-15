@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { OrderContext } from "../context/OrderContext";
 import emailjs from 'emailjs-com';
@@ -11,10 +11,11 @@ const ThanksContainer = (props) => {
     const {clearCart, setPromotionalDiscount} = useContext(CartContext)
     const location = useLocation()
     const location_params = new URLSearchParams(location.search)
-    const {updateOrder} = useContext(OrderContext)
+    const {updateOrder, getOrderById} = useContext(OrderContext)
     const paymentData = JSON.parse('{"' + location_params.toString().replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key ===""? value : decodeURIComponent(value) })
+    const order_id = JSON.parse(location_params.get('external_reference')).order_id
 
-    if (location_params.get('status')== null) {
+    if (location_params.get('status') == null) {
         window.location.href =  '/';
     } else {
         
@@ -29,45 +30,51 @@ const ThanksContainer = (props) => {
 
     
     useEffect(() => {
+        
         //Remove external info
         // delete paymentData.external_reference
-        const order_id = JSON.parse(location_params.get('external_reference')).order_id
+
         const nameBuyer = JSON.parse(location_params.get('external_reference')).name
         const emailBuyer = JSON.parse(location_params.get('external_reference')).email
         const paymentState = location_params.get('status')
+
         //Update Purchase Order with payment info 
         updateOrder(order_id, {payment: paymentData})
+        
         
 
         //Send email information
         const emailData={
             to_email:emailBuyer,
             to_name: nameBuyer,
-            payment_state:paymentState?paymentState:"pendiente",
+            payment_state:paymentState == 'approved'? "aprobado":"pendiente",
             payment_id: location_params.get('payment_id')?location_params.get('payment_id'):"pendiente",
-            number_track: location_params.get('preference_id')?location_params.get('preference_id'):"pendiente",
             order_id: order_id,
-            // link: "link por cada producto?",
         }
 
-        emailjs.send(
-            process.env.REACT_APP_EMAILJS_YOUR_SERVICE_ID,
-            process.env.REACT_APP_EMAILJS_YOUR_TEMPLATE_ID_THANKSFORYOURPURCHASE,
-            emailData,
-            process.env.REACT_APP_EMAILJS_YOUR_USER_ID,
-        ).then((result) => {
-            updateOrder(order_id, {'payment.emailSent': true})
-            toast(`Email enviado a ${JSON.parse(location_params.get('external_reference')).email}`, {
-                // autoClose: false,
-                position: "top-right",
-            });
-           
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-            console.log(process.env.REACT_APP_EMAILJS_YOUR_USER_ID)
-            updateOrder(order_id, {'payment.emailSent': false})
-        }); 
+
+        getOrderById(order_id).then(orderData=>
+            {
+
+                if(orderData.emailSent !== true) {
+                    
+                    emailjs.send(
+                        process.env.REACT_APP_EMAILJS_YOUR_SERVICE_ID,
+                        process.env.REACT_APP_EMAILJS_YOUR_TEMPLATE_ID_THANKSFORYOURPURCHASE,
+                        emailData,
+                        process.env.REACT_APP_EMAILJS_YOUR_USER_ID,
+                    ).then((result) => {
+                        updateOrder(order_id, {'emailSent': true})
+                        toast(`Email enviado a ${JSON.parse(location_params.get('external_reference')).email}`, {
+                            // autoClose: false,
+                            position: "top-right",
+                        });
+                       
+                    })
+                    
+                }
+            }    
+        )
         
         // setIsLoading(true) 
         
@@ -120,9 +127,9 @@ const ThanksContainer = (props) => {
                             <span style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}}>{location_params.get('payment_id')}</span>
                             </h5>
                             
-                            <h5 className='mt-3 '>Tu <b className="p-0" >número  de seguimiento</b> es:
+                            <h5 className='mt-3 '>En el siguiente <b className="p-0" > link </b> podrás descargar tu compra y solicitar un turno:
                                 <br/>
-                            <span style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}}>{location_params.get('preference_id')}</span>
+                            <Link style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}} to={`/compras/${order_id}`} >Ir a mi compra</Link>
                             </h5>
                             
 
