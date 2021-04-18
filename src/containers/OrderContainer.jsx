@@ -1,59 +1,147 @@
 import React, { useContext, useState, useEffect } from "react";
-import firebase from "firebase/app";
-import 'firebase/storage';
-
-// Get a reference to the storage service, which is used to create references in your storage bucket
-var storage = firebase.storage();
-
-// Create a storage reference from our storage service
-var storageRef = storage.ref();
-// Create a reference to the file we want to download
-var starsRef = storageRef.child('logo-055.jpg');
-
-// Get the download URL
-starsRef.getDownloadURL().then(function(url) {
-
-    // This can be downloaded directly:
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function(event) {
-      var blob = xhr.response;
-      var fileName = starsRef.name //if you have the fileName header available
-      var link=document.createElement('a');
-      link.href=window.URL.createObjectURL(blob);
-      link.download=fileName;
-      link.click();
-    };
-    // xhr.open('GET', url);
-    // xhr.send();
-}).catch(function(error) {
-
-  switch (error.code) {
-    case 'storage/object-not-found':
-      console.log("File doesn't exist")
-      break;
-
-    case 'storage/unauthorized':
-      console.log("User doesn't have permission to access the object")
-      break;
-
-    case 'storage/canceled':
-      console.log("User canceled the upload")
-      break;
-
-    case 'storage/unknown':
-      console.log("Unknown error occurred, inspect the server response")
-      break;
-  }
-});
-
+import { OrderContext } from "../context/OrderContext";
+import { CommercialContext } from "../context/CommercialContext";
+import { useParams } from "react-router-dom";
+import ItemOrder from '../components/ItemOrder';
+import EmailConfirmModal from '../components/EmailConfirmModal';
+import $ from 'jquery';
+import { toast } from "react-toastify";
+import {getFileFromDB} from '../firebase'
 
 const OrderContainer = (props) => {
+    const {numberToPrice, getProductById} = useContext(CommercialContext)
+    const {getOrderById} = useContext(OrderContext)
+    const {order_id} = useParams()
+    const [order, setOrder] = useState()
+    const [emailConfirmation, setEmailConfirmation] = useState()
+    const modal = $('#EmailConfirmModal')
+
+    
+
+    const openBookingPopUp = () =>{
+        console.log(emailConfirmation)
+        emailConfirmation === undefined?
+        modal.modal('show')
+        
+        :   (
+
+            console.log('booking')
+        )
+    }
+    
+    const downloadFile = (fileName) =>{
+        console.log(emailConfirmation)
+        emailConfirmation === undefined?
+        modal.modal('show')
+        
+        :   (
+            getFileFromDB(fileName)
+        )
+    }
+
+
+    
+    useEffect( () => {
+        
+        const getOrderData =  async ()=>{
+            
+
+            getOrderById(order_id)
+            .then(order=>{
+                setOrder(order)
+
+                const form = document.getElementById('emailConfirmation-form')
+                form.addEventListener("submit", (e) => {
+                    e.preventDefault()
+                    e.stopImmediatePropagation()
+                    var email = document.getElementById('email-confirmation').value
+                    if(email == order.buyer.email){
+                        $('#EmailConfirmModal').modal('hide')
+                        setEmailConfirmation(email)
+                        toast.success('Ahora puedes descargar tu contenido, intentalo nuevamente!', {
+                            position: "top-right",
+                            autoClose: 3000,
+                            
+                        });
+                    } else {
+
+                        toast.error('El Email no coincide con el utilizado en ésta compra', {
+                            position: "top-right",
+                            autoClose: 3000,
+                        });
+                    }                    
+                })
+
+            })
+        }
+
+        getOrderData()
+
+
+
+        
+        }, [])
+
     return (
-        <>
-        <img src="" alt=""/>
-        </>
-    )
+
+      <>
+            <div id="services" className="cards-2">
+                <div className="container">
+
+                    <h2 style={{ fontFamily: "Montserrat-Bold", textAlign:"left"}}><span
+                            style={{ fontFamily: "Mansalva",fontSize:'3rem'}}>Mis </span> productos
+                    </h2>
+
+                    <div className="row">
+                        <div className="col-lg-12">
+                            {(order == undefined)?
+
+                            (
+                            <>
+
+                                <div className='loadingComponent' style={{top:'25vh'}}>
+                                    <p> Cargando productos </p>
+                                    <div className="spinner-grow bounce1" role="status">
+                                        <span className="sr-only">Cargando Productos</span>
+                                    </div>
+                                    <div className="spinner-grow bounce2" role="status">
+                                        <span className="sr-only">Cargando Productos</span>
+                                    </div>
+                                    <div className="spinner-grow bounce3" role="status">
+                                        <span className="sr-only">Cargando Productos</span>
+                                    </div>
+                                </div>
+
+                            </>
+
+                            )
+                            :
+                            (order.items.map( (item,index)=>{
+
+                            var product = getProductById(item.id)
+                            if(product != undefined){
+                                return(
+                                    <>
+                                        <ItemOrder key={index} product={product} downloadFile={downloadFile} openBookingPopUp={openBookingPopUp} />
+                                    </>
+                                )
+                            }
+                            }))
+
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+       <EmailConfirmModal/>                
+         
+                            
+    </>
+
+  )
 }
 
 export default OrderContainer

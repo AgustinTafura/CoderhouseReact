@@ -19,7 +19,7 @@ export const CommercialProvider = ({children}) => {
     
             const categoryList = await CategoryCollection.get().then(async (value) => {
                 return Promise.all(
-                    value.docs.map(async (category) => {return await {...category.data(), id:category.id}})
+                    value.docs.map(async (category) => {return {...category.data(), id:category.id}})
                 )
             })
             productCollection.get().then(async (value) => {
@@ -54,10 +54,15 @@ export const CommercialProvider = ({children}) => {
 
 
     }
+
+    const getProductById =  (product_id)=>{
+        
+        return  products.find( element =>  element.id == product_id)
+    }
     
     
     return (
-        <CommercialContext.Provider value={{products, numberToPrice}}>
+        <CommercialContext.Provider value={{products, numberToPrice, getProductById}}>
             {children}
         </CommercialContext.Provider>
     )

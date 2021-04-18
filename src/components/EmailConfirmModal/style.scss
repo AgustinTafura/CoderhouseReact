@@ -1,0 +1,21 @@
+.googleLogin {
+    background-color: #ea4335;
+    border-color: #ea4335;
+
+    &:hover {
+        background-color: transparent;
+        color: #ea4335;
+        text-decoration: none;
+    }
+}
+
+.facebookLogin {
+    background-color: #4867aa;
+    border-color: #4867aa;
+
+    &:hover {
+        background-color: transparent;
+        color: #4867aa;
+        text-decoration: none;
+    }
+}

@@ -212,7 +212,7 @@ const AuthModal = (props) => {
                         <button type="button" className="btn-solid-lg btn-block facebookLogin">Ingresar con tu cuenta de Facebook</button>
  
                         <div className="nav-item logged-out justify-content-center mt-2">
-                            <span >¿Tienes cuenta?</span> <a className="mx-2 loginModal" href="#" >Ingresar</a>
+                            <span >¿Tienes cuenta?</span> <a className="loginModal mx-2" href="#" >Ingresar</a>
                         </div>
                     </form>
                     </div>

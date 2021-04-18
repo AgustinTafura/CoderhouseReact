@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 const ThanksContainer = (props) => {
     
     const [isLoading, setIsLoading] = useState(false)
+    const [orderHasDownloadItems, setOrderHasDownloadItems] = useState()
+    const [orderHasBookingItems, setOrderHasBookingItems] = useState()
     const {clearCart, setPromotionalDiscount} = useContext(CartContext)
     const location = useLocation()
     const location_params = new URLSearchParams(location.search)
@@ -37,44 +39,46 @@ const ThanksContainer = (props) => {
         const nameBuyer = JSON.parse(location_params.get('external_reference')).name
         const emailBuyer = JSON.parse(location_params.get('external_reference')).email
         const paymentState = location_params.get('status')
+        
 
         //Update Purchase Order with payment info 
         updateOrder(order_id, {payment: paymentData})
         
-        
-
-        //Send email information
-        const emailData={
-            to_email:emailBuyer,
-            to_name: nameBuyer,
-            payment_state:paymentState == 'approved'? "aprobado":"pendiente",
-            payment_id: location_params.get('payment_id')?location_params.get('payment_id'):"pendiente",
-            order_id: order_id,
-        }
 
 
-        getOrderById(order_id).then(orderData=>
-            {
 
-                if(orderData.emailSent !== true) {
-                    
-                    emailjs.send(
-                        process.env.REACT_APP_EMAILJS_YOUR_SERVICE_ID,
-                        process.env.REACT_APP_EMAILJS_YOUR_TEMPLATE_ID_THANKSFORYOURPURCHASE,
-                        emailData,
-                        process.env.REACT_APP_EMAILJS_YOUR_USER_ID,
-                    ).then((result) => {
-                        updateOrder(order_id, {'emailSent': true})
-                        toast(`Email enviado a ${JSON.parse(location_params.get('external_reference')).email}`, {
-                            // autoClose: false,
-                            position: "top-right",
-                        });
-                       
-                    })
-                    
+
+        getOrderById(order_id).then(orderData=>{
+
+                
+            if(orderData.emailSent !== true) {
+                
+                //Send email information
+                const emailData={
+                    to_email:emailBuyer,
+                    to_name: nameBuyer,
+                    payment_state:paymentState == 'approved'? "aprobado":"pendiente",
+                    payment_id: location_params.get('payment_id')?location_params.get('payment_id'):"pendiente",
+                    order_id: order_id,
                 }
-            }    
-        )
+                emailjs.send(
+                    process.env.REACT_APP_EMAILJS_YOUR_SERVICE_ID,
+                    process.env.REACT_APP_EMAILJS_YOUR_TEMPLATE_ID_THANKSFORYOURPURCHASE,
+                    emailData,
+                    process.env.REACT_APP_EMAILJS_YOUR_USER_ID,
+                ).then((result) => {
+                    updateOrder(order_id, {'emailSent': true})
+                    toast(`Email enviado a ${JSON.parse(location_params.get('external_reference')).email}`, {
+                        // autoClose: false,
+                        position: "top-right",
+                    });
+                    
+                })
+            }
+
+
+        })
+ 
         
         // setIsLoading(true) 
         
@@ -119,7 +123,7 @@ const ThanksContainer = (props) => {
                             <span style={{ fontFamily: "Mansalva" }}>por su </span> compra!</h1>
                             
                             <h5 className='mt-5'>
-                                En breve  te llegará un mail a <b className="p-0">{JSON.parse(location_params.get('external_reference')).email}</b> con la información de tu compra. 
+                                En breve  te enviaremos un mail a <b className="p-0">{JSON.parse(location_params.get('external_reference')).email}</b> con la información de tu compra. 
                             </h5>
 
                             <h5 className='mt-3 mt-lg-5'>Tu <b className="p-0">orden de pago</b> es:
@@ -127,7 +131,7 @@ const ThanksContainer = (props) => {
                             <span style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}}>{location_params.get('payment_id')}</span>
                             </h5>
                             
-                            <h5 className='mt-3 '>En el siguiente <b className="p-0" > link </b> podrás descargar tu compra y solicitar un turno:
+                            <h5 className='mt-3 '>Ingresa en el siguiente <b className="p-0" > link </b> para obtener los productos de tu compra y ,de ser necesario, solicitar turnos:
                                 <br/>
                             <Link style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}} to={`/compras/${order_id}`} >Ir a mi compra</Link>
                             </h5>

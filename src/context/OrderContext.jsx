@@ -67,18 +67,17 @@ export const OrderProvider = ({ children }) => {
      * @param {string} orderId 
       * @param {object} dataToUpdate 
     */
-        const getOrderById = async (orderId)=>{
+        const getOrderById =  (orderId)=>{
             const docRef = db.collection("orders").doc(orderId)
-
-            return docRef.get().then(async (doc) => {
+            return docRef.get().then((doc) => {
                 if (doc.exists) {
-                    return doc.data();
+                      return doc.data();
                 } else {
                     // doc.data() will be undefined in this case
-                    // console.log("No such document!");
+                    console.log("No such document!");
                 }
             }).catch((error) => {
-                // console.log("Error getting document:", error);
+                console.log("Error getting document:", error);
             });
             
         }

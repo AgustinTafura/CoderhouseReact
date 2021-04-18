@@ -13,7 +13,7 @@ import { useContext } from "react";
 import ThanksContainer from "../containers/ThanksContainer";
 import BookingContainer from "../containers/BookingContainer";
 import EmailContainer from "../containers/EmailContainer";
-import OrderContainer from "../containers/BookingContainer";
+import OrderContainer from "../containers/OrderContainer";
 
 const Routes = () => {
 
