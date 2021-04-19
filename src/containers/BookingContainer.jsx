@@ -13,24 +13,24 @@ import { openPopupWidget,InlineWidget,CalendlyEventListener  } from "react-calen
                e.data.event.indexOf('calendly') === 0;
       };
        
-      window.addEventListener(
-        'message',
-        function(e) {
-          if (isCalendlyEvent(e)) {
-            console.log(5, e.data);
-            if(e.data.event == "calendly.date_and_time_selected"){
+      // window.addEventListener(
+      //   'message',
+      //   function(e) {
+      //     if (isCalendlyEvent(e)) {
+      //       console.log(5, e.data);
+      //       if(e.data.event == "calendly.date_and_time_selected"){
 
-                var button = document.getElementsByTagName("iframe")
-                // var button = document.getElementsByClassName("_1vty3-psjP _3jd0brMbl7 _1-Q37xqIVF _3NUf4XXPRW _6zb5ZygPrI _16lJIvga5w _26bxlZFZ4O _3jdvikh0KV _1NKUM54h_1 _3NimS-g7Hg")
+      //           var button = document.getElementsByTagName("iframe")
+      //           // var button = document.getElementsByClassName("_1vty3-psjP _3jd0brMbl7 _1-Q37xqIVF _3NUf4XXPRW _6zb5ZygPrI _16lJIvga5w _26bxlZFZ4O _3jdvikh0KV _1NKUM54h_1 _3NimS-g7Hg")
   
                 
-                console.log(button)
+      //           console.log(button)
 
 
-            }
-          }
-        }
-      );
+      //       }
+      //     }
+      //   }
+      // );
     
 
 

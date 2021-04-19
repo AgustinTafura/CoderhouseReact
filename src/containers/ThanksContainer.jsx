@@ -14,6 +14,7 @@ const ThanksContainer = (props) => {
     const location = useLocation()
     const location_params = new URLSearchParams(location.search)
     const {updateOrder, getOrderById} = useContext(OrderContext)
+    console.log(location)
     const paymentData = JSON.parse('{"' + location_params.toString().replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key ===""? value : decodeURIComponent(value) })
     const order_id = JSON.parse(location_params.get('external_reference')).order_id
 

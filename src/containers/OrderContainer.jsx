@@ -7,10 +7,11 @@ import EmailConfirmModal from '../components/EmailConfirmModal';
 import $ from 'jquery';
 import { toast } from "react-toastify";
 import {getFileFromDB} from '../firebase'
+import { openPopupWidget, CalendlyEventListener } from "react-calendly";
 
 const OrderContainer = (props) => {
     const {numberToPrice, getProductById} = useContext(CommercialContext)
-    const {getOrderById} = useContext(OrderContext)
+    const {getOrderById, updateOrder} = useContext(OrderContext)
     const {order_id} = useParams()
     const [order, setOrder] = useState()
     const [emailConfirmation, setEmailConfirmation] = useState()
@@ -25,7 +26,7 @@ const OrderContainer = (props) => {
         
         :   (
 
-            console.log('booking')
+            openPopupWidget({ url:"https://calendly.com/agustintafura?primary_color=14bf98"})
         )
     }
     
@@ -38,8 +39,6 @@ const OrderContainer = (props) => {
             getFileFromDB(fileName)
         )
     }
-
-
     
     useEffect( () => {
         
@@ -80,7 +79,9 @@ const OrderContainer = (props) => {
 
 
         
-        }, [])
+        }, [order])
+
+
 
     return (
 
@@ -122,7 +123,7 @@ const OrderContainer = (props) => {
                             if(product != undefined){
                                 return(
                                     <>
-                                        <ItemOrder key={index} product={product} downloadFile={downloadFile} openBookingPopUp={openBookingPopUp} />
+                                        <ItemOrder key={index} product={product} downloadFile={downloadFile} openBookingPopUp={openBookingPopUp} order={order} />
                                     </>
                                 )
                             }
@@ -137,7 +138,32 @@ const OrderContainer = (props) => {
             </div>
 
        <EmailConfirmModal/>                
-         
+       <CalendlyEventListener 
+            onDateAndTimeSelected={(e)=>console.log(11,e)}
+            onEventTypeViewed={(e)=>console.log(33,e)}
+            onProfilePageViewed={(e)=>console.log(44,e)}
+            onEventScheduled={(e)=> {
+                e.preventDefault();
+                const eventLink =  e.data.payload.event.uri.toString()
+                const invitee = e.data.payload.invitee.uri
+                console.log(e)
+                console.log(typeof eventLink)
+                console.log(typeof invitee)
+                const eventCode = eventLink.substring(eventLink.lastIndexOf('scheduled_events/') + 17, eventLink.length)
+                const inviteeCode = invitee.substring(invitee.lastIndexOf('invitees/') + 9, invitee.length)
+                const bookingData = {
+                    booking: {
+                        eventCode: eventCode,
+                        eventLink: eventLink,
+                        cancelCode: inviteeCode,
+                        cancelLink: `https://calendly.com/cancellations/${inviteeCode}`,
+                        rescheduleLink: `https://calendly.com/reschedulings/${inviteeCode}`
+                    }
+                }
+                order != undefined&& updateOrder(order_id, bookingData).then(()=>setOrder(undefined))
+
+            }}
+        />
                             
     </>
 

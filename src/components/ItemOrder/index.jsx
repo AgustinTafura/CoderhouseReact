@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import ItemCount from "../ItemCount";
 
 
 
-const ItemOrder = ({product, downloadFile, openBookingPopUp}) => {
+
+const ItemOrder = ({product, downloadFile, openBookingPopUp, order}) => {
 
 
 
@@ -27,9 +27,14 @@ const ItemOrder = ({product, downloadFile, openBookingPopUp}) => {
                     </div>
                     <div className="card-body" style={{textAlign:"center"}}>
                         <h3 className="card-title" >{product.name}</h3>
-                        <p>{product.id}</p>
+                        {product.id}
                         {product.allowDownload&&<button onClick={()=>downloadFile(product.fileToDownload)}>Descargar</button>}
-                        {product.allowBooking&&<button  onClick={()=>openBookingPopUp(product)}>Solictar Turno</button>}
+                        {product.allowBooking&&(
+                            order.booking == undefined?
+                                <button  onClick={()=>openBookingPopUp(product)}>Solictar Turno</button>
+                            :   <button  onClick={()=>console.log('MOSTRAR DATOS')}>Datos de mi Turno</button>
+                        )}   
+
                     </div>
                 </div>
                 
