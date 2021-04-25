@@ -50,6 +50,7 @@ const payer = {
 createNewOrder(payer)
     .then((orderId)=>{
         const dataToPayment = {
+            booking: {},
             items: itemsDetail,
             payer: payer,
             name: data.name ,

@@ -21,12 +21,12 @@ export const UserProvider = ({ children }) => {
             if (user) {
                 setUser( user)
                 setIsAuthenticated(true)
-                // console.log(user)
+
             } else {
                 // No user is signed in.
                 setUser(false)  
                 setIsAuthenticated(false)
-                // console.log(user)
+
             }
     
         });
@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
             .createUserWithEmailAndPassword(email,pass)
             .then(
                 (userCredentials)=>{
-                    console.log(userCredentials)
+
                     const user =  userCredentials.user
                    
                     user.sendEmailVerification().then((a)=> {
@@ -48,13 +48,13 @@ export const UserProvider = ({ children }) => {
                             position: "top-right",
                         });
                     }).catch( (error) => {
-                        console.log('An error happened.', error)
+                        // console.log('An error happened.', error)
                     });
                     return user
                 }
             ).catch(
                 (errors)=> {
-                    console.log(errors)
+
                     if(errors.code == "auth/email-already-in-use") {
                         auth.fetchSignInMethodsForEmail(email).then(function(providers) {
         
@@ -115,9 +115,9 @@ export const UserProvider = ({ children }) => {
         const provider = new firebase.auth.GoogleAuthProvider();
 
        return auth.signInWithPopup(provider)
-        .then((user)=>{setIsAuthenticated(true);console.log(1)})
+        .then((user)=>{setIsAuthenticated(true)})
         .catch((errors)=>{
-            console.log(errors)
+            
             if(errors.code == "auth/account-exists-with-different-credential") {
                 auth.fetchSignInMethodsForEmail(errors.email).then(function(providers) {
 
@@ -139,16 +139,17 @@ export const UserProvider = ({ children }) => {
 
     }
 
-    const logInWhitFacebook = ()=> {
+    const logInWhitFacebook = async ()=> {
         const provider = new firebase.auth.FacebookAuthProvider();
-        return auth.signInWithPopup(provider)
-        .then((user)=>{setIsAuthenticated(true);console.log(1)})
-        .catch((errors)=>{
-            console.log(errors)
-            if(errors.code == "auth/account-exists-with-different-credential") {
-                auth.fetchSignInMethodsForEmail(errors.email).then(function(providers) {
+        try {
+            const user = await auth.signInWithPopup(provider);
+            setIsAuthenticated(true); 
+        } catch (errors) {
 
-                    var msg = providers.length > 0 && providers == "password" ? `Intenta ingresar con email y contraseña`: `Intenta ingresando con tu cuenta de ${providers}`
+            if (errors.code == "auth/account-exists-with-different-credential") {
+                auth.fetchSignInMethodsForEmail(errors.email).then(function (providers) {
+
+                    var msg = providers.length > 0 && providers == "password" ? `Intenta ingresar con email y contraseña` : `Intenta ingresando con tu cuenta de ${providers}`;
                     toast.error(msg, {
                         // autoClose: false,
                         position: "top-right",
@@ -161,8 +162,8 @@ export const UserProvider = ({ children }) => {
                     position: "top-right",
                 });
             }
-            throw errors
-        })
+            throw errors;
+        }
     }
 
     const logOutUser = () => {

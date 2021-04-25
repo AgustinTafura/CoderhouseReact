@@ -105,9 +105,10 @@ export const CartProvider = ({ children }) => {
         setCart(newCart)
 
     }
-
+    
     useEffect(() => {
         const db = getFirestore();
+        console.log('CartContext - promocode')
         const productCollection = db.collection("promocode")
         productCollection.get().then((value) => {
             const promocodeList = value.docs.map(element => { return { ...element.data() } })
@@ -121,7 +122,7 @@ export const CartProvider = ({ children }) => {
 
 
     useEffect(() => {
-
+        console.log('CartContext - localstorage Itemcart')
         localStorage.setItem("cart", JSON.stringify(cart))
         quantityproductsAdded()
 

@@ -10,7 +10,6 @@ export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
     
-
     const { user  } = useContext(UserContext)
     const { cart, subtotalCart, totalCart, promotionalDiscount, } = useContext(CartContext)
     const db = getFirestore()
@@ -37,33 +36,37 @@ export const OrderProvider = ({ children }) => {
 
         try {
             const { id } = await orders.add(newOrder);
-            console.log('orderId', id);
+
             return id;
         } catch (errors) {
-            console.log('errores al crear tu orden:', errors);
             throw errors;
         }
 
     }
 
       /** 
-     * Creat new order
+     * Update new order
      * @param {string} orderId 
       * @param {object} dataToUpdate 
     */
     const updateOrder = async (orderId, dataToUpdate)=>{
         const docRef = db.collection("orders").doc(orderId);
-        
+
         try {
             await docRef.update(dataToUpdate);
             return ;
         } catch (e) {
+            console.log('hubo un error', e)
             return ;
         }
     }
 
-          /** 
-     * Creat new order
+    
+
+
+
+    /** 
+     * Get Order by Id
      * @param {string} orderId 
       * @param {object} dataToUpdate 
     */
@@ -74,16 +77,17 @@ export const OrderProvider = ({ children }) => {
                       return doc.data();
                 } else {
                     // doc.data() will be undefined in this case
-                    console.log("No such document!");
+
                 }
             }).catch((error) => {
-                console.log("Error getting document:", error);
+
             });
             
         }
 
     return (
         <OrderContext.Provider value={{ createNewOrder, updateOrder, getOrderById}}>
+
             {children}
         </OrderContext.Provider>
     )

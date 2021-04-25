@@ -15,7 +15,7 @@ const AuthModal = (props) => {
     //check empty inputs
     const checkErrors = (e) => {
         if(e.value.trim().length >0) {
-            console.log(1)
+
             setErrors({}) 
             !e.classList.contains("notEmpty") && e.classList.add("notEmpty")
         } else {
@@ -62,25 +62,23 @@ const AuthModal = (props) => {
                    const signUpForm = document.querySelector("#signup-form");
                    signUpForm.addEventListener("submit", (e) => {
            
-                       console.log(999)
+
                        e.preventDefault();
                        e.stopImmediatePropagation();
                        const email = signUpForm["signup-email"].value.toString();
-                       console.log(email)
-                       console.log(typeof email)
-                       console.log((typeof email == 'string'))
+
                        const password = signUpForm["signup-password"].value;
                        
                        createNewUserWithEmailAndPassword(email,password)
                        .then((userCredential) => {
-                           console.log(userCredential)
+
            
                            // clear the form
                            $('#signupModal').modal("hide");
                            signUpForm.reset();
            
                        }).catch((err)=>{
-                           console.log(err)
+
                            setErrors({email:'Éste email ya esta en uso'})
                        });
                    })
@@ -95,7 +93,7 @@ const AuthModal = (props) => {
                        e.stopImmediatePropagation()
                        const email = signInForm["login-email"].value.toString();
                        const password = signInForm["login-password"].value;
-                       console.log(777, typeof email, email)
+
            
            
                        logInUser(email,password)
@@ -105,11 +103,11 @@ const AuthModal = (props) => {
            
                                signInForm.reset()
                                $("#signinModal").modal("hide");
-                               console.log(1)
+
                                currentLocation == "/" && history.push("/welcome")
            
                            })
-                       .catch(error=>console.log(2))
+                    //    .catch(error=>)
            
                
             })
@@ -131,11 +129,11 @@ const AuthModal = (props) => {
         
                         signInForm.reset()
                         $("#signinModal").modal("hide");
-                        console.log(user)
+
                         currentLocation == "/" && history.push("/welcome")
         
                     })
-                .catch(error=>console.log(error))
+                // .catch(error=>console.log(error))
                 });
             })
             
@@ -161,7 +159,7 @@ const AuthModal = (props) => {
                             currentLocation == "/" && history.push("/welcome")
         
                         })
-                    .catch(error=>console.log(error))
+                    // .catch(error=>console.log(error))
                     
                 });
             })
