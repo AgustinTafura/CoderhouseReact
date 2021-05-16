@@ -55,10 +55,10 @@ export const UserProvider = ({ children }) => {
             ).catch(
                 (errors)=> {
 
-                    if(errors.code == "auth/email-already-in-use") {
+                    if(errors.code === "auth/email-already-in-use") {
                         auth.fetchSignInMethodsForEmail(email).then(function(providers) {
         
-                            var msg = providers.length > 0 && providers == "password" ? `Intenta ingresar con email y contraseña`: `Ya existe una cuenta con este Email, intenta ingresando con tu cuenta de ${providers}`
+                            var msg = providers.length > 0 && providers === "password" ? `Intenta ingresar con email y contraseña`: `Ya existe una cuenta con este Email, intenta ingresando con tu cuenta de ${providers}`
                             toast.error(msg, {
                                 // autoClose: false,
                                 position: "top-right",
@@ -87,16 +87,14 @@ export const UserProvider = ({ children }) => {
                 case "auth/user-not-found": toast('No existen cuentas con éste email', {position: "top-right"});
                     break;   
                 case "auth/wrong-password": 
-                    {
-                        auth.fetchSignInMethodsForEmail(email).then(function(providers) {
+                    auth.fetchSignInMethodsForEmail(email).then(function(providers) {
 
-                            var msg = providers.length > 0 && providers == "password" ? ` Contraseña erronea`: `Intenta ingresando con tu cuenta de ${providers}`
+                            var msg = providers.length > 0 && providers === "password" ? ` Contraseña erronea`: `Intenta ingresando con tu cuenta de ${providers}`
                             toast(msg, {
                                 // autoClose: false,
                                 position: "top-right",
                             });
-                        });
-                    }
+                    });
                     break;
                 case "auth/too-many-requests": toast('Has realizado muchos intentos incorrecto, intenta más tarde nuevamente', {position: "top-right"});  
                     break;
@@ -118,10 +116,10 @@ export const UserProvider = ({ children }) => {
         .then((user)=>{setIsAuthenticated(true)})
         .catch((errors)=>{
             
-            if(errors.code == "auth/account-exists-with-different-credential") {
+            if(errors.code === "auth/account-exists-with-different-credential") {
                 auth.fetchSignInMethodsForEmail(errors.email).then(function(providers) {
 
-                    var msg = providers.length > 0 && providers == "password" ? `Intenta ingresar con email y contraseña`: `Intenta ingresando con tu cuenta de ${providers}`
+                    var msg = providers.length > 0 && providers === "password" ? `Intenta ingresar con email y contraseña`: `Intenta ingresando con tu cuenta de ${providers}`
                     toast.error(msg, {
                         // autoClose: false,
                         position: "top-right",
@@ -142,14 +140,14 @@ export const UserProvider = ({ children }) => {
     const logInWhitFacebook = async ()=> {
         const provider = new firebase.auth.FacebookAuthProvider();
         try {
-            const user = await auth.signInWithPopup(provider);
+            await auth.signInWithPopup(provider);
             setIsAuthenticated(true); 
         } catch (errors) {
 
-            if (errors.code == "auth/account-exists-with-different-credential") {
+            if (errors.code === "auth/account-exists-with-different-credential") {
                 auth.fetchSignInMethodsForEmail(errors.email).then(function (providers) {
 
-                    var msg = providers.length > 0 && providers == "password" ? `Intenta ingresar con email y contraseña` : `Intenta ingresando con tu cuenta de ${providers}`;
+                    var msg = providers.length > 0 && providers === "password" ? `Intenta ingresar con email y contraseña` : `Intenta ingresando con tu cuenta de ${providers}`;
                     toast.error(msg, {
                         // autoClose: false,
                         position: "top-right",

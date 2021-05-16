@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 
@@ -25,15 +25,15 @@ const ItemOrder = ({ product, downloadFile, openBookingPopUp, order, reschedule,
                         {/* {product.id} */}
                         {product.allowDownload&&<button onClick={()=>downloadFile(product.fileToDownload)}>Descargar</button>}
                         {product.allowBooking&&
-                            (order.booking == undefined || order.booking.length == 0?
+                            (order.booking === undefined || order.booking.length === 0?
                                 <button  onClick={()=>openBookingPopUp(product.id)}>Solictar Turno</button>
-                            : order.booking[product.id] == undefined?
+                            : order.booking[product.id] === undefined?
                                 <button  onClick={()=>openBookingPopUp(product.id)}>Solictar Turno</button>
                                 :   
-                                <div className="modal-footer justify-content-center border-0">
+                                // <div className="modal-footer justify-content-center border-0">
                                     <button className="px-lg-3 px-xl-4"onClick={()=>(cancel(product.id, order.booking[product.id].cancelCode))}  >Datos de mi Turno</button>
-                                    <button className="px-lg-3 px-xl-4"onClick={()=>(reschedule(product.id, order.booking[product.id].cancelCode))} >Reprogramar Turno</button>
-                                </div>
+                                //     <button className="px-lg-3 px-xl-4"onClick={()=>(reschedule(product.id, order.booking[product.id].cancelCode))} >Reprogramar Turno</button>
+                                // </div>
                             )
                         }   
 

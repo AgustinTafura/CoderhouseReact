@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {  useContext } from "react";
 import ItemDetail from "../components/ItemDetail";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -8,15 +8,15 @@ const ItemDetailContainer = (props) => {
     
     const {id} = useParams()
 
-    const [isLoading, setIsLoading] = useState(false)
+
     const {products, numberToPrice} = useContext(CommercialContext)
 
     
-    let productSelected = products.find(  element =>   element.id == id)
+    let productSelected = products.find(  element =>   element.id === id)
 
     console.log(productSelected)
 
-    if(productSelected == undefined){
+    if(productSelected === undefined){
         return (
             <>
             

@@ -89,7 +89,9 @@ export function getFileFromDB(fileName) {
       case 'storage/unknown':
         console.log("Unknown error occurred, inspect the server response")
         break;
-    }
+      default:
+        console.log('error on download the file')
+      }
 });
 
 }

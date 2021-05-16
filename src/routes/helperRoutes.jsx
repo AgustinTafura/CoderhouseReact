@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react"
 import { useContext } from "react"
 import { Route, Redirect } from "react-router"
 import { UserContext } from "../context/UserContext"

@@ -1,5 +1,4 @@
 
-import logo from './logo.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'animate.css'
@@ -7,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import NavBarComponent from './components/NavBar';
 import AuthModal from './components/AuthModal';
-import  React, { useContext } from 'react';
-import {BrowserRouter, Switch, Route, Redirect, } from 'react-router-dom';
+import  React from 'react';
+import {BrowserRouter } from 'react-router-dom';
 import {CartProvider} from './context/CartContext';
 import {UserProvider} from './context/UserContext';
 import {CommercialProvider} from './context/CommercialContext';

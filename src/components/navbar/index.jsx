@@ -13,7 +13,7 @@ import { UserContext } from "../../context/UserContext";
 
 const NavBar = () => {
 
-    const { user, logOutUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
     
     const actualLocation = useLocation()
 
@@ -72,7 +72,7 @@ const NavBar = () => {
                     {!user&&
                         (
                                 <li className="nav-item logged-out">
-                                    <a className="nav-link" href="#" data-toggle="modal" data-target="#signinModal">INGRESAR</a>
+                                    <a className="nav-link" href="/change" data-toggle="modal" data-target="#signinModal">INGRESAR</a>
                                 </li>
                         )
 
@@ -91,7 +91,7 @@ const NavBar = () => {
                     <CartWidgetComponent href={'/cart'}/>
                    {user?
                             (<li className="nav-item dropdown no-arrow">
-                                <a className="nav-link dropdown-toggle" href="#"
+                                <a className="nav-link dropdown-toggle" href="/change"
                                     id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                         <span className="mr-2 d-none d-lg-inline text-gray-600 text-uppercase">{user.email}</span>
@@ -102,16 +102,16 @@ const NavBar = () => {
                                             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
                                             <span className="item-text">MIS DATOS</span>
                                         </Link>
-                                        <a className="dropdown-item" href="#">
+                                        <a className="dropdown-item" href="/change">
                                             <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
                                             <span className="item-text">CONFIGURACIÓN</span>
                                         </a>
-                                        <a className="dropdown-item" href="#">
+                                        <a className="dropdown-item" href="/change">
                                             <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
                                             <span className="item-text">MI ACTIVIDAD</span>
                                         </a>
                                         <div className="dropdown-divider"></div>
-                                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <a className="dropdown-item" href="/change" data-toggle="modal" data-target="#logoutModal">
                                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
                                             <span className="item-text">CERRAR SESIÓN</span>
                                         </a>

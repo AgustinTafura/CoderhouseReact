@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import productList from '../mock/productList'
+
 import Item from '../components/Item';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { getFirestore } from "../firebase";
+
 import { CommercialContext } from "../context/CommercialContext";
 
 const ItemListContainer = (props) => {
@@ -89,7 +89,7 @@ const ItemListContainer = (props) => {
                         {products.length !== 0?
                             (categoryId?
                                 products.map((product, index)=>{
-                                    if(product.category == categoryId){
+                                    if(product.category === categoryId){
 
                                         return (
                                             <Item key={index}  

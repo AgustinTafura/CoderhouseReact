@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
+
 import { OrderContext } from "../context/OrderContext";
 import emailjs from 'emailjs-com';
 import { toast } from "react-toastify";
@@ -8,9 +8,6 @@ import { toast } from "react-toastify";
 const ThanksContainer = (props) => {
     
     const [isLoading, setIsLoading] = useState(false)
-    const [orderHasDownloadItems, setOrderHasDownloadItems] = useState()
-    const [orderHasBookingItems, setOrderHasBookingItems] = useState()
-    const {clearCart, setPromotionalDiscount} = useContext(CartContext)
     const location = useLocation()
     const location_params = new URLSearchParams(location.search)
     const {updateOrder, getOrderById} = useContext(OrderContext)
@@ -57,7 +54,7 @@ const ThanksContainer = (props) => {
                 const emailData={
                     to_email:emailBuyer,
                     to_name: nameBuyer,
-                    payment_state:paymentState == 'approved'? "aprobado":"pendiente",
+                    payment_state:paymentState === 'approved'? "aprobado":"pendiente",
                     payment_id: location_params.get('payment_id')?location_params.get('payment_id'):"pendiente",
                     order_id: order_id,
                 }
@@ -140,9 +137,8 @@ const ThanksContainer = (props) => {
                             <div className='justify-content-center align-items-center mt-5 pt-3'>
                                 <h6 className="col-12">Seguíme y enterate todos mis tips nutricionales</h6>
                                 <div className='d-flex justify-content-center'>
-                                    <div className="px-3"><a className="social-icon" href="https://www.instagram.com/juampilabollita/"><i className="fab fa-instagram fa-2x" aria-hidden="true"></i></a></div>
-                                    <div className="px-3"><a className="social-icon" href="https://www.facebook.com/juanpablo.labollita"><i className="fab fa-facebook-f fa-2x" aria-hidden="true"></i></a></div>
-
+                                    <div className="px-3"><a className="social-icon" href="https://www.instagram.com/juampilabollita/">JP<i className="fab fa-instagram fa-2x" aria-hidden="true"></i></a></div>
+                                    <div className="px-3"><a className="social-icon" href="https://www.facebook.com/juanpablo.labollita">JP<i className="fab fa-facebook-f fa-2x" aria-hidden="true"></i></a></div>
                                 </div>
 
 

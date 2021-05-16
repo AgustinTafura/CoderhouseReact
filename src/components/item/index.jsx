@@ -6,7 +6,7 @@ import {CartContext} from "../../context/CartContext";
 
 const Item = ({product, numberToPrice}) => {
 
-    const {addItemToCart,cart, isInCart, quantityItemAdded} = useContext(CartContext)
+    const {addItemToCart, isInCart, quantityItemAdded} = useContext(CartContext)
     const [contador, setContador] = useState(1)
     const [quantityAdded, setQuantityAdded] = useState([])
     const showButton = true

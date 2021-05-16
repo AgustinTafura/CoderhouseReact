@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { CommercialContext } from "../context/CommercialContext";
 import { CartContext } from "../context/CartContext";
 import ItemCart from "../components/ItemCart";
@@ -8,14 +8,14 @@ import ItemCart from "../components/ItemCart";
 const CartContainer = (props) => {
 
     const { products, numberToPrice } = useContext(CommercialContext)
-    const { cart, subtotalCart, totalCart, promotionalDiscount, addDiscount } = useContext(CartContext)
+    const { cart, subtotalCart, promotionalDiscount, addDiscount } = useContext(CartContext)
 
     useEffect(()=>{
         document.getElementById('discount-code1') != null && promotionalDiscount && document.getElementById('discount-code1').setAttribute('value', promotionalDiscount.code)
     })
 
 
-    if (products.length == 0) {
+    if (products.length === 0) {
         return (
             < >
                 <div className='loadingComponent'>

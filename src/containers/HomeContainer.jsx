@@ -1,14 +1,13 @@
 import { Link, } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactTextRotator from "react-text-rotator";
-import { CartContext } from "../context/CartContext";
-import $ from 'jquery'
+
 
 const HomeContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false)
-    const { cart } = useContext(CartContext)
-    const { innerWidth: width, innerHeight: height } = window;
+
+    const { innerWidth: width } = window;
 
 
     const content = [

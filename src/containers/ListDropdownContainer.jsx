@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import $ from 'jquery';
+
 
 const ListDropdownContainer = ({href, name, children }) => {
-    const { innerWidth: width, innerHeight: height } = window;
+    const { innerWidth: width, } = window;
     const hoverPreviousSibling = (e) => {
         let previousSibling = document.getElementById('navbarDropdown');
         previousSibling.style.color = '#fff';

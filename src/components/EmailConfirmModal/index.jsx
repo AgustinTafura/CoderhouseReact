@@ -1,8 +1,6 @@
-import $ from 'jquery'
 import './style.scss';
-import { UserContext } from "../../context/UserContext";
-import { useContext, useState, useEffect} from "react";
-import { withRouter, useLocation } from "react-router-dom";
+import { useState} from "react";
+import { withRouter } from "react-router-dom";
 
 
 const AuthModal = (props) => {

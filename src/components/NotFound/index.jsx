@@ -1,13 +1,10 @@
 import './style.scss';
 import { Link, useHistory } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
-import { CartContext } from "../../context/CartContext";
+import React from "react";
 import $ from 'jquery'
 
 const NotFound = () => {
 
-    const [isLoading, setIsLoading] = useState(false)
-    const { innerWidth: width, innerHeight: height } = window;
     const history = useHistory() 
     
     
@@ -128,45 +125,6 @@ const NotFound = () => {
     })            
     
 
-    
-    useEffect(() => {
-        
-        // setIsLoading(true)
-        console.log(isLoading)
-        const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(true), 2000)
-        })
-
-        myPromise.then(
-            (result)=>{
-
-                setIsLoading(false);
-            }
-        )
-
-        return() => {
-          setIsLoading(false)
-        }
-
-    }, [])
-
-
-
-
-    if (isLoading) {
-        return (
-            <>
-                {/* <!-- Preloader --> */}
-                <div className="spinner-wrapper">
-                    <div className="spinner">
-                        <div className="bounce1"></div>
-                        <div className="bounce2"></div>
-                        <div className="bounce3"></div>
-                    </div>
-                </div>
-            </>
-        )
-    }
     return (
         <>
             <div className="ag-page-404">
@@ -185,7 +143,7 @@ const NotFound = () => {
 
                     <canvas id="canvas-404" className="ag-canvas-404"></canvas>
                     <img className="ag-canvas-404_img"
-                        src="/images/smoke.png"/>
+                      alt='smokeToaster'  src="/images/smoke.png"/>
                 </div>
             </div>
 

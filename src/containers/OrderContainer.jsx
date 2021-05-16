@@ -12,14 +12,14 @@ import './OrderContainer.scss';
 
 
 const OrderContainer = (props) => {
-    const {numberToPrice, getProductById} = useContext(CommercialContext)
+    const {getProductById} = useContext(CommercialContext)
     const {getOrderById, updateOrder} = useContext(OrderContext)
     const {order_id} = useParams()
     const [order, setOrder] = useState()
     const [currentProductId, setCurrentProductId] = useState()
     const [emailConfirmation, setEmailConfirmation] = useState()
-    const {history} = props;
     
+
     const reschedule = (productId, code) => {
             openBookingPopUp(productId, 'reschedulings', code)
     }
@@ -65,7 +65,7 @@ const OrderContainer = (props) => {
                 e.preventDefault()
                 e.stopImmediatePropagation()
                 var email = document.getElementById('email-confirmation').value
-                if(email == order.buyer.email){
+                if(email === order.buyer.email){
                     $('#EmailConfirmModal').modal('hide')
                     setEmailConfirmation(email)
                     toast.success('Ahora puedes descargar tu contenido, intentalo nuevamente!', {
@@ -109,7 +109,7 @@ const OrderContainer = (props) => {
                                 emailConfirmation === undefined?
                                     <EmailConfirmModal />
                                 : (
-                                    (order == undefined)?
+                                    (order === undefined)?
 
                                         (
                                         <>
@@ -134,7 +134,7 @@ const OrderContainer = (props) => {
                                         (order.items.map( (item,index)=>{
             
                                             var product = getProductById(item.id)
-                                            if(product != undefined){
+                                            if(product !== undefined){
                                                 return(
                                                     <ItemOrder 
                                                         key={index} product={product} 
@@ -162,7 +162,7 @@ const OrderContainer = (props) => {
 
 
            
-            {order != undefined&&(
+            {order !== undefined&&(
                 <>                  
                     <CalendlyEventListener 
 
@@ -174,7 +174,7 @@ const OrderContainer = (props) => {
                             const eventCode = eventLink.substring(eventLink.lastIndexOf('scheduled_events/') + 17, eventLink.length)
                             const inviteeCode = invitee.substring(invitee.lastIndexOf('invitees/') + 9, invitee.length)
 
-                            if(order.booking == undefined){
+                            if(order.booking === undefined){
                                 order.booking = {}
                             }
                             order.booking[currentProductId] = {
@@ -186,7 +186,7 @@ const OrderContainer = (props) => {
                                 }
 
                             
-
+                            console.log(11, order)
                             updateOrder(order_id,  {booking:order.booking})
                             .then((e)=>{
                                 // localStorage.setItem('currentOrderBookingUpdated', JSON.stringify({order:order, order_id:order_id, orderB:order.booking, bookingIdUpdated:currentProductId}));

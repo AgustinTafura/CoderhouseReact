@@ -50,14 +50,14 @@ export const CommercialProvider = ({children}) => {
 
     const numberToPrice = (x) => {
 
-        if(x != undefined) {   return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        if(x !== undefined) {   return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
 
 
     }
 
     const getProductById =  (product_id)=>{
         
-        return  products.find( element =>  element.id == product_id)
+        return  products.find( element =>  element.id === product_id)
     }
     
     

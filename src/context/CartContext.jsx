@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { getFirestore } from "../firebase";
-import { useLocation } from "react-router-dom";
 
 // Creamos el espacio de memoria
 export const CartContext = createContext();
@@ -11,9 +10,10 @@ export const CartProvider = ({ children }) => {
     const [quantityproductsInCart, setQuantityproductsInCart] = useState(0)
     const [subtotalCart, setSubtotalCart] = useState(0)
     const [promotionalDiscount, setPromotionalDiscount] = useState('')
-    const [totalCart, setTotalCart] = useState()
+    const [totalCart] = useState()
     const [promocodes, setPromocodes] = useState([])
-
+    
+ 
 
     const addDiscount = (e) => {
         let code = e.target.value
@@ -68,7 +68,7 @@ export const CartProvider = ({ children }) => {
 
         setQuantityproductsInCart(quantity)
 
-        const subtotal = cart.reduce(function (subtotal, element, indice, vector) {
+        const subtotal = cart.reduce(function (subtotal, element) {
             return subtotal += element.unitPrice * element.quantity;
         }, 0);
 
@@ -77,7 +77,7 @@ export const CartProvider = ({ children }) => {
 
 
     const clearCart = () => {
-        cart.length != 0 && setCart([])
+        cart.length !== 0 && setCart([])
     }
 
     const isInCart = (x) => {
@@ -93,7 +93,7 @@ export const CartProvider = ({ children }) => {
             const itemQuantityItemAdded = cart.find(product => product.id === itemId).quantity
             return itemQuantityItemAdded
         }
-
+        
     }
 
 
@@ -109,23 +109,21 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         const db = getFirestore();
         console.log('CartContext - promocode')
-        const productCollection = db.collection("promocode")
-        productCollection.get().then((value) => {
+        const promocodeCollection = db.collection("promocode")
+        promocodeCollection.get().then((value) => {
             const promocodeList = value.docs.map(element => { return { ...element.data() } })
 
             setPromocodes(promocodeList)
         })
-        
-        localStorage.getItem("cart") !== null && localStorage.getItem("cart").length != 0  && setCart(JSON.parse(localStorage.getItem("cart")))
+
+        localStorage.getItem("cart") !== null && localStorage.getItem("cart").length !== 0  && setCart(JSON.parse(localStorage.getItem("cart")))
         sessionStorage.getItem("promotionalDiscount") != null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
     }, [])
 
 
     useEffect(() => {
-        console.log('CartContext - localstorage Itemcart')
         localStorage.setItem("cart", JSON.stringify(cart))
         quantityproductsAdded()
-
     }, [cart])
 
 

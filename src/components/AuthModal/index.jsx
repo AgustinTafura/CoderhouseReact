@@ -10,7 +10,7 @@ const AuthModal = (props) => {
     const { logInUser, createNewUserWithEmailAndPassword, logOutUser, logInWhitGoogle, logInWhitFacebook } = useContext(UserContext)
     const [errors, setErrors] = useState({})
     const location = useLocation()
-    const signInForm = document.querySelector("#login-form");
+
 
     //check empty inputs
     const checkErrors = (e) => {
@@ -104,7 +104,7 @@ const AuthModal = (props) => {
                                signInForm.reset()
                                $("#signinModal").modal("hide");
 
-                               currentLocation == "/" && history.push("/welcome")
+                               currentLocation === "/" && history.push("/welcome")
            
                            })
                     //    .catch(error=>)
@@ -130,7 +130,7 @@ const AuthModal = (props) => {
                         signInForm.reset()
                         $("#signinModal").modal("hide");
 
-                        currentLocation == "/" && history.push("/welcome")
+                        currentLocation === "/" && history.push("/welcome")
         
                     })
                 // .catch(error=>console.log(error))
@@ -156,7 +156,7 @@ const AuthModal = (props) => {
                             signInForm.reset()
                             $("#signinModal").modal("hide");
                             console.log(user)
-                            currentLocation == "/" && history.push("/welcome")
+                            currentLocation === "/" && history.push("/welcome")
         
                         })
                     // .catch(error=>console.log(error))
@@ -210,7 +210,7 @@ const AuthModal = (props) => {
                         <button type="button" className="btn-solid-lg btn-block facebookLogin">Ingresar con tu cuenta de Facebook</button>
  
                         <div className="nav-item logged-out justify-content-center mt-2">
-                            <span >¿Tienes cuenta?</span> <a className="loginModal mx-2" href="#" >Ingresar</a>
+                            <span >¿Tienes cuenta?</span> <a className="loginModal mx-2" href="/change" >Ingresar</a>
                         </div>
                     </form>
                     </div>
@@ -247,7 +247,7 @@ const AuthModal = (props) => {
                         <button type="button" className="btn-solid-lg btn-block googleLogin">Ingresar con tu cuenta de Google</button>
                         <button type="button" className="btn-solid-lg btn-block facebookLogin">Ingresar con tu cuenta de Facebook</button>
                         <div className="nav-item logged-out justify-content-center ml-3 mt-2">
-                            <span >¿No tienes una cuenta?</span> <a className="mx-2 registerModal" href="#" >Registrarse</a>
+                            <span >¿No tienes una cuenta?</span> <a className="mx-2 registerModal" href="/change" >Registrarse</a>
                         </div>
                     </form>
                     </div>
@@ -269,7 +269,7 @@ const AuthModal = (props) => {
                         {/* <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div> */}
                         <div className="modal-footer">
                             <button className="btn-solid-lg btn-light" type="button" data-dismiss="modal">Cancel</button>
-                            <a onClick={()=>{logout() }} className="btn-solid-lg " id="logOutButton">Logout</a>
+                            <div onClick={()=>{logout() }} className="btn-solid-lg " id="logOutButton">Logout</div>
  
                         </div>
                     </div>

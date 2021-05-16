@@ -1,5 +1,5 @@
 import { MercadoPagoContext } from "../context/MercadoPagoContext";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { CommercialContext } from "../context/CommercialContext";
 import { CartContext } from "../context/CartContext";
 import { useForm } from "react-hook-form";
@@ -14,13 +14,13 @@ const CheckoutContainer = (props) => {
 
 const location = useLocation()
 const location_params = new URLSearchParams(location.search)
-const statusError = location_params.get('status')
+
 
 
 const {createNewOrder} = useContext(OrderContext)
 const {payOnMP} = useContext(MercadoPagoContext)
 const {products, numberToPrice} = useContext(CommercialContext)
-const {cart, subtotalCart, totalCart, promotionalDiscount, addDiscount} = useContext(CartContext)
+const {cart, subtotalCart,  promotionalDiscount} = useContext(CartContext)
 const { register, handleSubmit, errors, watch } = useForm();
 const onSubmit = data => {
 
@@ -90,7 +90,7 @@ createNewOrder(payer)
 const isEmpty = (e) => {
 if(e.value.trim().length >0) {
 
-errors[e.name] == undefined && e.classList.contains("errorData") && e.classList.remove("errorData")
+errors[e.name] === undefined && e.classList.contains("errorData") && e.classList.remove("errorData")
 e.classList.add("notEmpty")
 
 } else {
@@ -111,23 +111,27 @@ let element = document.getElementsByName(elementName)
 errors[elementName] === undefined ? element[0].classList.remove('errorData') : element[0].classList.add('errorData')
 
 
-if (location_params.get('status') == 'rejected' || location_params.get('status') == 'null' &&
-JSON.parse(localStorage.getItem('formCheckout'))[elementName]){
 
-element[0].type == 'select-one' ?
-element[0].value = JSON.parse(localStorage.getItem('formCheckout'))[elementName]
-: element[0].setAttribute('value', JSON.parse(localStorage.getItem('formCheckout'))[elementName] )
+    if (location_params.get('status') === 'rejected' || location_params.get('status') === 'null') {
+        if(JSON.parse(localStorage.getItem('formCheckout'))[elementName]) {
+        
+            element[0].type === 'select-one' ?
+            element[0].value = JSON.parse(localStorage.getItem('formCheckout'))[elementName]
+            : element[0].setAttribute('value', JSON.parse(localStorage.getItem('formCheckout'))[elementName] )
+        
+        
+        
+        }
+        $('#modalErrorPayment').modal('show')
+        isEmpty(element[0])
+        // console.log(errors)
+    }
 
 
-
-}
-isEmpty(element[0])
-// console.log(errors)
 
 })
 
-location_params.get('status') == 'rejected' || location_params.get('status') == 'null' &&
-$('#modalErrorPayment').modal('show')
+
 
 
 
@@ -141,7 +145,7 @@ $(this).remove()
 }, [location_params])
 
 
-if(products.length == 0){
+if(products.length === 0){
 return (
 <>
     <div className='loadingComponent'>

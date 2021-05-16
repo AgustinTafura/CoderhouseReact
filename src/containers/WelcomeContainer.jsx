@@ -1,18 +1,10 @@
-import { Link, Redirect } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
-import ReactTextRotator from "react-text-rotator";
-import { CartContext } from "../context/CartContext";
-import { auth } from "../firebase";
-import $, { isEmptyObject } from 'jquery'
-import { UserContext } from "../context/UserContext";
+import React, { useState, useEffect } from "react";
+
 
 const WelcomeContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false)
-    const { cart } = useContext(CartContext)
-    const { user } = useContext(UserContext)
-    // var user = auth.currentUser
-    const { innerWidth: width, innerHeight: height } = window;
+
 
     useEffect(() => {
 
@@ -78,7 +70,7 @@ const WelcomeContainer = () => {
                             {/* <!-- Page Heading --> */}
                             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h1 className="h3 mb-0 text-gray-800">Mi perfil</h1>
-                                <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm bg-principal br-principal"><i
+                                <a href="/" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm bg-principal br-principal"><i
                                         className="fas fa-download fa-sm "></i> Generar Reporte</a>
                             </div>
 
@@ -181,17 +173,17 @@ const WelcomeContainer = () => {
                                             className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                             <h6 className="m-0 font-weight-bold text-principal">Últimas mediciones</h6>
                                             <div className="dropdown no-arrow">
-                                                <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                <a className="dropdown-toggle" href="/" role="button" id="dropdownMenuLink"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                 </a>
                                                 <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                     aria-labelledby="dropdownMenuLink">
                                                     <div className="dropdown-header">Dropdown Header:</div>
-                                                    <a className="dropdown-item" href="#">Action</a>
-                                                    <a className="dropdown-item" href="#">Another action</a>
+                                                    <a className="dropdown-item" href="/">Action</a>
+                                                    <a className="dropdown-item" href="/">Another action</a>
                                                     <div className="dropdown-divider"></div>
-                                                    <a className="dropdown-item" href="#">Something else here</a>
+                                                    <a className="dropdown-item" href="/">Something else here</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,17 +204,17 @@ const WelcomeContainer = () => {
                                             className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                             <h6 className="m-0 font-weight-bold text-principal">Composicion Corporal</h6>
                                             <div className="dropdown no-arrow">
-                                                <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                <a className="dropdown-toggle" href="/" role="button" id="dropdownMenuLink"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                 </a>
                                                 <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                     aria-labelledby="dropdownMenuLink">
                                                     <div className="dropdown-header">Dropdown Header:</div>
-                                                    <a className="dropdown-item" href="#">Action</a>
-                                                    <a className="dropdown-item" href="#">Another action</a>
+                                                    <a className="dropdown-item" href="/">Action</a>
+                                                    <a className="dropdown-item" href="/">Another action</a>
                                                     <div className="dropdown-divider"></div>
-                                                    <a className="dropdown-item" href="#">Something else here</a>
+                                                    <a className="dropdown-item" href="/">Something else here</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -307,9 +299,9 @@ const WelcomeContainer = () => {
                                                     src="img/undraw_posting_photo.svg" alt=""/>
                                             </div>
                                             <p>klajdkasjdlkajsdk ajslkdjalksdj aslkd alsdk alskdj; asldk; alskd;al skd;laskd  <a
-                                                    target="_blank" rel="nofollow" href="#">lalalal</a>, a
+                                                    target="_blank" rel="nofollow" href="/">lalalal</a>, a
                                                 sdfSDFsdfmhsba dgfdsajhg kadjfhg kajdfhvkjzlxckvjzxclkvjhzxlckjv zxkjh !</p>
-                                            <a target="_blank" rel="nofollow" href="#">Ver mas &rarr;</a>
+                                            <a target="_blank" rel="nofollow" href="/">Ver mas &rarr;</a>
                                         </div>
                                     </div>
 

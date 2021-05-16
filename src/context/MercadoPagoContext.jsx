@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext } from "react";
 
 // import { getFirestore } from "../firebase";
 
@@ -39,7 +39,7 @@ export const MercadoPagoProvider = ({ children }) => {
             return result.json();
         }).then(value=>{
             localStorage.setItem('payer', JSON.stringify(value.payer))
-            const linkToMP = value.init_point
+            // const linkToMP = value.init_point
 
             window.location.href = value.init_point
 

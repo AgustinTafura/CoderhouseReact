@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { getFirestore } from "../firebase";
-import { useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
 import firebase from "firebase/app";
@@ -11,7 +10,7 @@ export const OrderContext = createContext();
 export const OrderProvider = ({ children }) => {
     
     const { user  } = useContext(UserContext)
-    const { cart, subtotalCart, totalCart, promotionalDiscount, } = useContext(CartContext)
+    const { cart, subtotalCart, promotionalDiscount, } = useContext(CartContext)
     const db = getFirestore()
     
     /** 
