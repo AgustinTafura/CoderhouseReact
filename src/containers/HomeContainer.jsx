@@ -65,7 +65,7 @@ const HomeContainer = () => {
         <>
 
             {/* <!-- Header --> */}
-            <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), ${width>=768?`url('/images/logo-055.jpg')`:`url('/images/logo-0555.jpg')`}  no-repeat`, backgroundSize: `cover`,  backgroundPositionY: `center`}}>
+            <header id="header" className="header" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), ${width>=768?`url('${process.env.PUBLIC_URL}/images/logo-055.jpg')`:`url('${process.env.PUBLIC_URL}/images/logo-0555.jpg')`}  no-repeat`, backgroundSize: `cover`,  backgroundPositionY: `center`}}>
                 <div className="header-content">
                     <div className="container">
                         <div className="row">

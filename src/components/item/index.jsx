@@ -45,7 +45,7 @@ const Item = ({product, numberToPrice}) => {
                 <div  className="card">
                     <div className="card-image">
                         <Link to={`/product/${product.id}`}>
-                            <img className="img-fluid" src={`../images/${product.image}`} alt="alternative"></img>
+                            <img className="img-fluid" src={`${process.env.PUBLIC_URL}/images/${product.image}`} alt="alternative"></img>
                         </Link>
                             
                     </div>

@@ -60,7 +60,7 @@ const ItemCart = ({product, numberToPrice}) => {
                 <div className="col-12 col-lg-3">
                     <div className="image-container">
                         <Link to={`/product/${product.id}`}>
-                            <img className="img-fluid" src={`../images/${product.image}`} alt="alternative"/> 
+                            <img className="img-fluid" src={`${process.env.PUBLIC_URL}/images/${product.image}`} alt="alternative"/> 
                         </Link>                      
                     </div>
                 </div>

@@ -57,7 +57,7 @@ const NavBar = () => {
 
 
             <Link className="navbar-brand logo-image" to='/'>
-                <img id="logo" src="../images/JPL-0111.svg" alt="alternative"></img>
+                <img id="logo" src={`${process.env.PUBLIC_URL}/images/JPL-0111.svg`} alt="alternative"></img>
             </Link>
             
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

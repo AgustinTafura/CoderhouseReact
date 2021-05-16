@@ -49,7 +49,7 @@ const ItemDetail = ({product, numberToPrice}) => {
             <div  className="row no-gutters">
                     <div className="col-12 col-lg-6">
                     <div className="image-container">
-                        <img className="img-fluid" src={`../images/${product.image}`} alt="alternative"></img>
+                        <img className="img-fluid" src={`${process.env.PUBLIC_URL}/images/${product.image}`} alt="alternative"></img>
                     </div> 
                     </div>
                     <div className="col-12 col-lg-6 rounded-right card-text">

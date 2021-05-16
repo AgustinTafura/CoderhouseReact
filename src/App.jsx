@@ -21,7 +21,7 @@ const App = (props) => {
 
         
         return ( 
-                <BrowserRouter>
+                <BrowserRouter  basename={'/JPL-React'}>
                 <ScrollToTop/>
                 <UserProvider>
                 <CommercialProvider>

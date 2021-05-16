@@ -143,7 +143,7 @@ const NotFound = () => {
 
                     <canvas id="canvas-404" className="ag-canvas-404"></canvas>
                     <img className="ag-canvas-404_img"
-                      alt='smokeToaster'  src="/images/smoke.png"/>
+                      alt='smokeToaster'  src={`${process.env.PUBLIC_URL}/images/smoke.png`}/>
                 </div>
             </div>
 
