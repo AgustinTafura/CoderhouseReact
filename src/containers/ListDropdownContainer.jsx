@@ -22,13 +22,13 @@ const ListDropdownContainer = ({href, name, children }) => {
 
             <li className="nav-item dropdown">
             {width>=768?
-                (<Link className="nav-link dropdown-toggle page-scroll " to={href}  id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                (<Link className="nav-link page-scroll " to={href}  id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
                         
                         
                     {name}                 
                 
                 </Link>)
-                :   (<div className="nav-link dropdown-toggle page-scroll" id="navbarDropdown" role="button" aria-haspopup="false" aria-expanded="true">    
+                :   (<div className="nav-link page-scroll" id="navbarDropdown" role="button" aria-haspopup="false" aria-expanded="true">    
                   {name}                   
                 </div>)
             }

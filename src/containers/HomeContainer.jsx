@@ -10,7 +10,9 @@ const HomeContainer = () => {
     const [width, setWidth] = useState(false) 
 
     useEffect(() => {
+        
         setWidth(window.innerWidth)
+
         window.addEventListener('load', ()=>{
 
             $.fn.extend({ 
@@ -46,16 +48,11 @@ const HomeContainer = () => {
             });
 
             setIsLoading(false);
-            // $(document).ready(function() {
-                // $('#rotate').rotaterator({fadeSpeed:1500, pauseSpeed:200});
-            //  });
         })
 
         window.addEventListener('resize', ()=>{
             setWidth(window.innerWidth)
         })
-
-        // setIsLoading(true)
 
         const myPromise = new Promise((resolve, reject) => {
             setTimeout(()=>resolve(true), 1200)
@@ -63,7 +60,6 @@ const HomeContainer = () => {
 
         myPromise.then(
             (result)=>{
-
                 setIsLoading(false);
             }
         )

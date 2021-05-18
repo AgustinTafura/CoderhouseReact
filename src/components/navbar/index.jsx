@@ -80,9 +80,9 @@ const NavBar = () => {
                     <ItemNavContainer  href={'/booking'} name={'RESERVAR TURNO'}/>
 
                     <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
-                        <ItemDropdown href={'/tienda/planes'} name={'PLANES'}/>
+                        {/* <ItemDropdown href={'/tienda/planes'} name={'PLANES'}/>
                         <div className="dropdown-items-divide-hr"></div>
-                        <ItemDropdown href={'/tienda/recetas'} name={'RECETAS'}/>
+                        <ItemDropdown href={'/tienda/recetas'} name={'RECETAS'}/> */}
                         {/* <div className="dropdown-items-divide-hr"></div> */}
                         {/* <ItemDropdown href={'/tienda/turnos'} name={'TURNOS ONLINE'}/> */}
                     </ListDropdownContainer>
