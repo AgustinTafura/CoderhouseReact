@@ -10,9 +10,8 @@ const HomeContainer = () => {
     const [width, setWidth] = useState(false) 
 
     useEffect(() => {
-        
+        setWidth(window.innerWidth)
         window.addEventListener('load', ()=>{
-            setWidth(window.innerWidth)
 
             $.fn.extend({ 
                 rotaterator: function(options) {
@@ -45,10 +44,11 @@ const HomeContainer = () => {
                     });
                 }
             });
-            $(document).ready(function() {
-                $('#rotate').rotaterator({fadeSpeed:1500, pauseSpeed:200});
-         });
-         setIsLoading(false);
+
+            setIsLoading(false);
+            // $(document).ready(function() {
+                // $('#rotate').rotaterator({fadeSpeed:1500, pauseSpeed:200});
+            //  });
         })
 
         window.addEventListener('resize', ()=>{
@@ -57,16 +57,16 @@ const HomeContainer = () => {
 
         // setIsLoading(true)
 
-        // const myPromise = new Promise((resolve, reject) => {
-        //     setTimeout(()=>resolve(true), 1200)
-        // })
+        const myPromise = new Promise((resolve, reject) => {
+            setTimeout(()=>resolve(true), 1200)
+        })
 
-        // myPromise.then(
-        //     (result)=>{
+        myPromise.then(
+            (result)=>{
 
-        //         setIsLoading(false);
-        //     }
-        // )
+                setIsLoading(false);
+            }
+        )
 
 
     }, [])
@@ -107,11 +107,11 @@ const HomeContainer = () => {
                                     <div className='line-two '>
                                         <span style={{ fontFamily: "Mansalva" }}>de </span> 
                                         
-                                        <span id="rotate"> 
+                                        {/* <span id="rotate">  */}
                                             <span>alimentación</span> 
-                                            <span>entrenamiento</span> 
+                                            {/* <span>entrenamiento</span> 
                                             <span>hábitos</span>
-                                        </span> 
+                                        </span>  */}
                                                 
                                     </div>
                                     <div className='line-three '>
@@ -120,22 +120,10 @@ const HomeContainer = () => {
                                     </div>
                                 </div>
 
-                                    {/* <h1>
-                                    <span> NUTRICIÓN </span> 
-                                    <span style={{ fontFamily: "Mansalva" }}> +  </span>
-
-                                        <ReactTextRotator
-                                            content={content}
-                                            time={3000}
-                                            startDelay={1000}
-                                        />
-
-
-
-
-                                    </h1> */}
                                     <p className="p-heading p-large">Consultas Online, Planes personalizados y Monitoreo de los objetivos alcanzados</p>
-                                    <Link to="/tienda" className="btn-solid-lg page-scroll"> DESCÚBRE CÓMO</Link>
+                                    
+                                    <a href="#about-me" className="btn-solid-lg page-scroll"> DESCÚBRE CÓMO</a>
+                                    <Link to="/tienda" className="btn-solid-lg page-scroll"> IR A LA TIENDA</Link>
                                 </div>
                             </div>
                             {/* <!-- end of col --> */}
@@ -163,7 +151,7 @@ const HomeContainer = () => {
                                 <div className=''>
                                     
                                     <b>Licenciado en Nutrición y Personal Trainer.</b>
-                                    <p>
+                                    <p style={{marginTop: '0.5rem'}}>
                                         Busco en la nutrición, el entrenamiento y los deportes  el cuidado de la salud y de la estética corporal. 
                                         <br/>
                                         Quienes me conocen saben que es el estilo de vida que elijo todos los días y el que le propongo a mis pacientes.
