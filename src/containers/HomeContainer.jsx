@@ -1,36 +1,54 @@
 import { Link, } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import ReactTextRotator from "react-text-rotator";
+import $ from 'jquery'
 import './HomeContainer.scss'
 
 const HomeContainer = () => {
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     // const { innerWidth } = window;
-    const [width, setWidth] = useState(false)
-
-
-    const content = [
-        {
-            text: "  PLANIFICACIÓN",
-            animation: "fade",
-        },
-        {
-            text: "  ENTRENAMIENTO",
-            animation: "fade",
-        },
-        {
-            text: "  HÁBITOS",
-            animation: "fade",
-        },
-    ];
-
-    
+    const [width, setWidth] = useState(false) 
 
     useEffect(() => {
         
         window.addEventListener('load', ()=>{
             setWidth(window.innerWidth)
+
+            $.fn.extend({ 
+                rotaterator: function(options) {
+         
+                    var defaults = {
+                        fadeSpeed: 100,
+                        pauseSpeed: 1000,
+                        child:null
+                    };
+                     
+                    var options = $.extend(defaults, options);
+                 
+                    return this.each(function() {
+                          var o =options;
+                          var obj = $(this);                
+                          var items = $(obj.children(), obj);
+                          items.each(function() {$(this).hide();})
+                          if(!o.child){var next = $(obj).children(':first');
+                          }else{var next = o.child;
+                          }
+                          $(next).fadeIn(o.fadeSpeed, function() {
+                                $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+                                    var next = $(this).next();
+                                    if (next.length == 0){
+                                            next = $(obj).children(':first');
+                                    }
+                                    $(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
+                                })
+                            });
+                    });
+                }
+            });
+            $(document).ready(function() {
+                $('#rotate').rotaterator({fadeSpeed:1500, pauseSpeed:200});
+         });
+         setIsLoading(false);
         })
 
         window.addEventListener('resize', ()=>{
@@ -39,16 +57,16 @@ const HomeContainer = () => {
 
         // setIsLoading(true)
 
-        const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(true), 1200)
-        })
+        // const myPromise = new Promise((resolve, reject) => {
+        //     setTimeout(()=>resolve(true), 1200)
+        // })
 
-        myPromise.then(
-            (result)=>{
+        // myPromise.then(
+        //     (result)=>{
 
-                setIsLoading(false);
-            }
-        )
+        //         setIsLoading(false);
+        //     }
+        // )
 
 
     }, [])
@@ -88,9 +106,13 @@ const HomeContainer = () => {
                                     </div>
                                     <div className='line-two '>
                                         <span style={{ fontFamily: "Mansalva" }}>de </span> 
-                                        <span>alimentación</span>
-                                        <div className="linea"></div>
-
+                                        
+                                        <span id="rotate"> 
+                                            <span>alimentación</span> 
+                                            <span>entrenamiento</span> 
+                                            <span>hábitos</span>
+                                        </span> 
+                                                
                                     </div>
                                     <div className='line-three '>
                                         <div className="linea col-4"></div>

@@ -33,7 +33,7 @@
 	}
 
 	.line-two {
-		font-size: 2.4rem;
+		font-size: 2.3rem;
 		// text-align: center;
 		// font-size: 3rem;
 	}
@@ -99,7 +99,7 @@
 		}
 	
 		.line-two {
-			font-size: 3rem;
+			font-size: 2.7rem;
 	
 		}
 	
@@ -126,7 +126,7 @@
 		}
 	
 		.line-two {
-			font-size: 3.3rem;
+			font-size: 2.9rem;
 	
 		}
 	}
@@ -149,6 +149,11 @@
 
 @media (min-width: 1200px) {
 	#title {
+
+		.line-two {
+			font-size: 3.3rem;
+	
+		}
 		.line-three {
 			padding-left: 2rem;
 		}
