@@ -125,12 +125,12 @@ const ThanksContainer = (props) => {
 
                             <h5 className='mt-3 mt-lg-5'>Tu <b className="p-0">orden de pago</b> es:
                                 <br/>
-                            <span style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}}>{location_params.get('payment_id')}</span>
+                            <span style={{ fontFamily: "Montserrat-Bold", color: 'var(--primary)'}}>{location_params.get('payment_id')}</span>
                             </h5>
                             
                             <h5 className='mt-3 '>Ingresa en el siguiente <b className="p-0" > link </b> para obtener los productos de tu compra y ,de ser necesario, solicitar turnos:
                                 <br/>
-                            <Link style={{ fontFamily: "Montserrat-Bold", color: '#14bf98'}} to={`/compras/${order_id}`} >Ir a mi compra</Link>
+                            <Link style={{ fontFamily: "Montserrat-Bold", color: 'var(--primary)'}} to={`/compras/${order_id}`} >Ir a mi compra</Link>
                             </h5>
                             
 

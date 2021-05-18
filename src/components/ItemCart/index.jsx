@@ -86,7 +86,7 @@ const ItemCart = ({product, numberToPrice}) => {
                             <div onClick={(e) => {removeFromCart(e)}}>
                                 <a href="#!" type="button"
                                     className="card-link-secondary small text-uppercase mr-3"
-                                    style={{color:'#14bf98'}}
+                                    style={{color:'var(--primary)'}}
                                     >
                                     <i className="fas fa-trash-alt mr-1" aria-hidden="true"></i>
                                         Quitar

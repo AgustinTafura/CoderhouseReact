@@ -16,7 +16,7 @@ import EmailContainer from "../containers/EmailContainer";
 import OrderContainer from "../containers/OrderContainer";
 
 const Routes = () => {
-    console.log(process.env.PUBLIC_URL)
+
     const {isAuthenticated} = useContext(UserContext)
     return (
         <Switch>

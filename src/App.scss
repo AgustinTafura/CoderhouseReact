@@ -12,7 +12,8 @@ Colors:
 ******************************************/
 
 :root {
-    --primary: #14bf98;
+    // --primary: #14bf98;
+	--primary: #82c496;
 	--secondary: #1d1e1b;
 	--tertiarity: #fff;
 	--background-dark: #1d1e1b;
@@ -217,11 +218,11 @@ a, .social-icon {
 
     border-color: transparent;
 
-    box-shadow: 0 0 0 0.2rem #14bf9840;
+    box-shadow: 0 0 0 0.2rem #82c49640;
 }
 
  .Toastify__progress-bar--default {
-	background: #14bf9887;
+	background: #82c49687;
 	
 }
 
