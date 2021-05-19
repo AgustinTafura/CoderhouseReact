@@ -23,6 +23,8 @@
       // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
       // Otherwise, leave pathSegmentsToKeep as 0.
       var pathSegmentsToKeep = 0;
+      alert('aca 404.html ')
+      console.log('aca 404.html')
 
       var l = window.location;
       l.replace(
@@ -32,7 +34,6 @@
         (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
-
     </script>
   </head>
   <body>
