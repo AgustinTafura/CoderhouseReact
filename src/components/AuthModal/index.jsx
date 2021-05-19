@@ -12,6 +12,7 @@ const AuthModal = (props) => {
     const location = useLocation()
 
 
+
     //check empty inputs
     const checkErrors = (e) => {
         if(e.value.trim().length >0) {

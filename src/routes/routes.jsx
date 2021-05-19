@@ -43,7 +43,9 @@ const Routes = () => {
             <PublicRoute exact path="/compras/:order_id?" component={OrderContainer} />
 
             {isAuthenticated && <PrivateRoute exact path="/welcome" component={WelcomeContainer}/>}
+            <Route path="/error404"  component={NotFound}/>
             <Route path="/**"  component={NotFound}/>
+
             {/* <Route exact path={"*"} to="/booking"/> */}
         </Switch>
     )
