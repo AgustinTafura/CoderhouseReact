@@ -328,16 +328,6 @@ const WelcomeContainer = () => {
                     </div>
                     {/* <!-- End of Main Content --> */}
 
-                    {/* <!-- Footer --> */}
-                    <footer className="sticky-footer bg-white">
-                        <div className="my-auto">
-                            <div className="copyright text-center my-auto text-white">
-                                <span>Copyright &copy; JPL Nutrición 2021</span>
-                            </div>
-                        </div>
-                    </footer>
-                    {/* <!-- End of Footer --> */}
-
                 </div>
                 {/* <!-- End of Content Wrapper --> */}
 

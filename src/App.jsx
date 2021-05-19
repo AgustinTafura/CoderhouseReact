@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import Routes from './routes/routes';
 import { OrderProvider } from './context/OrderContext';
 import ScrollToTop from './components/ScrollToTop'
+import FooterContainer from './containers/Footer';
 
 const App = (props) => {
 
@@ -34,7 +35,7 @@ const App = (props) => {
 
                         <AuthModal/>
                         <Routes/>
-
+                        <FooterContainer/>
                 </MercadoPagoProvider>
                 </OrderProvider>      
                 </CartProvider>
