@@ -36,6 +36,11 @@ const NavBar = () => {
             }
         }
 
+        var navLinks = Array.from(document.getElementsByClassName('nav-link'))
+        navLinks.map(link=>{
+            link.addEventListener('click', ()=>{window.innerWidth < 768 && $('.collapse').collapse('toggle')})
+        })
+
         if(actualLocation.pathname === '/'){
             
             /* Navbar Scripts */
@@ -45,6 +50,9 @@ const NavBar = () => {
 
         return () => {
             $(window).off('scroll load',efectNav);
+            navLinks.map(link=>{
+                link.removeEventListener('click', ()=>{window.innerWidth < 768 && $('.collapse').collapse('toggle')})
+            })
         }
     }, [actualLocation])
 
@@ -78,14 +86,14 @@ const NavBar = () => {
 
                     }
                     <ItemNavContainer  href={'/booking'} name={'RESERVAR TURNO'}/>
-
-                    <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
-                        {/* <ItemDropdown href={'/tienda/planes'} name={'PLANES'}/>
+                    <ItemNavContainer  href={'/tienda'} name={'TIENDA'}/>
+                    {/* <ListDropdownContainer name={"TIENDA"} href={'/tienda'}>
+                        <ItemDropdown href={'/tienda/planes'} name={'PLANES'}/>
                         <div className="dropdown-items-divide-hr"></div>
-                        <ItemDropdown href={'/tienda/recetas'} name={'RECETAS'}/> */}
-                        {/* <div className="dropdown-items-divide-hr"></div> */}
-                        {/* <ItemDropdown href={'/tienda/turnos'} name={'TURNOS ONLINE'}/> */}
-                    </ListDropdownContainer>
+                        <ItemDropdown href={'/tienda/recetas'} name={'RECETAS'}/>
+                        <div className="dropdown-items-divide-hr"></div>
+                        <ItemDropdown href={'/tienda/turnos'} name={'TURNOS ONLINE'}/>
+                    </ListDropdownContainer> */}
 
 
                     <CartWidgetComponent href={'/cart'}/>

@@ -13,46 +13,45 @@ const HomeContainer = () => {
         
         setWidth(window.innerWidth)
 
-        window.addEventListener('load', ()=>{
-
-            $.fn.extend({ 
-                rotaterator: function(options) {
-         
-                    var defaults = {
-                        fadeSpeed: 100,
-                        pauseSpeed: 1000,
-                        child:null
-                    };
-                     
-                    var options = $.extend(defaults, options);
+        $.fn.extend({ 
+            rotaterator: function(options) {
+     
+                var defaults = {
+                    fadeSpeed: 100,
+                    pauseSpeed: 1000,
+                    child:null
+                };
                  
-                    return this.each(function() {
-                          var o =options;
-                          var obj = $(this);                
-                          var items = $(obj.children(), obj);
-                          items.each(function() {$(this).hide();})
-                          if(!o.child){var next = $(obj).children(':first');
-                          }else{var next = o.child;
-                          }
-                          $(next).fadeIn(o.fadeSpeed, function() {
-                                $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
-                                    var next = $(this).next();
-                                    if (next.length == 0){
-                                            next = $(obj).children(':first');
-                                    }
-                                    $(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
-                                })
-                            });
-                    });
-                }
-            });
-
+                var options = $.extend(defaults, options);
+             
+                return this.each(function() {
+                      var o =options;
+                      var obj = $(this);                
+                      var items = $(obj.children(), obj);
+                      items.each(function() {$(this).hide();})
+                      if(!o.child){var next = $(obj).children(':first');
+                      }else{var next = o.child;
+                      }
+                      $(next).fadeIn(o.fadeSpeed, function() {
+                            $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+                                var next = $(this).next();
+                                if (next.length == 0){
+                                        next = $(obj).children(':first');
+                                }
+                                $(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
+                            })
+                        });
+                });
+            }
+        });
+        window.addEventListener('load', ()=>{
             setIsLoading(false);
         })
 
-        window.addEventListener('resize', ()=>{
+        window.addEventListener('resize',()=>{
             setWidth(window.innerWidth)
-        })
+        } 
+        )
 
         const myPromise = new Promise((resolve, reject) => {
             setTimeout(()=>resolve(true), 1200)
@@ -64,8 +63,12 @@ const HomeContainer = () => {
             }
         )
 
+        return () => {
+            window.removeEventListener('resize', setWidth(window.innerWidth))
+        }
 
     }, [])
+
 
 
 

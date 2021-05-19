@@ -24,25 +24,8 @@ const BookingContainer = (props) => {
                 <InlineWidget
                 
                     url={url}   
-                    styles={{minWidth: '360px', height: '1000px',overflow: 'hidden'}}
-                    prefill={{
-                        email: 'test@test.com',
-                        firstName: 'Jon',
-                        lastName: 'Snow',
-                        name: 'Jon Snow',
-                        customAnswers: {
-                          a1: 'a1',
-                          a2: 'a2',
-                          a3: 'a3',
-                          a4: 'a4',
-                          a5: 'a5',
-                          a6: 'a6',
-                          a7: 'a7',
-                          a8: 'a8',
-                          a9: 'a9',
-                          a10: 'a10'
-                        }
-                      }}
+                    styles={{minWidth: '360px', height: '750px',overflow: 'hidden'}}
+                    prefill={{}}
                 />
                 </div> 
             </div>
