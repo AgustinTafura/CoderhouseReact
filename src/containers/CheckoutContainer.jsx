@@ -121,7 +121,7 @@ useEffect(() => {
     .then(response => setStates(response.provincias))
 
     let formCheckoutLocalDataEncripted = localStorage.getItem('formCheckout');
-    let formCheckoutLocalData = decryptData(formCheckoutLocalDataEncripted, process.env.REACT_APP_ENCRYPT_SECRET_KEY);
+  
     let elements = watch()
     Object.keys(elements).map(elementName => {
 
@@ -141,7 +141,7 @@ useEffect(() => {
         }
    
         if (location_params.get('status') === 'rejected' || location_params.get('status') === 'null') {
-                
+            let formCheckoutLocalData = decryptData(formCheckoutLocalDataEncripted, process.env.REACT_APP_ENCRYPT_SECRET_KEY);
             if(formCheckoutLocalData[elementName]) {
             
                 element[0].type === 'select-one' ?

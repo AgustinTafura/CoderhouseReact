@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 
 const ThanksContainer = (props) => {
     
+    if(!window.location.search){  window.location.href =  '/JPL-React/';}
+
     const [isLoading, setIsLoading] = useState(false)
     const location = useLocation()
     const location_params = new URLSearchParams(location.search)
@@ -128,17 +130,17 @@ const ThanksContainer = (props) => {
                             <span style={{ fontFamily: "Montserrat-Bold", color: 'var(--primary)'}}>{location_params.get('payment_id')}</span>
                             </h5>
                             
-                            <h5 className='mt-3 '>Ingresa en el siguiente <b className="p-0" > link </b> para obtener los productos de tu compra y ,de ser necesario, solicitar turnos:
+                            <h5 className='mt-3 '>Ingresa en el siguiente <b className="p-0" > link </b> para descargar los productos de tu compra y solicitar turnos:
                                 <br/>
-                            <Link style={{ fontFamily: "Montserrat-Bold", color: 'var(--primary)'}} to={`/compras/${order_id}`} >Ir a mi compra</Link>
+                            <Link style={{ fontFamily: "Montserrat-Bold"}} to={`/compras/${order_id}`} >Ir a Mi Compra</Link>
                             </h5>
                             
 
                             <div className='justify-content-center align-items-center mt-5 pt-3'>
                                 <h6 className="col-12">Seguíme y enterate todos mis tips nutricionales</h6>
                                 <div className='d-flex justify-content-center'>
-                                    <div className="px-3"><a className="social-icon" href="https://www.instagram.com/juampilabollita/">JP<i className="fab fa-instagram fa-2x" aria-hidden="true"></i></a></div>
-                                    <div className="px-3"><a className="social-icon" href="https://www.facebook.com/juanpablo.labollita">JP<i className="fab fa-facebook-f fa-2x" aria-hidden="true"></i></a></div>
+                                    <div className="px-3"><a className="social-icon" href="https://www.instagram.com/juampilabollita/"><i className="fab fa-instagram fa-2x" aria-hidden="true"></i></a></div>
+                                    <div className="px-3"><a className="social-icon" href="https://www.facebook.com/juanpablo.labollita"><i className="fab fa-facebook-f fa-2x" aria-hidden="true"></i></a></div>
                                 </div>
 
 

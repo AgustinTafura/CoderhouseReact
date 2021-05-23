@@ -9,7 +9,7 @@ export const MercadoPagoContext = createContext();
 
 export const MercadoPagoProvider = ({ children }) => {
 
-
+    
 
     const payOnMP = (data) => {
         console.log(111)
@@ -24,9 +24,9 @@ export const MercadoPagoProvider = ({ children }) => {
                 payer: data.payer,
                 external_reference: data.external_reference,       
                 back_urls: {
-                    success: 'http://localhost:3000/thankYou',
-                    pending: 'http://localhost:3000/thankYou',
-                    failure: 'http://localhost:3000/checkout',
+                    success: `${window.location.origin}/JPL-React/thankYou`,
+                    pending: `${window.location.origin}/JPL-React/thankYou`,
+                    failure: `${window.location.origin}/JPL-React/checkout`,
                 },
                 statement_descriptor: "JPL NUTRICIÓN",
                 auto_return: 'approved',
@@ -36,11 +36,14 @@ export const MercadoPagoProvider = ({ children }) => {
         ),
 
         }).then(result=>{
+            console.log(222)
             return result.json();
         }).then(value=>{
             localStorage.setItem('payer', JSON.stringify(value.payer))
             // const linkToMP = value.init_point
-
+            console.log(333)
+            console.log('value', value)
+            console.log('value.init', value.init)
             window.location.href = value.init_point
 
             return  value
