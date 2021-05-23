@@ -200,10 +200,20 @@ body {
 }
 
 .loadingComponent {
+
 	position: absolute;
-    top: 40%;
-    left: 45%;
     text-align: center;
+
+	top: 40vh;
+	left: 30vw;
+
+	
+	@media (min-width: 576px) {
+		top: 40vh;
+		left: 45vw;
+		
+	}
+
 }
 
 a, .social-icon {

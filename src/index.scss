@@ -275,7 +275,7 @@ strong {
 	position: absolute;
 	top: 0.8125rem;
 	left: 1.375rem;
-	color: var(--body-text);
+	color: #a9a9a9;
 	opacity: 1;
 	font: 500 0.875rem/1.375rem "Open Sans", sans-serif;
 	cursor: text;
@@ -308,7 +308,7 @@ strong {
 	opacity: 1;
 	font-size: 0.75rem;
 	font-weight: 700;
-	color: red
+	color: #e46060
 	
 }
 
@@ -1862,6 +1862,35 @@ a:hover.back-to-top {
 /*****************************/
 /*     21. Media Queries     */
 /*****************************/	
+
+/* Max-width width 576px */
+@media (max-width: 576px) {
+
+	.cards-2 .card-body {
+		padding: 1rem;
+		margin-top: 1rem;
+	}
+
+	#checkoutForm {
+		
+		.card-body{
+			
+			border: none;
+			padding: 0rem;
+	
+			&:last-of-type {
+				margin-bottom: 3rem;
+			  }
+		}
+
+		.btn-solid-lg {
+			padding-left: 0rem;
+			padding-right: 0rem;
+		}
+	} 
+}
+
+
 /* Min-width width 768px */
 @media (min-width: 768px) {
 	

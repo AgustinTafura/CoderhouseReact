@@ -21,6 +21,7 @@ const ItemListContainer = (props) => {
                 setIsLoading(false);
             
         }, 1000);
+        
         return () => {
                 setIsLoading(false);
         }

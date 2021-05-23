@@ -12,7 +12,7 @@ export const MercadoPagoProvider = ({ children }) => {
 
 
     const payOnMP = (data) => {
-
+        console.log(111)
         fetch('https://api.mercadopago.com/checkout/preferences', {
             method: 'POST', 
             headers: {

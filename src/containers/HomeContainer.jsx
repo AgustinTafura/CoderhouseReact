@@ -12,6 +12,16 @@ const HomeContainer = () => {
     useEffect(() => {
         
         setWidth(window.innerWidth)
+        
+        const myPromise = new Promise((resolve, reject) => {
+            setTimeout(()=>resolve(true), 1200)
+        })
+
+        myPromise.then(
+            (result)=>{
+                setIsLoading(false);
+            }
+        )
 
         $.fn.extend({ 
             rotaterator: function(options) {
@@ -53,18 +63,11 @@ const HomeContainer = () => {
         } 
         )
 
-        const myPromise = new Promise((resolve, reject) => {
-            setTimeout(()=>resolve(true), 1200)
-        })
 
-        myPromise.then(
-            (result)=>{
-                setIsLoading(false);
-            }
-        )
 
         return () => {
             window.removeEventListener('resize', setWidth(window.innerWidth))
+
         }
 
     }, [])
