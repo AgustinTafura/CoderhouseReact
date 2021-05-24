@@ -141,8 +141,8 @@ useEffect(() => {
         }
    
         if (location_params.get('status') === 'rejected' || location_params.get('status') === 'null') {
-            let formCheckoutLocalData = decryptData(formCheckoutLocalDataEncripted, process.env.REACT_APP_ENCRYPT_SECRET_KEY);
-            if(formCheckoutLocalData[elementName]) {
+            let formCheckoutLocalData = formCheckoutLocalDataEncripted && decryptData(formCheckoutLocalDataEncripted, process.env.REACT_APP_ENCRYPT_SECRET_KEY);
+            if(formCheckoutLocalData != null && formCheckoutLocalData[elementName]) {
             
                 element[0].type === 'select-one' ?
                 element[0].value = formCheckoutLocalData[elementName]
