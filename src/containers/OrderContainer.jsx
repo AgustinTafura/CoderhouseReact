@@ -186,7 +186,6 @@ const OrderContainer = (props) => {
                                 }
 
                             
-                            console.log(11, order)
                             updateOrder(order_id,  {booking:order.booking})
                             .then((e)=>{
                                 // localStorage.setItem('currentOrderBookingUpdated', JSON.stringify({order:order, order_id:order_id, orderB:order.booking, bookingIdUpdated:currentProductId}));

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-
+import {encryptData } from './../utils/data';
 // import { getFirestore } from "../firebase";
 
 
@@ -39,7 +39,12 @@ export const MercadoPagoProvider = ({ children }) => {
             console.log(222)
             return result.json();
         }).then(value=>{
-            localStorage.setItem('payer', JSON.stringify(value.payer))
+
+            //Encrypt data
+            const encryptedData = encryptData(value.payer, process.env.REACT_APP_ENCRYPT_SECRET_KEY);
+            //setLocalStorage
+            localStorage.setItem('payer', encryptedData)
+
             // const linkToMP = value.init_point
             console.log(333)
             console.log('value', value)

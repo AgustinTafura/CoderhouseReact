@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { getFirestore } from "../firebase";
+import {encryptData, decryptData } from './../utils/data';
 
 // Creamos el espacio de memoria
 export const CartContext = createContext();
@@ -115,14 +116,21 @@ export const CartProvider = ({ children }) => {
 
             setPromocodes(promocodeList)
         })
-
-        localStorage.getItem("cart") !== null && localStorage.getItem("cart").length !== 0  && setCart(JSON.parse(localStorage.getItem("cart")))
-        sessionStorage.getItem("promotionalDiscount") != null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
+        if(localStorage.getItem("cart")){
+            
+            var cartLocalStorage = decryptData(localStorage.getItem("cart"), process.env.REACT_APP_ENCRYPT_SECRET_KEY)
+            cartLocalStorage !== null && cartLocalStorage.length !== 0  && setCart(JSON.parse(cartLocalStorage))
+            sessionStorage.getItem("promotionalDiscount") != null && setPromotionalDiscount(JSON.parse(sessionStorage.getItem("promotionalDiscount")))
+        }
     }, [])
 
 
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart))
+        //Encrypt data
+        const encryptedData = encryptData(cart, process.env.REACT_APP_ENCRYPT_SECRET_KEY);
+        //setLocalStorage
+        localStorage.setItem('cart', encryptedData)
+
         quantityproductsAdded()
     }, [cart])
 

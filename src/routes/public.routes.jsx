@@ -10,7 +10,7 @@ import {PublicRoute} from './helperRoutes'
 const PublicRoutes = () => {
     return (
         <Switch>
-            <PublicRoute exact path="/" component={HomeContainer}/>
+            {/* <PublicRoute exact path="/" component={HomeContainer}/>
                         
             <PublicRoute path="/booking" >
                 PROXIMAMENTE TURNOS ONLINE
@@ -22,7 +22,7 @@ const PublicRoutes = () => {
             
             <PublicRoute exact path="/cart" component={CartContainer} />
 
-            <PublicRoute exact path="/checkout" component={CheckoutContainer} />
+            <PublicRoute exact path="/checkout" component={CheckoutContainer} /> */}
 
         </Switch>
     )
